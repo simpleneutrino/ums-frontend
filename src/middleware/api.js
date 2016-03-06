@@ -9,9 +9,10 @@ export default store => next => action => {
   console.log('callAPI',callAPI );
   if (!callAPI) return next(action);
 
+  console.log('type + _START', type + _START);
   next({...rest, ...{type: type + _START}});
 
-  let myInit = {
+  let fetchOptions = {
     method: 'GET',
     headers: {
       Authorization : BASIC_AUTH,
@@ -19,7 +20,7 @@ export default store => next => action => {
     }
   };
 
-  fetch(BASIC_URL + callAPI.url, myInit)
+  fetch(BASIC_URL + callAPI.url, fetchOptions)
     .then((response) => processResponse(response))
     .then((response) => {
       console.log(callAPI.url + ' response', response);

@@ -11,14 +11,14 @@ class EnrolmentList extends Component {
   };
   componentDidMount() {
     let { enrolmentList } = this.props;
-    console.log('Object.keys(enrolment)', Object.keys(enrolmentList));
-    if (!Object.keys(enrolmentList).length) {
+    console.log('Object.keys(enrolment)', enrolmentList);
+    if (!enrolmentList.isLoading) {
       this.props.loadAllEnrolments();
     }
   }
   render() {
     let { enrolmentList } = this.props;
-
+    console.log('enrolmentList', enrolmentList);
     return (
       <div>
         <ul>enrolment list</ul>

@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import * as storage from './persistence/storage'
 import * as components from './components'
 import * as constants from './constants'
-import { default as enrolmentListContainer } from './modules/enrolment.list'
+import { enrolmentListContainer } from './modules/enrolment.list'
 import Application  from './modules/main/Application'
 import store from './store'
 

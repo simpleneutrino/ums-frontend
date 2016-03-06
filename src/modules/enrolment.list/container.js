@@ -10,19 +10,18 @@ class EnrolmentList extends Component {
     children: PropTypes.any
   };
   componentDidMount() {
-    let { enrolment } = this.props;
-    console.log('Object.keys(enrolment)', Object.keys(enrolment));
-    if (!Object.keys(enrolment).length) {
+    let { enrolmentList } = this.props;
+    console.log('Object.keys(enrolment)', Object.keys(enrolmentList));
+    if (!Object.keys(enrolmentList).length) {
       this.props.loadAllEnrolments();
     }
   }
   render() {
-    let { enrolment } = this.props;
+    let { enrolmentList } = this.props;
 
     return (
       <div>
         <ul>enrolment list</ul>
-        <ul>{enrolment}</ul>
         {this.props.children}
       </div>
     )
@@ -30,8 +29,8 @@ class EnrolmentList extends Component {
 }
 
 export default connect((state) => {
-  const { enrolment } = state;
-  return { enrolment }
+  const { enrolmentList } = state;
+  return { enrolmentList }
 }, {
   loadAllEnrolments
 })(EnrolmentList)

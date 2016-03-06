@@ -19,7 +19,7 @@ export default store => next => action => {
     }
   };
 
-  fetch(callAPI.url, myInit)
+  fetch(BASIC_URL + callAPI.url, myInit)
     .then((response) => processResponse(response))
     .then((response) => {
       console.log(callAPI.url + ' response', response);

@@ -1,5 +1,5 @@
 import application from '../reducers/application'
 import github from '../reducers/github'
-import {  enrolmentListReducer } from  '../modules/enrolment.list'
-
-export { application, github, enrolmentListReducer };
+import { enrolmentList } from  '../modules/enrolment.list'
+console.log('reduc enrolment', enrolmentList );
+export { application, github, enrolmentList };

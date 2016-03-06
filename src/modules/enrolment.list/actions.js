@@ -7,7 +7,7 @@ export function loadAllEnrolments() {
     type: LOAD_ALL_ENROLMENTS,
     callAPI: {
       key: 'enrolments',
-      url: `${BASIC_URL}/enrolments`
+      url: `/enrolments`
     }
   }
 }
@@ -21,7 +21,7 @@ export function loadEnrolmentById(enrolmentId) {
     },
     callAPI: {
       key: 'enrolments',
-      url: `${BASIC_URL}/enrolments/${enrolmentId}`
+      url: `/enrolments/${enrolmentId}`
     }
   }
 }

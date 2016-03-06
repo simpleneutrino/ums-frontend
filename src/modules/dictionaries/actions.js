@@ -7,7 +7,7 @@ export function loadDepartments() {
     type: LOAD_DEPARTMENTS,
     callAPI: {
       key: 'dictionaries',
-      url: `${BASIC_URL}/departments`,
+      url: `/departments`,
       params: {
         departmentTypeId: 1
       }
@@ -21,7 +21,7 @@ export function loadEnrolmentsTypes() {
     type: LOAD_ENROLMENTS_TYPES,
     callAPI: {
       key: 'dictionaries',
-      url: `${BASIC_URL}/enrolments/types`
+      url: `/enrolments/types`
     }
   }
 }
@@ -32,7 +32,7 @@ export function loadEnrolmentsStatusTypes() {
     type: LOAD_ENROLMENTS_STATUS_TYPES,
     callAPI: {
       key: 'dictionaries',
-      url: `${BASIC_URL}/enrolments/statustypes`
+      url: `/enrolments/statustypes`
     }
   }
 }

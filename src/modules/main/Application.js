@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import UmsLeftNav from './LeftNav'
 import TopNav from './TopNav'
-import DisplayError from './devTools/DisplayError'
+import DisplayError from '../../components/devTools/DisplayError'
 
 import Paper from 'material-ui/lib/paper';
 import AppBar from 'material-ui/lib/app-bar';

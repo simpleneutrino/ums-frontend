@@ -3,8 +3,8 @@ import '../assets/stylesheets/index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import Root, { store } from './Root';
-
+import Root from './Root';
+import store from './store'
 
 start();
 

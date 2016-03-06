@@ -2,30 +2,27 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loadAllEnrolments } from '../../actions/enrolment'
-import { store } from '../../Root'
-import GeneralTable from '../table/GeneralTable'
+import { loadAllEnrolments } from './actions'
+//import GeneralTable from '../table/GeneralTable'
 
 class EnrolmentList extends Component {
   static propTypes = {
     children: PropTypes.any
   };
   componentDidMount() {
-    console.log('EnrolmentList did mount!', store.getState())
-
-    let { enrolment } = store.getState();
-    console.log('Object.keys(enrolment)', Object.keys(enrolment))
+    let { enrolment } = this.props;
+    console.log('Object.keys(enrolment)', Object.keys(enrolment));
     if (!Object.keys(enrolment).length) {
       this.props.loadAllEnrolments();
     }
-    //checkAndLoadAllArticles()
   }
   render() {
-    let { enrolment } = this.props.enrolment;
+    let { enrolment } = this.props;
 
     return (
       <div>
         <ul>enrolment list</ul>
+        <ul>{enrolment}</ul>
         {this.props.children}
       </div>
     )

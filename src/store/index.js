@@ -7,7 +7,18 @@ import thunk from 'redux-thunk'
 import logger from '../middleware/logger'
 import api from '../middleware/api'
 import persistenceStore from '../persistence/store'
-import * as reducers from '../reducers'
+import * as reducers from './reducers'
+import * as storage from '../persistence/storage'
+
+console.log('reducers', reducers);
+
+const initialState = {
+  application: {
+    token: storage.get('token'),
+    locale: storage.get('locale') || 'en',
+    user: {permissions: [/*'manage_account'*/]}
+  }
+};
 
 // Use hash location for Github Pages
 // but switch to HTML5 history locally.
@@ -33,16 +44,20 @@ const combinedReducer = combineReducers(Object.assign({
   router: routerStateReducer
 }, reducers));
 
-export default function configureStore (initialState) {
+function configureStore (initState) {
 
-  const store = finalCreateStore(combinedReducer, initialState);
+  const store = finalCreateStore(combinedReducer, initState);
 
   if (module.hot)
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default;
+  // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./reducers', () => {
+      const nextRootReducer = require('./reducers').default;
       store.replaceReducer(nextRootReducer)
     });
 
   return store
 }
+
+const store = configureStore(initialState);
+
+export default store

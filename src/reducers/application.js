@@ -35,7 +35,7 @@ const actionHandlers = {
       }
     })
   },
-  [constants.HIDE_ERROR]: state => ({ ...state, ...{ error: null } }),
-}
+  [constants.HIDE_ERROR]: state => ({ ...state, ...{ error: null } })
+};
 
 export default createReducer(initialState, actionHandlers)

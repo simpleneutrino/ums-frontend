@@ -4,6 +4,7 @@ import { BASIC_URL } from '../../constants'
 import store from '../../store'
 
 export function loadDictionaries(listOfDict) {
+  console.log('async', f);
   listOfDict.forEach((dicName) => {
     let { url, params, cache } = DICTIONARY_MAP[dicName];
     let action = {

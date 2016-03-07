@@ -22,3 +22,11 @@ export const LOAD_BY_ID = 'enrolments/LOAD_BY_ID';
 
 export const BASIC_URL = 'http://194.44.198.222:8080/is-lnu-rest-api/api';
 export const BASIC_AUTH = 'Basic YWRtaW46bmltZGE=';
+
+export const FETCH_OPTIONS = {
+  method: 'GET',
+  headers: {
+    Authorization : BASIC_AUTH,
+    'Content-Type': 'application/json'
+  }
+};

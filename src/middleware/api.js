@@ -1,4 +1,4 @@
-import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH } from '../constants'
+import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../constants'
 import handleActionError from '../utils/handle-action-error'
 import processResponse from '../utils/process-response'
 import parseLinkHeader from 'parse-link-header'
@@ -12,15 +12,15 @@ export default store => next => action => {
   console.log('type + _START', type + _START);
   next({...rest, ...{type: type + _START}});
 
-  let fetchOptions = {
-    method: 'GET',
-    headers: {
-      Authorization : BASIC_AUTH,
-      'Content-Type': 'application/json'
-    }
-  };
+  //let fetchOptions = {
+  //  method: 'GET',
+  //  headers: {
+  //    Authorization : BASIC_AUTH,
+  //    'Content-Type': 'application/json'
+  //  }
+  //};
 
-  fetch(BASIC_URL + callAPI.url, fetchOptions)
+  fetch(BASIC_URL + callAPI.url, FETCH_OPTIONS)
     .then((response) => processResponse(response))
     .then((response) => {
       console.log(callAPI.url + ' response', response);

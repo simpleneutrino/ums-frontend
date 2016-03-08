@@ -23,7 +23,6 @@ rules:
   no-eq-null: 2
   no-mixed-spaces-and-tabs: 2
   no-multiple-empty-lines: [ 2, { max: 2 } ]
-  no-trailing-spaces: 2
   no-use-before-define: [ 2, 'nofunc' ]
   no-undef: 2
   no-underscore-dangle: 0

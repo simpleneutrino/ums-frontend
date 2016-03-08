@@ -2,6 +2,18 @@ import { LOAD_DEPARTMENTS, LOAD_ENROLMENTS_TYPES, LOAD_ENROLMENTS_STATUS_TYPES} 
 import { BASIC_URL } from '../../constants'
 import store from '../../store'
 
+export function loadDictionaries() {
+  return {
+    type: LOAD_DEPARTMENTS,
+    callAPI: {
+      key: 'dictionaries',
+      url: `/departments`,
+      params: {
+        departmentTypeId: 1
+      }
+    }
+  }
+}
 
 export function loadDepartments() {
   return {

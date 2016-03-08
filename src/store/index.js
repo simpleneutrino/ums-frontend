@@ -6,6 +6,7 @@ import createHashHistory from 'history/lib/createHashHistory'
 import thunk from 'redux-thunk'
 import logger from '../middleware/logger'
 import api from '../middleware/api'
+import dicApi from '../middleware/dicApi'
 import persistenceStore from '../persistence/store'
 import * as reducers from './reducers'
 import * as storage from '../persistence/storage'
@@ -36,7 +37,7 @@ if (__DEVTOOLS__) {
 }
 
 const finalCreateStore = compose(
-  applyMiddleware(thunk, logger, api),
+  applyMiddleware(thunk, logger, dicApi, api),
   ...storeEnhancers
 )(createStore);
 

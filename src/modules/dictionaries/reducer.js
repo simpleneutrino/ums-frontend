@@ -8,7 +8,7 @@ const initialState = {};
 const actionHandlers = {
   [LOAD_ + DICTIONARY + _START]: (state, action) => {
     console.log(LOAD_ + DICTIONARY + _START, action);
-    return Object.assign(  {}, state,
+    return Object.assign({}, state,
       {
         [action.dicName] : {
           isLoading: true
@@ -23,7 +23,8 @@ const actionHandlers = {
       {
         [action.dicName] : {
           isLoading: false,
-          loaded: true
+          loaded: true,
+          resources: action.resources
         }
       }
     )

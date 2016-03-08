@@ -10,8 +10,8 @@ const initialState = {
   isLoading: false,
   loaded: true,
   count: 0,
-  limit: 0,
-  offset: 4,
+  limit: 50,
+  offset: 0,
   resources: [],
   error: null
 };
@@ -20,7 +20,9 @@ const actionHandlers = {
   [LOAD_ALL_ENROLMENTS + _START]: (state, action) => {
     console.log('LOAD_ALL_ENROLMENTS + _START ', action);
     return Object.assign(  {}, state,
-      { isLoading: true },
+      {
+        isLoading: true
+      },
       action
     )
   },

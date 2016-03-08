@@ -6,7 +6,7 @@ export function loadAllEnrolments() {
   return {
     type: LOAD_ALL_ENROLMENTS,
     callAPI: {
-      key: 'enrolments',
+      reducerName: 'enrolmentList',
       url: `/enrolments`
     }
   }
@@ -20,7 +20,7 @@ export function loadEnrolmentById(enrolmentId) {
       enrolmentId
     },
     callAPI: {
-      key: 'enrolments',
+      reducerName: 'enrolmentList',
       url: `/enrolments/${enrolmentId}`
     }
   }

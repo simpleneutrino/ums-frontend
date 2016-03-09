@@ -11,7 +11,9 @@ export default store => next => action => {
   const { url, params, dicName } = callDicAPI;
 
   let { dictionaries } = store.getState();
-  if (dictionaries[dicName] && dictionaries[dicName].resources) return next(action); // data was already loaded!
+  if (dictionaries[dicName] && dictionaries[dicName].resources && dictionaries[dicName].resources.length % 300 !== 0) {
+    return next(action);// data was already loaded!
+  }
 
   //console.group();
   //console.log('dicApi type', type);

@@ -2,6 +2,13 @@
 import { LOAD_, DICTIONARY_MAP, DICTIONARY} from './constants'
 import { _START, _SUCCESS, _FAIL } from '../../constants'
 import createReducer from '../../utils/create-reducer'
+import { forEach } from 'lodash';
+
+function createDataMap(data) {
+  let map = [];
+  forEach(data, (item) => map[item.id] = item.name);
+  return map
+}
 
 const initialState = {};
 
@@ -24,7 +31,8 @@ const actionHandlers = {
         [action.dicName] : {
           isLoading: false,
           loaded: true,
-          resources: action.resources
+          resources: action.resources,
+          resourcesMap: createDataMap(action.resources)
         }
       }
     )

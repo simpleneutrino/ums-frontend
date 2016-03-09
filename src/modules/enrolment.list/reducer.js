@@ -21,7 +21,9 @@ const actionHandlers = {
     console.log('LOAD_ALL_ENROLMENTS + _START ', action);
     return Object.assign(  {}, state,
       {
-        isLoading: true
+        isLoading: true,
+        loaded: false, // data is not loaded!
+        resources: [] // clear data
       },
       action
     )

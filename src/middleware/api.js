@@ -1,7 +1,6 @@
 import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../constants'
 import handleActionError from '../utils/handle-action-error'
 import processResponse from '../utils/process-response'
-import parseLinkHeader from 'parse-link-header'
 import serializeParams from '../utils/serializeParams'
 import 'whatwg-fetch'
 

@@ -10,7 +10,7 @@ export default store => next => action => {
   if (!callAPI) return next(action); // only for those action that has 'callApi' field
 
   const { url, params, reducerName } = callAPI;
-
+  console.log('callAPI', callAPI);
   let entityData = store.getState()[reducerName];
   const { offset, limit, isLoading } = entityData;
 

@@ -9,6 +9,7 @@ import * as storage from './persistence/storage'
 import * as components from './components'
 import * as constants from './constants'
 import { enrolmentListContainer } from './modules/enrolment.list'
+import Statistics from './modules/statistics/container'
 import Application  from './modules/main/Application'
 import store from './store'
 
@@ -45,7 +46,7 @@ function renderRoutes() {
         <Route path="enrolment">
           <Route path='list' component={enrolmentListContainer}/>
         </Route>
-
+        <Route path="statistics" component={Statistics}/>
         <Redirect from="/account" to="/account/profile"/>
         <Route path="stargazers" component={GithubStargazers}>
           <Route path=':username/:repo' component={GithubRepo}/>

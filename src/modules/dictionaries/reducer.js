@@ -17,7 +17,7 @@ const actionHandlers = {
     console.log(LOAD_ + DICTIONARY + _START, action);
     return Object.assign({}, state,
       {
-        [action.dicName] : {
+        [action.meta.collectionName] : {
           isLoading: true
         }
       }
@@ -28,7 +28,7 @@ const actionHandlers = {
     console.log(LOAD_ + DICTIONARY + _SUCCESS, action);
     return Object.assign({}, state,
       {
-        [action.dicName] : {
+        [action.meta.collectionName] : {
           isLoading: false,
           loaded: true,
           resources: action.resources,
@@ -40,7 +40,7 @@ const actionHandlers = {
   [LOAD_ + DICTIONARY + + _FAIL]: (state, action) => {
     return Object.assign({}, state,
       {
-        [action.dicName] : {
+        [action.meta.collectionName] : {
           isLoading: false,
           loaded: false,
           error: action.error

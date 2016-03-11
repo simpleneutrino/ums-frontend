@@ -1,5 +1,4 @@
 import { DICTIONARY_MAP, LOAD_, DICTIONARY } from './constants'
-import { BASIC_URL } from '../../constants'
 import store from '../../store'
 import serializeParams from '../../utils/serializeParams'
 
@@ -13,10 +12,12 @@ export function loadDictionaries(listOfDict) {
       callDicAPI: {
         url,
         params,
-        cache,
-        dicName
+        cache
       },
-      dicName
+      meta: {
+        reducerName: 'dictionaries',
+        collectionName: dicName
+      }
     };
     store.dispatch(action)
   });

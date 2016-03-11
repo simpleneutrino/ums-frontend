@@ -10,12 +10,12 @@ import { ENROLMENT_REDUCER } from './constants'
 import RefreshIndicator from 'material-ui/lib/refresh-indicator';
 const style = {
   container: {
-    position: 'relative',
+    position: 'relative'
   },
   refresh: {
     display: 'inline-block',
-    position: 'relative',
-  },
+    position: 'relative'
+  }
 };
 
 let { loadDictionaries } = dicAction;

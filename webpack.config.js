@@ -33,7 +33,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: 'style-loader!css-loader!cssnext-loader' },
-      { test: /\.js$/, loader: 'babel', include: path.join(__dirname, 'src') }
+      { test: /\.js$/, loader: 'babel', include: path.join(__dirname, 'src') },
+      { test: /\.json$/, loader: 'json' },
     ]
   },
   cssnext: {

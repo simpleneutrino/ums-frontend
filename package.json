@@ -23,12 +23,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "amcharts3": "github:amcharts/amcharts3",
+    "ammap3": "github:amcharts/ammap3",
     "history": "~1.17.0",
     "lodash": "^4.6.1",
     "material-ui": "^0.14.4",
     "parse-link-header": "~0.4.1",
     "purecss": "~0.6.0",
-    "react": "~0.14.6",
+    "react": "^0.14.7",
     "react-dom": "~0.14.6",
     "react-pure-render": "~1.0.2",
     "react-redux": "~4.0.6",

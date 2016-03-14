@@ -1,5 +1,10 @@
-import { LOAD_ALL_ENROLMENTS, LOAD_ENROLMENT_BY_ID, ENROLMENT_REDUCER } from './constants'
+
 import { BASIC_URL } from '../../constants'
+import {
+    LOAD_ALL_ENROLMENTS,
+    LOAD_ENROLMENT_BY_ID,
+    ENROLMENT_REDUCER } from './constants'
+
 
 export function loadAllEnrolments() {
   console.log(LOAD_ALL_ENROLMENTS);

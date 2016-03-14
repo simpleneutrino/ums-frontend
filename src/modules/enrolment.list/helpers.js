@@ -3,11 +3,18 @@
  */
 
 import store from '../../store'
-import { constants as dicConstants } from '../dictionaries'
-import { ENROLMENT_REDUCER,
-  isStateNames, isContractNames, isPrivilegeNames, isHostelNames } from './constants'
+import { dictConstants } from '../dictionaries'
+import {
+  ENROLMENT_REDUCER,
+  isStateNames,
+  isContractNames,
+  isPrivilegeNames,
+  isHostelNames } from './constants'
 
-let { DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES } = dicConstants;
+let {
+  DEPARTMENTS,
+  ENROLMENTS_TYPES,
+  ENROLMENTS_STATUS_TYPES } = dictConstants;
 
 export function isDicLoaded (listOfDict) {
   listOfDict.forEach((dicName) => {

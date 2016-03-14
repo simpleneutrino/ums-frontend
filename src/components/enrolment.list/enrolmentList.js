@@ -2,12 +2,11 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loadAllEnrolments } from './actions'
-import { actions as dicAction, constants as dicConstants } from '../dictionaries'
-import { isDataForEnrolmentLoaded, decodeEnrolments } from './helpers'
-import { ENROLMENT_REDUCER } from './constants'
-//import GeneralTable from '../table/GeneralTable'
+import { loadAllEnrolments } from './../../modules/enrolment.list/actions'
+import { dictActions, dictConstants } from './../../modules/dictionaries'
+import { enrolListHelpers } from './../../modules/enrolment.list'
 import RefreshIndicator from 'material-ui/lib/refresh-indicator';
+
 const style = {
   container: {
     position: 'relative'
@@ -18,8 +17,15 @@ const style = {
   }
 };
 
-let { loadDictionaries } = dicAction;
-let { DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES } = dicConstants;
+let { loadDictionaries } = dictActions;
+let { DEPARTMENTS,
+  ENROLMENTS_TYPES,
+  ENROLMENTS_STATUS_TYPES } = dictConstants;
+console.log('enrolListHelpers', enrolListHelpers);
+console.log('loadAllEnrolments', loadAllEnrolments);
+let {
+  isDataForEnrolmentLoaded,
+  decodeEnrolments } = enrolListHelpers;
 
 class EnrolmentList extends Component {
   static propTypes = {

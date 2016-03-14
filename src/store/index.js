@@ -8,10 +8,8 @@ import logger from '../middleware/logger'
 import api from '../middleware/api'
 import dicApi from '../middleware/dicApi'
 import persistenceStore from '../persistence/store'
-import * as reducers from './reducers'
+import * as reducers from './../modules/reducers'
 import * as storage from '../persistence/storage'
-
-console.log('reducers', reducers);
 
 const initialState = {
   application: {
@@ -51,8 +49,8 @@ function configureStore (initState) {
 
   if (module.hot)
   // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers').default;
+    module.hot.accept('./../modules/reducers', () => {
+      const nextRootReducer = require('./../modules/reducers').default;
       store.replaceReducer(nextRootReducer)
     });
 

@@ -1,6 +1,6 @@
-import * as actions from './actions';
-import * as constants from './constants';
+import * as dictActions from './actions';
+import * as dictConstants from './constants';
 import dictionaries from './reducer';
-import * as helpers from './helpers';
+import * as dictHelpers from './helpers';
 
-export { actions, constants, helpers, dictionaries };
+export { dictActions, dictConstants, dictHelpers, dictionaries };

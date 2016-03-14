@@ -1,7 +1,11 @@
-import { LOAD_STATISTICS, PRIORITIES, ALLOCATIONS_ADMINUNITS,
-  ALLOCATIONS_DEPARTMENTS } from './constants'
+
 import { _START, _SUCCESS, _FAIL } from '../../constants'
 import createReducer from '../../utils/create-reducer'
+import {
+    LOAD_STATISTICS,
+    PRIORITIES,
+    ALLOCATIONS_ADMINUNITS,
+    ALLOCATIONS_DEPARTMENTS } from './constants'
 
 const initialState = {};
 

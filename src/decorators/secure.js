@@ -11,11 +11,11 @@ export default function secure (scope) {
     };
 
     render () {
-      const { store } = this.context
-      const { application: { user } } = store.getState()
+      const { store } = this.context;
+      const { application: { user } } = store.getState();
 
       if (user.permissions.some(s => s === scope))
-        return <DecoratedComponent {...this.props} />
+        return <DecoratedComponent {...this.props} />;
       else
         return <Forbidden />
     }

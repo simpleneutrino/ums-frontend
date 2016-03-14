@@ -1,7 +1,7 @@
-import * as actions from './actions';
-import * as constants from './constants';
-import enrolmentList from './reducer';
-import enrolmentListContainer from './container';
+import * as enrolListActions from './actions';
+import * as enrolListConstants from './constants';
+import * as enrolListHelpers from './helpers';
+import enrolmentListReducer from './reducer';
 //import * as selectors from './selectors';
-console.log('enrolmentList y', enrolmentList);
-export { actions, constants, enrolmentList, enrolmentListContainer };
+
+export { enrolListActions, enrolListConstants, enrolListHelpers, enrolmentListReducer };

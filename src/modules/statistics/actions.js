@@ -46,54 +46,6 @@ function receiveStatistics (data, collectionName) {
   }
 }
 
-// ----------------------------------- OLD CODE BELOW::
-
-export function loadStatisticsOld (url, statisticCollectionName) {
-  return {
-    type: LOAD_STATISTICS,
-    callDicAPI: {
-      url
-    },
-    meta: {
-      reducerName: STATISTICS_REDUCER,
-      collectionName: statisticCollectionName
-    }
-  }
-}
-
-
-export function loadPriorities () {
-  return {
-    type: LOAD_STATISTICS,
-    callAPI: {
-      url: `/priorities`,
-      reducerName: STATISTICS_REDUCER
-    },
-    collectionName:  PRIORITIES
-  }
-}
-
-export function loadAllocationsAdminunits () {
-  return {
-    type: LOAD_STATISTICS,
-    callAPI: {
-      url: `/allocations/adminunits`,
-      reducerName: STATISTICS_REDUCER
-    },
-    collectionName:  ALLOCATIONS_ADMINUNITS
-  }
-}
-
-export function loadAllocationsdepartments () {
-  return {
-    type: LOAD_STATISTICS,
-    callAPI: {
-      url: `/allocations/departments`,
-      reducerName: STATISTICS_REDUCER
-    },
-    collectionName:  ALLOCATIONS_DEPARTMENTS
-  }
-}
 //allocations/adminunits
 //[ {
 //  "adminUnit" : "ВІННИЦЬКА ОБЛАСТЬ/М.ВІННИЦЯ",

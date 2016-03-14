@@ -1,8 +1,11 @@
-//LOAD_DEPARTMENTS, LOAD_ENROLMENTS_TYPES, LOAD_ENROLMENTS_STATUS_TYPES
-import { LOAD_, DICTIONARY_MAP, DICTIONARY} from './constants'
+
 import { _START, _SUCCESS, _FAIL } from '../../constants'
 import createReducer from '../../utils/create-reducer'
 import { forEach } from 'lodash';
+import { LOAD_ } from '../../constants'
+import {
+    DICTIONARY_MAP,
+    DICTIONARY } from './constants'
 
 function createDataMap(data) {
   let map = [];

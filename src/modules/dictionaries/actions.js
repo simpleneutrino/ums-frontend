@@ -1,6 +1,9 @@
-import { DICTIONARY_MAP, LOAD_, DICTIONARY } from './constants'
 import store from '../../store'
 import serializeParams from '../../utils/serializeParams'
+import { LOAD_ } from '../../constants'
+import {
+    DICTIONARY_MAP,
+    DICTIONARY } from './constants'
 
 export function loadDictionaries(listOfDict) {
   console.log('async3', listOfDict);
@@ -22,49 +25,3 @@ export function loadDictionaries(listOfDict) {
     store.dispatch(action)
   });
 }
-
-//export function loadDepartments() {
-//  return {
-//    type: LOAD_DEPARTMENTS,
-//    callAPI: {
-//      key: 'dictionaries',
-//      url: `/departments`,
-//      params: {
-//        departmentTypeId: 1
-//      }
-//    }
-//  }
-//}
-//
-//export function loadDepartments() {
-//  return {
-//    type: LOAD_DEPARTMENTS,
-//    callAPI: {
-//      key: 'dictionaries',
-//      url: `/departments`,
-//      params: {
-//        departmentTypeId: 1
-//      }
-//    }
-//  }
-//}
-//
-//export function loadEnrolmentsTypes() {
-//  return {
-//    type: LOAD_ENROLMENTS_TYPES,
-//    callAPI: {
-//      key: 'dictionaries',
-//      url: `/enrolments/types`
-//    }
-//  }
-//}
-//
-//export function loadEnrolmentsStatusTypes() {
-//  return {
-//    type: LOAD_ENROLMENTS_STATUS_TYPES,
-//    callAPI: {
-//      key: 'dictionaries',
-//      url: `/enrolments/statustypes`
-//    }
-//  }
-//}

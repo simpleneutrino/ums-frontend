@@ -2,10 +2,16 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { loadStatistics } from './actions'
-import Chart from '../amcharts/chartsFactory';
-import { PRIORITIES, ALLOCATIONS_ADMINUNITS, ALLOCATIONS_DEPARTMENTS,
-  PRIORITIES_URL, ALLOCATIONS_ADMINUNITS_URL, ALLOCATIONS_DEPARTMENTS_URL } from './constants'
+import { loadStatistics } from './../../modules/statistics/actions'
+import Chart from './chartsFactory';
+
+import {
+  PRIORITIES,
+  ALLOCATIONS_ADMINUNITS,
+  ALLOCATIONS_DEPARTMENTS,
+  PRIORITIES_URL,
+  ALLOCATIONS_ADMINUNITS_URL,
+  ALLOCATIONS_DEPARTMENTS_URL } from './../../modules/statistics/constants'
 
 let data = [{
   'year': 2005,

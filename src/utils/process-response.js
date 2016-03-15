@@ -1,4 +1,4 @@
-export default function processResponse(response) {
+export function parseResponse(response) {
   let isOk = response.ok;
 
   return response.text()
@@ -13,4 +13,15 @@ export default function processResponse(response) {
 
       throw {...body, statusCode: response.status}
     })
+}
+
+
+export function normalizeResponse(response) {
+  if (Array.isArray(response)) {
+    return {
+      resources: response,
+      count: response.length
+    }
+  }
+  return response;
 }

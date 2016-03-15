@@ -4,7 +4,7 @@ import  '../../../node_modules/amcharts3/amcharts/amcharts'
 import '../../../node_modules/amcharts3/amcharts/serial'
 import '../../../node_modules/amcharts3/amcharts/themes/light'
 import { connect } from 'react-redux'
-import { loadStatisticsIfNeeded } from './../../modules/statistics/actions'
+import { loadStatistics } from './../../modules/statistics/actions'
 
 const style = {width: 640, height: 400};
 
@@ -49,7 +49,7 @@ const mapStateToChartFactory = (state, ownProps) => {
 const mapDispatchToChartFactory = (dispatch, ownProps) => {
   return {
     getData: () => {
-      dispatch(loadStatisticsIfNeeded(ownProps.url, ownProps.collectionName));
+      dispatch(loadStatistics(ownProps.url, ownProps.collectionName));
     }
   };
 };

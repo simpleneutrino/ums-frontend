@@ -6,8 +6,6 @@ import {
     DICTIONARY } from './constants'
 
 export function loadDictionaries(listOfDict) {
-  console.log('async3', listOfDict);
-
   listOfDict.forEach((dicName) => {
     let { url, params, cache } = DICTIONARY_MAP[dicName];
     let action = {

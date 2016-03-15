@@ -1,6 +1,6 @@
 import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../constants'
 import handleActionError from '../utils/handle-action-error'
-import processResponse from '../utils/process-response'
+import { parseResponse } from '../utils/process-response'
 import serializeParams from '../utils/serializeParams'
 import 'whatwg-fetch'
 
@@ -21,7 +21,7 @@ export default store => next => action => {
   next({...rest, ...{ type: type + _START}});
 
   fetch(BASIC_URL + url + serializeParams({offset, limit}), FETCH_OPTIONS)
-    .then((response) => processResponse(response))
+    .then((response) => parseResponse(response))
     .then((response) => {
       next({...rest, ...{type: type + _SUCCESS}, ...response});
     })

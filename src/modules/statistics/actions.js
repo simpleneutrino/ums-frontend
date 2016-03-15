@@ -1,21 +1,40 @@
-import { LOAD_STATISTICS, PRIORITIES, ALLOCATIONS_ADMINUNITS,
-  ALLOCATIONS_DEPARTMENTS, STATISTICS_REDUCER } from './constants'
+import {
+  LOAD_STATISTICS,
+  PRIORITIES,
+  ALLOCATIONS_ADMINUNITS,
+  ALLOCATIONS_DEPARTMENTS,
+  STATISTICS_REDUCER } from './constants'
 import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../../constants'
 import handleActionError from '../../utils/handle-action-error'
-import processResponse from '../../utils/process-response'
+import { parseResponse }from '../../utils/process-response'
 import 'whatwg-fetch'
+
+export function loadStatistics (url, statisticCollectionName) {
+  return {
+    type: LOAD_STATISTICS,
+    callDicAPI: {
+      url
+    },
+    meta: {
+      reducerName: STATISTICS_REDUCER,
+      collectionName: statisticCollectionName
+    }
+  }
+}
+
+// ----------------------------------- OLD CODE BELOW::
 
 export function loadStatisticsIfNeeded(url, statisticCollectionName) {
   return (dispatch, getState) => {
-    if (shouldFetchStatistics(getState(), statisticCollectionName)) {
-      return dispatch(loadStatistics(url, statisticCollectionName));
+    if (shouldLoadStatistics(getState(), statisticCollectionName)) {
+      return dispatch(doLoad(url, statisticCollectionName));
     } else {
       return Promise.resolve();
     }
   };
 }
 
-function shouldFetchStatistics (state, collection) {
+function shouldLoadStatistics (state, collection) {
   const statisticItems = state[STATISTICS_REDUCER][collection];
   if (!statisticItems) {
     return true;
@@ -26,11 +45,12 @@ function shouldFetchStatistics (state, collection) {
   }
 }
 
-function loadStatistics (url, collectionName) {
+function doLoad (url, collectionName) {
   return dispatch => {
     dispatch({type: LOAD_STATISTICS +_START, meta: { collectionName } });
+
     return fetch(BASIC_URL + url)
-      .then(response => processResponse(response))
+      .then(response => parseResponse(response))
       .then(json => dispatch(receiveStatistics(json, collectionName)))
       .catch((error) => {
         dispatch({type: LOAD_STATISTICS + _FAIL, error, meta: { collectionName } })
@@ -69,7 +89,7 @@ function receiveStatistics (data, collectionName) {
 // allocations/departments
 //[ {
 //  "name" : "Фізичний",
-//  "departmentId" : 435,
+//  "departmentId" : 435,1
 //  "generalCount" : 158,
 //  "awardsCount" : 0,
 //  "benefitCount" : 0

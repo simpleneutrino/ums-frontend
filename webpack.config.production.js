@@ -19,7 +19,8 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       },
-      '__DEVTOOLS__': false
+      '__DEVTOOLS__': false,
+      '__BASIC_URL__': process.env.BASIC_URL ? JSON.stringify(process.env.BASIC_URL) : JSON.stringify('http://194.44.198.222:8080/is-lnu-rest-api/api')
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {

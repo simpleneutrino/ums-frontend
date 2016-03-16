@@ -21,7 +21,8 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       },
-      '__DEVTOOLS__': process.env.DEVTOOLS === 'true' ? true : false
+      '__DEVTOOLS__': process.env.DEVTOOLS === 'true' ? true : false,
+      '__BASIC_URL__': process.env.BASIC_URL ? JSON.stringify(process.env.BASIC_URL) : JSON.stringify('http://194.44.198.222:8080/is-lnu-rest-api/api')
     }),
     new HtmlWebpackPlugin({
       title: 'Redux React Router Async Example',
@@ -34,7 +35,7 @@ module.exports = {
     loaders: [
       { test: /\.css$/, loader: 'style-loader!css-loader!cssnext-loader' },
       { test: /\.js$/, loader: 'babel', include: path.join(__dirname, 'src') },
-      { test: /\.json$/, loader: 'json' },
+      { test: /\.json$/, loader: 'json' }
     ]
   },
   cssnext: {

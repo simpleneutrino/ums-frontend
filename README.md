@@ -1,7 +1,6 @@
 
 ## Frontend part for UMS sdmission system
 
-The skeleton for this app was taken from [emmenko/redux-react-router-async-example](http://emmenko.github.io/redux-react-router-async-example)
 
 ### FE project features
 
@@ -15,10 +14,6 @@ $ npm install
 $ npm start 
 ```
 
-with devtools:
-```bash
-$ npm run start:devtools
-```
 To build: 
 ```bash
 $ npm run build

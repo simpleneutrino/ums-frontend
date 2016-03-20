@@ -1,16 +1,16 @@
 {
-  "name": "redux-react-router-async-example",
+  "name": "ums-frontned",
   "version": "0.0.1",
   "description": "",
-  "homepage": "https://github.com/emmenko/redux-react-router-async-example",
+  "homepage": "https://github.com/mkozhukharenko/ums-frontend",
   "author": "Nikolay Kozhukharenko <nikolay.kozhuharenko@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/emmenko/redux-react-router-async-example.git"
+    "url": "https://github.com/mkozhukharenko/ums-frontend.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/emmenko/redux-react-router-async-example/issues"
+    "url": "https://github.com/mkozhukharenko/ums-frontend.git/issues"
   },
   "scripts": {
     "build": "npm run clean && npm run lint && webpack",
@@ -52,7 +52,6 @@
     "babel-runtime": "^6.3.19",
     "babel-polyfill": "^6.3.14",
     "chai": "3.5.0",
-    "cheerio": "0.20.0",
     "colors": "1.1.2",
     "css-loader": "^0.23.1",
     "file-loader": "0.8.5",
@@ -64,7 +63,6 @@
     "eslint-plugin-react": "^3.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^1.7.0",
-    "parallelshell": "2.0.0",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.2",

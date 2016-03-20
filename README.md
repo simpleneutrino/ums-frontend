@@ -16,8 +16,10 @@ $ npm start
 
 To build: 
 ```bash
-$ npm run build
+$ npm run dist
 ```
+
+
 
 #### Specification
 

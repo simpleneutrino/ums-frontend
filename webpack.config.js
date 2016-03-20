@@ -1,10 +1,10 @@
 // For info about this file refer to webpack and webpack-hot-middleware documentation
 // Rather than having hard coded webpack.config.js for each environment, this
 // file generates a webpack config for the environment passed to the getConfig method.
-import webpack from 'webpack';
-import path from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+var webpack = require('webpack');
+var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const developmentEnvironment = 'development' ;
 const productionEnvironment = 'production';
@@ -53,7 +53,7 @@ const getEntry = function (env) {
     entry.push('webpack-hot-middleware/client');
   }
 
-  entry.push('./src/index');
+  entry.push('babel-polyfill', './src/index');
 
   return entry;
 };
@@ -73,6 +73,9 @@ const getLoaders = function (env) {
 };
 
 function getConfig(env) {
+  env = process.env.NODE_ENV || 'development';
+  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+  console.log('env', env);
   return {
     debug: true,
     devtool: env === productionEnvironment  ? 'source-map' : 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -80,9 +83,9 @@ function getConfig(env) {
     entry: getEntry(env),
     target: env === testEnvironment ? 'node' : 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
     output: {
-      path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
-      publicPath: '',
-      filename: 'bundle.js'
+      path: path.join(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
+      publicPath: env === productionEnvironment  ? '' : '/assets/',
+      filename: env === productionEnvironment  ? '[name].min.js' : 'app.js'
     },
     plugins: getPlugins(env),
     module: {
@@ -91,4 +94,4 @@ function getConfig(env) {
   };
 }
 
-export default getConfig;
+module.exports = getConfig();

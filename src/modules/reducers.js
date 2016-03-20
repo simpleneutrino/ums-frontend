@@ -5,6 +5,7 @@ import { default as application } from './application/reducer'
 import { routeReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
+console.log('dictionaries_reducer', dictionaries);
 const rootReducer = combineReducers({
   enrolmentList,
   dictionaries,

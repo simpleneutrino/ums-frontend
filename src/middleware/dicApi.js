@@ -37,6 +37,7 @@ export default store => next => action => {
     .then((response) => parseResponse(response))
     .then((response) => normalizeResponse(response))
     .then((response) => {
+      console.log('response', {...rest, ...action, ...{type: type + _SUCCESS}, ...response});
       next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});
     })
     .catch((error) => {

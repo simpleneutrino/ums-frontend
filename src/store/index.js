@@ -1,12 +1,12 @@
 /* global __DEVTOOLS__ */
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import * as middlewares from '../middleware'
-import persistenceStore from '../persistence/store'
-import * as storage from '../persistence/storage'
+import persistenceStore from '../persistence/store';
+import * as storage from '../persistence/storage';
 import { Router, Route, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import rootReducer from '../modules/reducers';
+import thunk from 'redux-thunk';
+import { api, dicApi, logger } from '../middleware';
 
 const initialState = {
   application: {
@@ -27,8 +27,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 const storemiddlewareHistory = syncHistory(browserHistory);
 
+
 const finalCreateStore = compose(
-  applyMiddleware(storemiddlewareHistory, thunk, ...middlewares),
+  applyMiddleware(storemiddlewareHistory, thunk, api, dicApi, logger),
   ...storeEnhancers
 )(createStore);
 

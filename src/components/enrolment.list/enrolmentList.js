@@ -8,9 +8,6 @@ import { enrolListHelpers } from './../../modules/enrolment.list'
 import RefreshIndicator from 'material-ui/lib/refresh-indicator';
 
 const style = {
-  container: {
-    position: 'relative'
-  },
   refresh: {
     display: 'inline-block',
     position: 'relative'
@@ -21,11 +18,11 @@ let { loadDictionaries } = dictActions;
 let { DEPARTMENTS,
   ENROLMENTS_TYPES,
   ENROLMENTS_STATUS_TYPES } = dictConstants;
-console.log('enrolListHelpers', enrolListHelpers);
-console.log('loadAllEnrolments', loadAllEnrolments);
+
 let {
   isDataForEnrolmentLoaded,
   decodeEnrolments } = enrolListHelpers;
+
 
 class EnrolmentList extends Component {
   static propTypes = {
@@ -44,7 +41,8 @@ class EnrolmentList extends Component {
     }
   }
   componentDidMount() {
-    loadDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]);
+    //debugger;
+    this.props.loadDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]);
     this.props.loadAllEnrolments();
   }
   render() {
@@ -65,8 +63,6 @@ class EnrolmentList extends Component {
     console.log('render: enrolmentList', enrolmentList);
     console.log('render: dictionaries', dictionaries);
     console.log('render: decodedEnrolmentsList', decodedEnrolmentsList);
-    //let decodedEnrolmentsList = decodeEnrolments(enrolmentList.resources, dictionaries);
-    //console.log('render: decodedEnrolmentsList', decodedEnrolmentsList);
     return (
       <div>
         <ul>enrolment list</ul>
@@ -80,6 +76,6 @@ export default connect((state) => {
   const { enrolmentList, dictionaries } = state;
   return { enrolmentList, dictionaries }
 }, {
-  loadAllEnrolments
+  loadAllEnrolments, loadDictionaries
 })(EnrolmentList)
 

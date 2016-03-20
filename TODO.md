@@ -1,22 +1,29 @@
 # TODO
 
-- decouple files: http://jaysoo.ca/2016/02/28/organizing-redux-application/
+## Core
+- implement enrolment list view
+    + filtering
+    + pagination
+    + sorting
+- implement single enrolment view
+    + fetch data
+    + decode data
+    + pass to view
+- auth !!!
+
+## Enhancement:
+
+#### Hight priptiry 
 - loading spinner for data fetching
-- use inline styles https://github.com/emmenko/redux-react-router-async-example/issues/7
-- add use-case for `AsyncProps`
-- add use-case for external plugin https://dl.dropboxusercontent.com/u/4803975/ReactEurope/slides.pdf
+- improve appBar (topbar). Move links from left bar to topbar . See https://github.com/newoga/material-ui-scrolling-techniques
 
-change file structure to:
-```
-todos/
-  components/
-  actions.js
-  actionTypes.js
-  constants.js
-  index.js !!!!!
-  reducer.js
-index.js
-rootReducer.js
-```
+#### Medium  priptiry
+- tests in progress
+- maybe fetching data before route transition? https://github.com/Rezonans/redux-async-connect or  `AsyncProps`
+- add redux storage (localstorage) https://github.com/michaelcontento/redux-storage
 
-- tests?
+#### Low priptiry
+- maybe use inline styles https://github.com/emmenko/redux-react-router-async-example/issues/7
+
+
+## Bugs:

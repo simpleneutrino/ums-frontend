@@ -7,6 +7,6 @@ export default createDevTools(
   <DockMonitor
     toggleVisibilityKey='H'
     changePositionKey='W'>
-    <LogMonitor theme="tomorrow"/>
+    <LogMonitor theme="tomorrow" preserveScrollTop={false}/>
   </DockMonitor>
 )

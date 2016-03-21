@@ -1,15 +1,12 @@
 /* global __DEVTOOLS__ */
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import { reduxReactRouter, routerStateReducer } from 'redux-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import createHashHistory from 'history/lib/createHashHistory'
-import thunk from 'redux-thunk'
-import logger from '../middleware/logger'
-import api from '../middleware/api'
-import dicApi from '../middleware/dicApi'
-import persistenceStore from '../persistence/store'
-import * as reducers from './../modules/reducers'
-import * as storage from '../persistence/storage'
+import persistenceStore from '../persistence/store';
+import * as storage from '../persistence/storage';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistory } from 'react-router-redux';
+import rootReducer from '../modules/reducers';
+import thunk from 'redux-thunk';
+import { api, dicApi, logger } from '../middleware';
 
 const initialState = {
   application: {
@@ -19,33 +16,27 @@ const initialState = {
   }
 };
 
-// Use hash location for Github Pages
-// but switch to HTML5 history locally.
-const createHistory = process.env.NODE_ENV === 'production' ?
-  createHashHistory : createBrowserHistory;
-
 const storeEnhancers = [
-  persistenceStore,
-  reduxReactRouter({ createHistory })
+  persistenceStore
 ];
 
-if (__DEVTOOLS__) {
+if (process.env.NODE_ENV !== 'production') {
   const DevTools = require('../components/devTools/DevTools').default;
   storeEnhancers.push(DevTools.instrument())
 }
 
+const storemiddlewareHistory = syncHistory(browserHistory);
+
+
 const finalCreateStore = compose(
-  applyMiddleware(thunk, logger, dicApi, api),
+  applyMiddleware(storemiddlewareHistory, thunk, api, dicApi, logger),
   ...storeEnhancers
 )(createStore);
 
-const combinedReducer = combineReducers(Object.assign({
-  router: routerStateReducer
-}, reducers));
-
 function configureStore (initState) {
 
-  const store = finalCreateStore(combinedReducer, initState);
+  const store = finalCreateStore(rootReducer, initState);
+  storemiddlewareHistory.listenForReplays(store);
 
   if (module.hot)
   // Enable Webpack hot module replacement for reducers
@@ -57,6 +48,6 @@ function configureStore (initState) {
   return store
 }
 
-const store = configureStore(initialState);
+const store = configureStore(initialState, storemiddlewareHistory);
 
 export default store

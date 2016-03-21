@@ -4,13 +4,14 @@ import React from 'react';
 import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import AppBar from 'material-ui/lib/app-bar';
+import { browserHistory } from 'react-router'
 
 import EditorInsertChart from 'material-ui/lib/svg-icons/editor/insert-chart';
 import AvLibraryBooks from 'material-ui/lib/svg-icons/av/library-books';
 import SocialPeople from 'material-ui/lib/svg-icons/social/people';
 
-import ContentFilterList from 'material-ui/lib/svg-icons/content/filter-list';
-import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle';
+//import ContentFilterList from 'material-ui/lib/svg-icons/content/filter-list';
+//import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle';
 
 const menuItems = [
   {text: 'Статистика', link: '/statistics', icon: <EditorInsertChart/>},
@@ -30,8 +31,10 @@ export default class UmsLeftNav extends React.Component {
 
   toggleRoute = (link) => {
     return () => {
+      console.log('toggleRoute this', this);
       this.handleClose();
-      this.props.history.pushState({}, link);
+      //this.props.history.push(link);
+      browserHistory.push(link);
     }
   };
 

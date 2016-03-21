@@ -3,9 +3,7 @@ import { _START, _SUCCESS, _FAIL } from '../../constants'
 import createReducer from '../../utils/create-reducer'
 import { forEach } from 'lodash';
 import { LOAD_ } from '../../constants'
-import {
-    DICTIONARY_MAP,
-    DICTIONARY } from './constants'
+import { DICTIONARY_MAP, DICTIONARY } from './constants'
 
 function createDataMap(data) {
   let map = [];
@@ -17,7 +15,7 @@ const initialState = {};
 
 const actionHandlers = {
   [LOAD_ + DICTIONARY + _START]: (state, action) => {
-    console.log(LOAD_ + DICTIONARY + _START, action);
+    console.log('load_dict_start',LOAD_ + DICTIONARY + _START, action);
     return Object.assign({}, state,
       {
         [action.meta.collectionName] : {
@@ -28,7 +26,7 @@ const actionHandlers = {
   },
 
   [LOAD_ + DICTIONARY + _SUCCESS]: (state, action) => {
-    console.log(LOAD_ + DICTIONARY + _SUCCESS, action);
+    console.log('load_dict_success', LOAD_ + DICTIONARY + _SUCCESS, action);
     return Object.assign({}, state,
       {
         [action.meta.collectionName] : {

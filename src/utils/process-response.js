@@ -1,3 +1,8 @@
+/**
+ * parse a response 
+ * @param response 
+ * @returns {Promise.<TResult>}
+ */
 export function parseResponse(response) {
   let isOk = response.ok;
 
@@ -15,7 +20,16 @@ export function parseResponse(response) {
     })
 }
 
-
+/**
+ * if response - is a simple array like [{}, {}, {}]
+ *  - it turn it to this:
+ *  {
+ *      resources: [{}, {}, {}]
+ *      count: 3
+ *  }
+ * @param response
+ * @returns {*}
+ */
 export function normalizeResponse(response) {
   if (Array.isArray(response)) {
     return {

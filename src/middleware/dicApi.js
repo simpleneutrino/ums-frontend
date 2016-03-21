@@ -34,7 +34,8 @@ export default store => next => action => {
     .then((response) => parseResponse(response))
     .then((response) => normalizeResponse(response))
     .then((response) => {
-      next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});  // notify that data is loaded, and send it to store!
+      // notify that data is loaded, and send it to store!
+      next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});
     })
     .catch((error) => {
       next({...rest, ...action, ...{type: type + _FAIL}, error}); // notify about an error!

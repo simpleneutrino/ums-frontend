@@ -18,7 +18,7 @@ const initialState = {
 
 const actionHandlers = {
   [LOAD_ALL_ENROLMENTS + _START]: (state, action) => {
-    console.log('LOAD_ALL_ENROLMENTS + _START ', action);
+    // console.log('LOAD_ALL_ENROLMENTS + _START ', action);
     return Object.assign(  {}, state,
       {
         isLoading: true,
@@ -30,8 +30,7 @@ const actionHandlers = {
   },
 
   [LOAD_ALL_ENROLMENTS + _SUCCESS]: (state, action) => {
-    console.log('LOAD_ALL_ENROLMENTS _SUCCESS action', action);
-    console.log('LOAD_ALL_ENROLMENTS _SUCCESS  state', state);
+    // console.log('LOAD_ALL_ENROLMENTS _SUCCESS action', action);
     return Object.assign({},
       state,
       {

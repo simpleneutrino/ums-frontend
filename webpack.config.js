@@ -74,8 +74,7 @@ const getLoaders = function (env) {
 
 function getConfig(env) {
   env = process.env.NODE_ENV || 'development';
-  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-  console.log('env', env);
+  console.log('current environment is a ', env);
   return {
     debug: true,
     devtool: env === productionEnvironment  ? 'source-map' : 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool

@@ -5,9 +5,6 @@ const initialState = {
   token: null,
   locale: 'en',
   user: {
-    // TO-DO: have a checkbox to update the state
-    // e.g.: on the login page and/or menu
-    // permissions: ['manage_account']
     permissions: []
   },
   error: null

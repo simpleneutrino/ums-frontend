@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Forbidden } from '../components'
 
+// need to intergate this into project
+// usless for now
 export default function secure (scope) {
 
   return DecoratedComponent =>

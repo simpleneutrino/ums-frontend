@@ -1,17 +1,13 @@
 
 import { _START, _SUCCESS, _FAIL } from '../../constants'
 import createReducer from '../../utils/create-reducer'
-import {
-    LOAD_STATISTICS,
-    PRIORITIES,
-    ALLOCATIONS_ADMINUNITS,
-    ALLOCATIONS_DEPARTMENTS } from './constants'
+import { LOAD_STATISTICS } from './constants'
 
 const initialState = {};
 
 const actionHandlers = {
   [LOAD_STATISTICS + _START]: (state, action) => {
-    console.log(LOAD_STATISTICS + _START, action);
+    // console.log(LOAD_STATISTICS + _START, action);
     return Object.assign({}, state,
       {
         [action.meta.collectionName] : {
@@ -22,7 +18,7 @@ const actionHandlers = {
   },
 
   [LOAD_STATISTICS + _SUCCESS]: (state, action) => {
-    console.log(LOAD_STATISTICS + _SUCCESS, action);
+    // console.log(LOAD_STATISTICS + _SUCCESS, action);
     return Object.assign({}, state,
       {
         [action.meta.collectionName] : {

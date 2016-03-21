@@ -1,8 +1,7 @@
-/* global __DEVTOOLS__ */
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import persistenceStore from '../persistence/store';
 import * as storage from '../persistence/storage';
-import { Router, Route, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import rootReducer from '../modules/reducers';
 import thunk from 'redux-thunk';
@@ -20,6 +19,7 @@ const storeEnhancers = [
   persistenceStore
 ];
 
+// if 'production' environment - add DevTools
 if (process.env.NODE_ENV !== 'production') {
   const DevTools = require('../components/devTools/DevTools').default;
   storeEnhancers.push(DevTools.instrument())

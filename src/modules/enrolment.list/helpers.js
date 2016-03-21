@@ -6,7 +6,7 @@ import store from '../../store'
 import { dictConstants } from '../dictionaries'
 import { isDictLoaded } from '../dictionaries/helpers'
 import {
-  ENROLMENT_REDUCER,
+  ENROLMENT_LIST_REDUCER,
   isStateNames,
   isContractNames,
   isPrivilegeNames,
@@ -26,7 +26,7 @@ export function isEntityDataLoaded  (storeState, reducerName) {
 export function isDataForEnrolmentLoaded  () {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state)
-    && isEntityDataLoaded(state, ENROLMENT_REDUCER)
+    && isEntityDataLoaded(state, ENROLMENT_LIST_REDUCER)
 }
 
 export function decodeEnrolments  (rowEnrolments, dictionaries) {

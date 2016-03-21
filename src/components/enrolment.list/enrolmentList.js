@@ -33,8 +33,8 @@ class EnrolmentList extends Component {
     this.state = { decodedEnrolmentsList: null }
   }
   componentWillReceiveProps(nextProps, nextState) {
-    console.log('nextProps', nextProps);
-    console.log('nextState', nextState);
+    // console.log('nextProps', nextProps);
+    // console.log('nextState', nextState);
     let { enrolmentList, dictionaries } = nextProps;
     if (isDataForEnrolmentLoaded()) {
       this.setState({ decodedEnrolmentsList: decodeEnrolments(enrolmentList.resources, dictionaries) })
@@ -60,9 +60,9 @@ class EnrolmentList extends Component {
 
     let { enrolmentList, dictionaries } = this.props;
     let { decodedEnrolmentsList } = this.state;
-    console.log('render: enrolmentList', enrolmentList);
-    console.log('render: dictionaries', dictionaries);
-    console.log('render: decodedEnrolmentsList', decodedEnrolmentsList);
+    // console.log('render: enrolmentList', enrolmentList);
+    // console.log('render: dictionaries', dictionaries);
+    // console.log('render: decodedEnrolmentsList', decodedEnrolmentsList);
     return (
       <div>
         <ul>enrolment list</ul>

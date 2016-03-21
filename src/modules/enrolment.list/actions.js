@@ -1,9 +1,8 @@
 
-import { BASIC_URL } from '../../constants'
 import {
     LOAD_ALL_ENROLMENTS,
     LOAD_ENROLMENT_BY_ID,
-    ENROLMENT_REDUCER } from './constants'
+    ENROLMENT_LIST_REDUCER } from './constants'
 
 
 export function loadAllEnrolments() {
@@ -11,8 +10,10 @@ export function loadAllEnrolments() {
   return {
     type: LOAD_ALL_ENROLMENTS,
     callAPI: {
-      reducerName: ENROLMENT_REDUCER,
       url: `/enrolments`
+    },
+    meta: {
+      reducerName: ENROLMENT_LIST_REDUCER
     }
   }
 }
@@ -25,8 +26,10 @@ export function loadEnrolmentById(enrolmentId) {
       enrolmentId
     },
     callAPI: {
-      reducerName: ENROLMENT_REDUCER,
       url: `/enrolments/${enrolmentId}`
+    },
+    meta: {
+      reducerName: ENROLMENT_LIST_REDUCER
     }
   }
 }

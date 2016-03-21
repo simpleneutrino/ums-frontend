@@ -23,11 +23,9 @@ export default class Application extends React.Component {
   };
 
   _onMenuIconButtonTouch = () => {
-    console.log('this.refs.LeftNav',this.refs.LeftNav );
     this.refs.LeftNav.handleToggle()};
 
   render() {
-    console.log('Application this.props', this.props);
     return (
         <div id="layout">
 

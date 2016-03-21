@@ -3,7 +3,7 @@
 export const LOAD_ALL_ENROLMENTS= 'LOAD_ALL_ENROLMENTS';
 export const LOAD_ENROLMENT_BY_ID = 'LOAD_ENROLMENT_BY_ID';
 
-export const ENROLMENT_REDUCER = 'enrolmentList';
+export const ENROLMENT_LIST_REDUCER = 'enrolmentList';
 
 // CONSTANTS
 export const isStateNames = ['\u2718', '\u2713'];

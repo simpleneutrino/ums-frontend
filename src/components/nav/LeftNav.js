@@ -31,7 +31,6 @@ export default class UmsLeftNav extends React.Component {
 
   toggleRoute = (link) => {
     return () => {
-      console.log('toggleRoute this', this);
       this.handleClose();
       //this.props.history.push(link);
       browserHistory.push(link);

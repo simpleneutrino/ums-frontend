@@ -1,5 +1,4 @@
-import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../constants'
-import handleActionError from '../utils/handle-action-error'
+import { _START, _SUCCESS, _FAIL, BASIC_URL, FETCH_OPTIONS } from '../constants'
 import { parseResponse, normalizeResponse } from '../utils/process-response'
 import serializeParams from '../utils/serializeParams'
 import 'whatwg-fetch'
@@ -19,8 +18,6 @@ export default store => next => action => {
   //console.log('dicApi params', params);
   //console.log('dicApi collectionStore', collectionStore);
   //console.log('dicApi collectionStore[collectionName]', collectionStore[collectionName]);
-  //console.log(BASIC_URL + url + serializeParams(params));
-  //console.log('dicApi rest', rest);
   //console.log('dicApi reducerName', reducerName);
   //console.log('dicApi collectionName', collectionName);
   //console.groupEnd();
@@ -29,7 +26,7 @@ export default store => next => action => {
     return next(action);// data was already loaded!
   }
 
-  next({...rest, ...action, ...{type: type + _START}});
+  next({...rest, ...action, ...{type: type + _START}}); // notify that loading is started!
 
   let queryParams = Object.assign({limit: 300, offset: 0}, params);
 
@@ -37,11 +34,10 @@ export default store => next => action => {
     .then((response) => parseResponse(response))
     .then((response) => normalizeResponse(response))
     .then((response) => {
-      console.log('response', {...rest, ...action, ...{type: type + _SUCCESS}, ...response});
-      next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});
+      next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});  // notify that data is loaded, and send it to store!
     })
     .catch((error) => {
-      next({...rest, ...action, ...{type: type + _FAIL}, error})
+      next({...rest, ...action, ...{type: type + _FAIL}, error}); // notify about an error!
     })
 
 }

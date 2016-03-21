@@ -1,4 +1,3 @@
-import serializeParams from '../../utils/serializeParams'
 import { LOAD_ } from '../../constants'
 import { DICTIONARY_MAP, DICTIONARY } from './constants'
 

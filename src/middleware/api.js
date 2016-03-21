@@ -1,5 +1,4 @@
-import { _START, _SUCCESS, _FAIL, BASIC_URL, BASIC_AUTH, FETCH_OPTIONS } from '../constants'
-import handleActionError from '../utils/handle-action-error'
+import { _START, _SUCCESS, _FAIL, BASIC_URL, FETCH_OPTIONS } from '../constants'
 import { parseResponse } from '../utils/process-response'
 import serializeParams from '../utils/serializeParams'
 import 'whatwg-fetch'
@@ -9,14 +8,14 @@ export default store => next => action => {
 
   if (!callAPI) return next(action); // only for those action that has 'callApi' field
 
-  const { url, params, reducerName } = callAPI;
-  console.log('callAPI', callAPI);
-  let entityData = store.getState()[reducerName];
+  const { url, params } = callAPI;
+  const { reducerName } = meta;
+  
+  let entityData = store.getState()[reducerName]; // get entity (e.g. enrolmentList) state
   const { offset, limit, isLoading } = entityData;
 
-  console.log('isLoading', isLoading);
+  console.info(`URL ${url} is loading. Reducer name: ${reducerName}. Action type: ${type}`);
   if (isLoading) return next(action); // don't fetch if req already in process
-  console.log('entityData', reducerName, entityData);
 
   next({...rest, ...{ type: type + _START}});
 

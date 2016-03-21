@@ -20,11 +20,9 @@ export default (ComposedComponent) => {
 
     handleToggle = (ev) => {
       if (ev) ev.preventDefault();
-      console.log('this.state before', this.state);
       this.setState({
         isOpen: !this.state.isOpen
-      })
-      console.log('this.state after', this.state);
+      });
     }
   }
 }

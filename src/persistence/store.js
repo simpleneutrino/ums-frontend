@@ -8,8 +8,7 @@ export default function persistenceHandler (next) {
     return Object.assign({}, store, {
       dispatch (action) {
         store.dispatch(action)
-
-        storage.put('locale', store.getState().application.locale)
+        // storage.put('locale', store.getState().application.locale)
 
         if (action.type === constants.LOGGED_IN)
           storage.put('token', action.payload.token)

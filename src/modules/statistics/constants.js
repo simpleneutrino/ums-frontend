@@ -11,7 +11,7 @@ export const STATISTICS_REDUCER = 'statistics';
 
 export const STATISTICS_MAP = {
   [PRIORITIES]: {
-    url: '/priorities',
+    url: '/stats/8/priorities',
     params: {},
     cache: true,
     chartTitle: 'Статистика по пріоритетам',
@@ -42,7 +42,7 @@ export const STATISTICS_MAP = {
     }
   },
   [ALLOCATIONS_ADMINUNITS]: {
-    url: '/entrants/allocations/adminunits',
+    url: '/stats/8/entrants/allocations/adminunits',
     params: {},
     cache: true,
     chartTitle: 'Статистика по областям',
@@ -62,7 +62,7 @@ export const STATISTICS_MAP = {
     }
   },
   [ALLOCATIONS_DEPARTMENTS]: {
-    url: '/entrants/allocations/departments',
+    url: '/stats/8/entrants/allocations/departments',
     params: {},
     cache: true,
     chartTitle: 'Статистика по факультетам',

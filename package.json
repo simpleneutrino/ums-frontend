@@ -13,7 +13,7 @@
     "url": "https://github.com/mkozhukharenko/ums-frontend.git/issues"
   },
   "scripts": {
-    "build": "npm run clean && npm run lint && webpack",
+    "build": "npm run clean && webpack",
     "clean": "rimraf dist",
     "dist": "npm run clean && npm run lint && NODE_ENV=production webpack",
     "lint": "eslint src",
@@ -24,17 +24,19 @@
   "dependencies": {
     "amcharts3": "github:amcharts/amcharts3",
     "ammap3": "github:amcharts/ammap3",
+    "bootstrap": "^3.3.6",
     "connect-history-api-fallback": "1.1.0",
     "history": "2.0.0",
     "lodash": "^4.6.1",
-    "material-ui": "^0.14.4",
     "react": "^0.14.7",
+    "react-bootstrap": "^0.28.3",
     "react-dom": "~0.14.6",
     "react-redux": "4.4.0",
     "react-router": "~2.0.0",
+    "react-router-bootstrap": "^0.20.1",
+    "react-router-redux": "3.0.0",
     "react-tap-event-plugin": "^0.2.2",
     "redux": "~3.0.5",
-    "react-router-redux": "3.0.0",
     "redux-thunk": "~1.0.3",
     "whatwg-fetch": "~0.10.1"
   },

@@ -1,60 +1,65 @@
 /*global AmCharts :true*/
-import React, { Component, PropTypes } from 'react'
-import  '../../../node_modules/amcharts3/amcharts/amcharts'
-import '../../../node_modules/amcharts3/amcharts/serial'
-import '../../../node_modules/amcharts3/amcharts/themes/light'
-import { connect } from 'react-redux'
-import { loadStatistics } from './../../modules/statistics/actions'
+import React, {Component, PropTypes} from 'react'
+import 'amcharts3/amcharts/amcharts';
+import 'amcharts3/amcharts/serial'
+import 'amcharts3/amcharts/pie'
+import 'amcharts3/amcharts/themes/light'
+import {connect} from 'react-redux'
+import {loadStatistics} from './../../modules/statistics/actions'
 
 const style = {width: 640, height: 400};
 
 class chartFactory extends Component {
-  static propTypes = {
-    config: PropTypes.object.isRequired,
-    collectionName: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
-  };
+    static propTypes = {
+        config: PropTypes.object.isRequired,
+        collectionName: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired
+    };
 
-  renderChart() {
-    let { config, data } = this.props;
-    config.dataProvider = data;
-    AmCharts.makeChart('chartdiv', config);
-  }
-
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.getData();
+    renderChart() {
+        let {config, data, id} = this.props;
+        config.dataProvider = data.data;
+        AmCharts.makeChart(id, config);
     }
-  }
 
-  render() {
-    let { data } = this.props;
-    if (!data) {
-      return <div>Loading ...</div>
+    componentWillUnmount(){
+        AmCharts.clear();
     }
-    this.renderChart();
+    componentDidMount() {
+        if (!this.props.data) {
+            this.props.getData();
+        }
+    }
 
-    return (
-      <div id="chartdiv" style={style}/>
-    );
-  }
+    render() {
+        let {data, id} = this.props;
+        if (!data) {
+            return <div>Loading ...</div>
+        }
+
+        this.renderChart();
+        return (
+            <div id={id} style={style}/>
+        );
+    }
 }
 
 const mapStateToChartFactory = (state, ownProps) => {
-  return {
-    data: state.statistics[ownProps.collectionName]
-  }
+    return {
+        data: state.statistics[ownProps.collectionName]
+    }
 };
 
 const mapDispatchToChartFactory = (dispatch, ownProps) => {
-  return {
-    getData: () => {
-      dispatch(loadStatistics(ownProps.url, ownProps.collectionName));
-    }
-  };
+    return {
+        getData: () => {
+            dispatch(loadStatistics(ownProps.url, ownProps.collectionName));
+        }
+    };
 };
 
 export default connect(
-  mapStateToChartFactory,
-  mapDispatchToChartFactory
+    mapStateToChartFactory,
+    mapDispatchToChartFactory
 )(chartFactory);

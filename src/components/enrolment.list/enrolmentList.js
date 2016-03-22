@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { loadAllEnrolments } from './../../modules/enrolment.list/actions'
 import { dictActions, dictConstants } from './../../modules/dictionaries'
 import { enrolListHelpers } from './../../modules/enrolment.list'
-import RefreshIndicator from 'material-ui/lib/refresh-indicator';
 
 const style = {
   refresh: {
@@ -48,14 +47,7 @@ class EnrolmentList extends Component {
   render() {
 
     if (!isDataForEnrolmentLoaded()) {
-      return <RefreshIndicator
-        size={50}
-        left={70}
-        top={0}
-        loadingColor={"#FF9800"}
-        status="loading"
-        style={style.refresh}
-      />
+      return <div>load</div>
     }
 
     let { enrolmentList, dictionaries } = this.props;

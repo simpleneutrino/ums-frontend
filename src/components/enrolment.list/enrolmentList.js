@@ -44,6 +44,7 @@ class EnrolmentList extends Component {
     this.props.loadDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]);
     this.props.loadAllEnrolments();
   }
+  
   render() {
 
     if (!isDataForEnrolmentLoaded()) {

@@ -17,7 +17,7 @@
     "clean": "rimraf dist",
     "dist": "npm run clean && npm run lint && NODE_ENV=production webpack",
     "lint": "eslint src",
-    "start": "npm run build && node server.js",
+    "start": "npm run build && npm run lint && node server.js",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --recursive \"./src/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },

@@ -1,28 +1,19 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './store';
 import '../assets/stylesheets/index.css';
-
-import { Router, browserHistory } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.css';
+import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 
 render(
-  <Provider store={store}>
-    <div>
-      <Router history={browserHistory} routes={routes}/>
-      { getDevTools() }
-    </div>
-  </Provider>, document.getElementById('app')
+    <Provider store={store}>
+        <div>
+            <Router history={browserHistory} routes={routes}/>
+        </div>
+    </Provider>, document.getElementById('app')
 );
-
-
-function getDevTools() {
-  if (process.env.NODE_ENV !== 'production') {
-    const DevTools = require('./components/devTools/DevTools').default;
-    return <DevTools key="devtools"/>
-  }
-}
 
 
 // TODO: implement auth. check this

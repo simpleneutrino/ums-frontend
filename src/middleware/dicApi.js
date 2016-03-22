@@ -1,14 +1,14 @@
-import { _START, _SUCCESS, _FAIL, BASIC_URL, FETCH_OPTIONS } from '../constants'
-import { parseResponse, normalizeResponse } from '../utils/process-response'
+import {_START, _SUCCESS, _FAIL, BASIC_URL, FETCH_OPTIONS} from '../constants'
+import {parseResponse, normalizeResponse} from '../utils/process-response'
 import serializeParams from '../utils/serializeParams'
 import 'whatwg-fetch'
 
 export default store => next => action => {
-  const { callDicAPI, type, meta, ...rest } = action;
+  const {callDicAPI, type, meta, ...rest} = action;
 
   if (!callDicAPI) return next(action); // only for fetching dictionary!!
-  const { url, params } = callDicAPI;
-  const { reducerName, collectionName } = meta;
+  const {url, params} = callDicAPI;
+  const {reducerName, collectionName} = meta;
 
   let collectionStore = store.getState()[reducerName];
 
@@ -35,7 +35,10 @@ export default store => next => action => {
     .then((response) => normalizeResponse(response))
     .then((response) => {
       // notify that data is loaded, and send it to store!
-      next({...rest, ...action, ...{type: type + _SUCCESS}, ...response});
+      next({
+        ...rest, ...action, ...{type: type + _SUCCESS},
+        payload: {count: response.count, data: response.resources}
+      });
     })
     .catch((error) => {
       next({...rest, ...action, ...{type: type + _FAIL}, error}); // notify about an error!

@@ -1,11 +1,11 @@
-import { createStore, compose, applyMiddleware } from 'redux'
+import {createStore, compose, applyMiddleware} from 'redux'
 import persistenceStore from '../persistence/store';
 import * as storage from '../persistence/storage';
-import { browserHistory } from 'react-router';
-import { syncHistory } from 'react-router-redux';
+import {browserHistory} from 'react-router';
+import {syncHistory} from 'react-router-redux';
 import rootReducer from '../modules/reducers';
 import thunk from 'redux-thunk';
-import { api, dicApi, logger } from '../middleware';
+import {api, dicApi, logger} from '../middleware';
 
 const initialState = {
   application: {
@@ -19,21 +19,15 @@ const storeEnhancers = [
   persistenceStore
 ];
 
-// if 'production' environment - add DevTools
-if (process.env.NODE_ENV !== 'production') {
-  const DevTools = require('../components/devTools/DevTools').default;
-  storeEnhancers.push(DevTools.instrument())
-}
-
 const storemiddlewareHistory = syncHistory(browserHistory);
-
 
 const finalCreateStore = compose(
   applyMiddleware(storemiddlewareHistory, thunk, api, dicApi, logger),
+  window.devToolsExtension ? window.devToolsExtension() : f => f,
   ...storeEnhancers
 )(createStore);
 
-function configureStore (initState) {
+function configureStore(initState) {
 
   const store = finalCreateStore(rootReducer, initState);
   storemiddlewareHistory.listenForReplays(store);

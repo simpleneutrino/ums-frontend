@@ -22,7 +22,7 @@ export default (
     </Route>
     <Route path="statistics" component={Statistics}>
       <IndexRoute component={StatisticsIndex} />
-      <Route path="chart/:id" component={Chart}/>
+      <Route path="chart/:chartId" component={Chart}/>
     </Route>
     <Route path="persons" component={Persons}/>
     <Route path="logout" onEnter={logout}/>

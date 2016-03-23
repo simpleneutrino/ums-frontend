@@ -25,20 +25,25 @@ class Chart extends Component {
 // /blob/fb192a707a84d0ae65a3afe0e2f2900e94a5fc9e/docs/guides/ComponentLifecycle.md
   componentDidMount() {
     console.log('componentDidMount Chart this.props', this.props);
-    this.props.getChartData();
+    this.props.getChartData(this.props.chartId);
   }
   componentWillUnmount() {
     console.log('componentWillUnmount!');
     AmCharts.clear();
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate prevProps', prevProps);
     let { dataProvider } = this.props;
     if (dataProvider || !dataProvider.isLoading) {
       this.renderChart();
     }
   }
   componentWillReceiveProps(nextProps) {
-
+    console.log('componentWillReceiveProps nextProps', nextProps);
+    if (nextProps.chartId !== this.props.chartId) {
+      AmCharts.clear();
+      this.props.getChartData(nextProps.chartId);
+    }
   }
 
   renderChart() {
@@ -67,7 +72,7 @@ class Chart extends Component {
 }
 
 const mapStateToChartFactory = (state, ownProps) => {
-  let chartId =  ownProps.params.id;
+  let { chartId } =  ownProps.params;
   return {
     dataProvider: state.statistics[chartId],
     config: map[chartId],
@@ -78,7 +83,7 @@ const mapStateToChartFactory = (state, ownProps) => {
 
 const mapDispatchToChartFactory = (dispatch, ownProps) => {
   return {
-    getChartData: () => dispatch(loadStatistics(map[ownProps.params.id].callApi, ownProps.params.id))
+    getChartData: (chartId) => dispatch(loadStatistics(map[chartId].callApi, chartId))
   };
 };
 

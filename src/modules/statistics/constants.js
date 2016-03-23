@@ -29,29 +29,62 @@ export const STATISTICS_MAP = {
     route: `/statistics/chart/${PRIORITIES}`,
     title: 'Статистика по пріоритетам',
     amChartConfig: {
-      'theme': 'light',
       'type': 'serial',
-      'dataProvider': null,
+      'theme': 'light',
+      'marginRight': 70,
+      'dataProvider': [ {
+        'priority' : 12,
+        'count' : 10
+      }, {
+        'priority' : 8,
+        'count' : 1
+      }, {
+        'priority' : 1,
+        'count' : 18
+      }, {
+        'priority' : 4,
+        'count' : 1
+      }, {
+        'priority' : 0,
+        'count' : 5
+      }, {
+        'priority' : 3,
+        'count' : 158
+      }, {
+        'priority' : 5,
+        'count' : 1
+      }, {
+        'priority' : 9,
+        'count' : 2
+      } ],
+      'valueAxes': [{
+        'axisAlpha': 0,
+        'position': 'left',
+        'title': 'Кількість'
+      }],
+      'startDuration': 1,
       'graphs': [{
-        'balloonText': '[[value]] заяв "[[category]]"-го пріоритету',
-        'fillAlphas': 1,
+        'balloonText': '<b>[[value]] заяв [[category]]-го пріоритету</b>',
+        'fillAlphas': 0.9,
         'lineAlpha': 0.2,
-        'title': 'count',
         'type': 'column',
         'valueField': 'count'
       }],
-      'depth3D': 20,
-      'angle': 50,
-      'rotate': false,
+      'chartCursor': {
+        'categoryBalloonEnabled': false,
+        'cursorAlpha': 0,
+        'zoomable': false
+      },
       'categoryField': 'priority',
       'categoryAxis': {
         'gridPosition': 'start',
-        'fillAlpha': 0.05,
-        'position': 'left'
+        'labelRotation': 45,
+        'title': 'Пріоритет'
       },
       'export': {
         'enabled': true
       }
+
     }
   },
   [ALLOCATIONS_ADMINUNITS]: {
@@ -70,7 +103,6 @@ export const STATISTICS_MAP = {
       'titleField': 'adminUnit',
       'valueField': 'entrantCount',
       'labelRadius': 5,
-
       'radius': '42%',
       'innerRadius': '60%',
       'labelText': '[[title]]',

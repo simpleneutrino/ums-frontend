@@ -1,5 +1,6 @@
 import * as constants from '../../constants'
 import createReducer from '../../utils/create-reducer'
+import { TIMEPERIODID_CHANGED } from './constants'
 
 const initialState = {
   token: null,
@@ -7,10 +8,15 @@ const initialState = {
   user: {
     permissions: []
   },
-  error: null
+  error: null,
+  timePeriodId: 10
 }
 
 const actionHandlers = {
+  [TIMEPERIODID_CHANGED]: (state, action) => {
+    return Object.assign({}, state, {timePeriodId: action.payload.timePeriodId})
+  },
+
   [constants.LOGGED_IN]: (_, action) => action.payload,
   [constants.LOG_OUT]: () => ({ token: null }),
   [constants.LOCALE_SWITCHED]: (_, action) => ({ locale: action.payload }),

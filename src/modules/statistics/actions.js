@@ -4,16 +4,15 @@ import {
 
 /**
  * ACTION CREATOR - dispatch action for fetching statistics data
- * @param url
+ * @param callApiData
  * @param statisticCollectionName
  * @returns {{type, callDicAPI: {url: *}, meta: {reducerName, collectionName: *}}}
  */
-export function loadStatistics (url, statisticCollectionName) {
+export function loadStatistics (callApiData, statisticCollectionName) {
+  console.log('callApiData',callApiData );
   return {
     type: LOAD_STATISTICS,
-    callDicAPI: {
-      url
-    },
+    callDicAPI: callApiData,
     meta: {
       reducerName: STATISTICS_REDUCER,
       collectionName: statisticCollectionName

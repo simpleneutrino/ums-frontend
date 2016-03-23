@@ -8,7 +8,6 @@ import createReducer from '../../utils/create-reducer'
 
 const initialState = {
   isLoading: false,
-  loaded: true,
   count: 0,
   limit: 50,
   offset: 0,
@@ -22,7 +21,6 @@ const actionHandlers = {
     return Object.assign(  {}, state,
       {
         isLoading: true,
-        loaded: false, // data is not loaded!
         resources: [] // clear data
       },
       action
@@ -35,7 +33,6 @@ const actionHandlers = {
       state,
       {
         isLoading: false,
-        loaded: true
       },
       action
     )

@@ -1,53 +1,88 @@
 /*global AmCharts :true*/
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import 'amcharts3/amcharts/amcharts';
 import 'amcharts3/amcharts/serial'
 import 'amcharts3/amcharts/pie'
 import 'amcharts3/amcharts/themes/light'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { loadStatistics } from './../../modules/statistics/actions'
 
-const style = {width: 640, height: 400};
+import {
+  STATISTICS_MAP as map
+} from './../../modules/statistics/constants'
 
 class Chart extends Component {
-  render() {
-    let {dataProvider, id} = this.props;
+  static propTypes = {
+    children: PropTypes.any,
+    dispatch: PropTypes.func,
+    config: PropTypes.object.isRequired,
+    chartId: PropTypes.string.isRequired,
+    amChartConfig: PropTypes.object.isRequired,
+    dataProvider: PropTypes.object.isRequired
+  };
 
-    if (dataProvider) {
+// https://github.com/reactjs/react-router
+// /blob/fb192a707a84d0ae65a3afe0e2f2900e94a5fc9e/docs/guides/ComponentLifecycle.md
+  componentDidMount() {
+    console.log('componentDidMount Chart this.props', this.props);
+    this.props.getChartData();
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount!');
+    AmCharts.clear();
+  }
+  componentDidUpdate() {
+    let { dataProvider } = this.props;
+    if (dataProvider || !dataProvider.isLoading) {
       this.renderChart();
-
-      return (
-        <div id={id} style={style}></div>
-      );
-
-    } else {
-      return <div>Loading ...</div>
     }
+  }
+  componentWillReceiveProps(nextProps) {
+
   }
 
   renderChart() {
-    let {config, dataProvider, id} = this.props;
-    config.dataProvider = dataProvider.data;
-    AmCharts.makeChart(id, config);
+    let { amChartConfig, dataProvider, chartId } = this.props;
+    amChartConfig.dataProvider = dataProvider.data;
+    console.log('renderChart! amChartConfig', amChartConfig);
+    AmCharts.makeChart(chartId, amChartConfig);
   }
 
-  componentWillUnmount() {
-    AmCharts.clear();
+  render() {
+    let { dataProvider, chartId } = this.props;
+    console.log('Chart rendering!! this.props', this.props);
+    return (
+        <div>
+          <div> {this.addSpinner(dataProvider)}</div>
+          <div id={chartId} className="amchart_div"></div>
+        </div>
+      );
+  }
+
+  addSpinner(dataProvider) {
+    if (!dataProvider || dataProvider.isLoading) {
+      return <div>Loading ...</div>
+    }
   }
 }
 
-Chart.propTypes = {
-  config: PropTypes.object.isRequired,
-  collection: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+const mapStateToChartFactory = (state, ownProps) => {
+  let chartId =  ownProps.params.id;
+  return {
+    dataProvider: state.statistics[chartId],
+    config: map[chartId],
+    amChartConfig: map[chartId].amChartConfig,
+    chartId: chartId
+  }
 };
 
-const mapStateToChartFactory = (state, ownProps) => {
+const mapDispatchToChartFactory = (dispatch, ownProps) => {
   return {
-    dataProvider: state.statistics[ownProps.collection]
-  }
+    getChartData: () => dispatch(loadStatistics(map[ownProps.params.id].callApi, ownProps.params.id))
+  };
 };
 
 
 export default connect(
-  mapStateToChartFactory
+  mapStateToChartFactory, mapDispatchToChartFactory
 )(Chart);

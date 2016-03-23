@@ -1,7 +1,7 @@
 
 import { forEach } from 'lodash';
 /**
- * check whether a specific distionaries is loaded 
+ * check whether a specific distionaries is loaded
  * @param listOfDict {Array} - arry of dict
  * @param storeState {Object} - state
  * @returns {boolean}
@@ -10,7 +10,7 @@ export function isDictLoaded (listOfDict, storeState) {
   let dictState = storeState['dictionaries'];
   listOfDict.forEach((dicName) => {
     let dicData = dictState[dicName];
-    if (dicData && dicData.resources && (dicData.isLoading || !dicData.loaded || !dicData.resources.length)) {
+    if (!dicData || !dicData.resources || dicData.isLoading || !dicData.resources.length) {
       return false;
     }
   });
@@ -18,7 +18,7 @@ export function isDictLoaded (listOfDict, storeState) {
 }
 
 /**
- * 
+ *
  * @param data
  * @returns {Array}
  */

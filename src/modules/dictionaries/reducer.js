@@ -25,7 +25,6 @@ const actionHandlers = {
       {
         [action.meta.collectionName] : {
           isLoading: false,
-          loaded: true,
           resources: action.payload.data,
           resourcesMap: createDataMap(action.payload.data)
         }
@@ -37,7 +36,6 @@ const actionHandlers = {
       {
         [action.meta.collectionName] : {
           isLoading: false,
-          loaded: false,
           error: action.error
         }
       }

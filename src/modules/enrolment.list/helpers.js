@@ -18,14 +18,14 @@ let {
   ENROLMENTS_STATUS_TYPES } = dictConstants;
 
 /**
- * check if data is loaded 
- * @param storeState 
+ * check if data is loaded
+ * @param storeState
  * @param reducerName
  * @returns {boolean}
  */
 export function isEntityDataLoaded  (storeState, reducerName) {
   let entityData = storeState[reducerName];
-  return !entityData.isLoading && !!entityData.loaded && !!entityData.resources.length;
+  return !entityData.isLoading && !!entityData.resources.length;
 }
 
 /**
@@ -40,7 +40,7 @@ export function isDataForEnrolmentLoaded  () {
 
 /**
  * TO-DO: make this function PURE!
- * 
+ *
  * @param rowEnrolments - list of row enrolments
  * @param dictionaries - dictionary state
  * @returns {Array} - array of decoded enrolments

@@ -22,7 +22,7 @@ export function loadEnrolmentById(enrolmentId) {
   console.dir(LOAD_ENROLMENT_BY_ID);
   return {
     type: LOAD_ENROLMENT_BY_ID,
-    data: {
+    payload: {
       enrolmentId
     },
     callAPI: {

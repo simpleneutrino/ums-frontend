@@ -67,6 +67,7 @@ export const STATISTICS_MAP = {
         'balloonText': '<b>[[value]] заяв [[category]]-го пріоритету</b>',
         'fillAlphas': 0.9,
         'lineAlpha': 0.2,
+        'title': 'count',
         'type': 'column',
         'valueField': 'count'
       }],

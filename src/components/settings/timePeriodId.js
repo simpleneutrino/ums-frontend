@@ -11,7 +11,7 @@ import { isDataForSettingsLoaded } from './../../modules/application/helpers'
 let { loadDictionaries } = dictActions;
 let { TIMEPERIODS } = dictConstants;
 
-class Settings extends Component {
+class TimePeriodId extends Component {
   static propTypes = {
     children: PropTypes.any
   };
@@ -58,8 +58,8 @@ const mapStateToSettings = (state) => {
 
 const mapDispatchToChartFactory = (dispatch) => {
   return {
-    sendTimePeriodId: (val) => {
-      dispatch(changeTimePeriodId(val));
+    sendTimePeriodId: (timePeriodId) => {
+      dispatch(changeTimePeriodId(timePeriodId));
     },
     getDictionaries: (dictionaries) => {
       dispatch(loadDictionaries(dictionaries));
@@ -70,4 +70,4 @@ const mapDispatchToChartFactory = (dispatch) => {
 export default connect(
   mapStateToSettings,
   mapDispatchToChartFactory
-)(Settings)
+)(TimePeriodId)

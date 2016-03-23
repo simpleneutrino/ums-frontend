@@ -9,21 +9,13 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Modal from 'react-bootstrap/lib/Modal';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 
-import Settings from './../settings/settings'
+import SettingsModal from './../settings/SettingsModal'
 
 export default class TopNav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {isModalOpen: false};
-  }
 
-  openModal = () => {
-    this.setState({ isModalOpen: true });
-  }
-
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  }
+  _onSettingModalClick = () => {
+    this.refs.SetModal.openModal()
+  };
 
   render() {
     return (
@@ -48,7 +40,7 @@ export default class TopNav extends Component {
             </LinkContainer>
 
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1} onClick={this.openModal}>Налаштування</MenuItem>
+              <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>
               <MenuItem eventKey={3.3}>Something else here</MenuItem>
               <MenuItem divider/>
@@ -56,14 +48,7 @@ export default class TopNav extends Component {
             </NavDropdown>
           </Nav>
         </Navbar>
-        <Modal show={this.state.isModalOpen} onHide={this.closeModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Налаштування</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Settings/>
-          </Modal.Body>
-        </Modal>
+        <SettingsModal ref='SetModal'/>
       </div>
     )
   }

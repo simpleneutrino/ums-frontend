@@ -8,11 +8,11 @@ import thunk from 'redux-thunk';
 import {api, dicApi, logger} from '../middleware';
 
 const initialState = {
-  application: {
-    token: storage.get('token'),
-    locale: storage.get('locale') || 'en',
-    user: {permissions: [/*'manage_account'*/]}
-  }
+  // application: {
+  //   token: storage.get('token'),
+  //   locale: storage.get('locale') || 'en',
+  //   user: {permissions: [/*'manage_account'*/]}
+  // }
 };
 
 const storeEnhancers = [

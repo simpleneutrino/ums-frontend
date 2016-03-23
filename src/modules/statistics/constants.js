@@ -9,13 +9,26 @@ export const ALLOCATIONS_DEPARTMENTS = 'ALLOCATIONS_DEPARTMENTS';
 // CONSTANTS
 export const STATISTICS_REDUCER = 'statistics';
 
+//
+/**
+ * callApi - info for fetching data from a server
+ * cacheTime - 5h x 60sec = 300
+ * route - internal route for navigation
+ * chartTitle - pill title
+ * amChartConfig - config for amchart
+ * @type {{}}
+ */
 export const STATISTICS_MAP = {
   [PRIORITIES]: {
-    url: '/stats/8/priorities',
-    params: {},
-    cache: true,
-    chartTitle: 'Статистика по пріоритетам',
-    chartConfig: {
+    callApi: {
+      url: '/stats/8/priorities',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${PRIORITIES}`,
+    title: 'Статистика по пріоритетам',
+    amChartConfig: {
       'theme': 'light',
       'type': 'serial',
       'dataProvider': null,
@@ -42,31 +55,40 @@ export const STATISTICS_MAP = {
     }
   },
   [ALLOCATIONS_ADMINUNITS]: {
-    url: '/stats/8/entrants/allocations/adminunits',
-    params: {},
-    cache: true,
-    chartTitle: 'Статистика по областям',
-    chartConfig: {
+    callApi: {
+      url: '/stats/8/entrants/allocations/adminunits',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${ALLOCATIONS_ADMINUNITS}`,
+    title: 'Статистика по областям',
+    amChartConfig: {
       'type': 'pie',
       'theme': 'light',
       'dataProvider': null,
-      'valueField': 'entrantCount',
       'titleField': 'adminUnit',
-      'outlineAlpha': 0.4,
-      'depth3D': 15,
-      'balloonText': '[[title]]<br><span style="font-size:14px"><b>[[value]]</b> ([[percents]]%)</span>',
-      'angle': 30,
+      'valueField': 'entrantCount',
+      'labelRadius': 5,
+
+      'radius': '42%',
+      'innerRadius': '60%',
+      'labelText': '[[title]]',
       'export': {
         'enabled': true
       }
     }
   },
   [ALLOCATIONS_DEPARTMENTS]: {
-    url: '/stats/8/entrants/allocations/departments',
-    params: {},
-    cache: true,
-    chartTitle: 'Статистика по факультетам',
-    chartConfig: {
+    callApi: {
+      url: '/stats/8/entrants/allocations/departments',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${ALLOCATIONS_DEPARTMENTS}`,
+    title: 'Статистика по факультетам',
+    amChartConfig: {
       'type': 'serial',
       'theme': 'light',
       'categoryField': 'name',

@@ -8,7 +8,9 @@ const {
   Application,
   Statistics,
   EnrolmentList,
-  Persons
+  Persons,
+  StatisticsIndex,
+  Chart
 } = components;
 
 export default (
@@ -18,9 +20,11 @@ export default (
     <Route path="enrolment">
       <Route path='list' component={EnrolmentList}/>
     </Route>
-    <Route path="statistics" component={Statistics}/>
+    <Route path="statistics" component={Statistics}>
+      <IndexRoute component={StatisticsIndex} />
+      <Route path="chart/:id" component={Chart}/>
+    </Route>
     <Route path="persons" component={Persons}/>
-    <Redirect from="/account" to="/account/profile"/>
     <Route path="logout" onEnter={logout}/>
   </Route>
 );

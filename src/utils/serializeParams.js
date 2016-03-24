@@ -1,4 +1,4 @@
-import { forOwn } from 'lodash';
+import forOwn from 'lodash/forOwn';
 
 /**
  * serialize parameters for req

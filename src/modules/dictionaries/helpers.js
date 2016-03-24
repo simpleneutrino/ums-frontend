@@ -1,5 +1,5 @@
 
-import { forEach } from 'lodash';
+import forEach from 'lodash/forEach';
 /**
  * check whether a specific distionaries is loaded
  * @param listOfDict {Array} - arry of dict

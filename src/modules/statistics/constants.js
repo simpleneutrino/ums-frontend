@@ -4,7 +4,9 @@ export const LOAD_STATISTICS = 'LOAD_STATISTICS';
 // statistics entities names
 export const PRIORITIES = 'PRIORITIES';
 export const ALLOCATIONS_ADMINUNITS = 'ALLOCATIONS_ADMINUNITS';
+export const ALLOCATIONS_ADMINUNITS_MAP = 'ALLOCATIONS_ADMINUNITS_MAP';
 export const ALLOCATIONS_DEPARTMENTS = 'ALLOCATIONS_DEPARTMENTS';
+export const PLACES = 'PLACES';
 
 // CONSTANTS
 export const STATISTICS_REDUCER = 'statistics';
@@ -32,31 +34,7 @@ export const STATISTICS_MAP = {
       'type': 'serial',
       'theme': 'light',
       'marginRight': 70,
-      'dataProvider': [ {
-        'priority' : 12,
-        'count' : 10
-      }, {
-        'priority' : 8,
-        'count' : 1
-      }, {
-        'priority' : 1,
-        'count' : 18
-      }, {
-        'priority' : 4,
-        'count' : 1
-      }, {
-        'priority' : 0,
-        'count' : 5
-      }, {
-        'priority' : 3,
-        'count' : 158
-      }, {
-        'priority' : 5,
-        'count' : 1
-      }, {
-        'priority' : 9,
-        'count' : 2
-      } ],
+      'dataProvider': null,
       'valueAxes': [{
         'axisAlpha': 0,
         'position': 'left',
@@ -110,6 +88,43 @@ export const STATISTICS_MAP = {
       'export': {
         'enabled': true
       }
+    }
+  },
+  [ALLOCATIONS_ADMINUNITS_MAP]: {
+    callApi: {
+      url: '/stats/8/entrants/allocations/adminunits',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${ALLOCATIONS_ADMINUNITS_MAP}`,
+    title: 'Статистика по областям (карта)',
+    amChartConfig: {
+      'type': 'map',
+      'theme': 'light',
+      'colorSteps': 10,
+      'dataProvider': {
+        'map': 'ukraineLow',
+        'getAreasFromMap': true,
+        'zoomLevel': 0.9,
+        'areas': []
+      },
+      'areasSettings': {
+        'autoZoom': true,
+        'balloonText': '[[title]]: <strong>[[value]]</strong>'
+      },
+      'valueLegend': {
+        'right': 10,
+        'minValue': 'Трохи заявок',
+        'maxValue': 'Багато!'
+      },
+      'zoomControl': {
+        'minZoomLevel': 0.9
+      },
+      'titles': 'titles',
+      'listeners':[{'event':'init', 'method': function updateHeatmap(event) {
+
+      } }]
     }
   },
   [ALLOCATIONS_DEPARTMENTS]: {
@@ -181,5 +196,30 @@ export const STATISTICS_MAP = {
         'enabled': true
       }
     }
+  },
+  [PLACES]: {
+    callApi: {
+      url: '/stats/8/entrants/places',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${PLACES}`,
+    title: 'Статистика по місцям',
+    amChartConfig: {
+      'type': 'pie',
+      'theme': 'light',
+      'dataProvider': null,
+      'valueField': 'entrantPlace',
+      'titleField': 'departmentName',
+      'balloon':{
+        'fixedPosition':true
+      },
+      'export': {
+        'enabled': true
+      }
+    }
   }
+
 };
+

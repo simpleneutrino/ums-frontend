@@ -12,6 +12,8 @@ import {
   PRIORITIES,
   ALLOCATIONS_ADMINUNITS,
   ALLOCATIONS_DEPARTMENTS,
+  ALLOCATIONS_ADMINUNITS_MAP,
+  PLACES,
   STATISTICS_MAP as map
 } from './../../modules/statistics/constants'
 
@@ -32,11 +34,17 @@ class Statistics extends Component {
           <LinkContainer to={{ pathname: map[ALLOCATIONS_ADMINUNITS].route}}>
             <NavItem eventKey={1} > { map[ALLOCATIONS_ADMINUNITS].title } </NavItem>
           </LinkContainer>
+          <LinkContainer to={{ pathname: map[ALLOCATIONS_ADMINUNITS_MAP].route}}>
+            <NavItem eventKey={2} > { map[ALLOCATIONS_ADMINUNITS_MAP].title } </NavItem>
+          </LinkContainer>
           <LinkContainer to={{ pathname: map[PRIORITIES].route}}>
-            <NavItem eventKey={2} > { map[PRIORITIES].title } </NavItem>
+            <NavItem eventKey={3} > { map[PRIORITIES].title } </NavItem>
           </LinkContainer>
           <LinkContainer to={{ pathname: map[ALLOCATIONS_DEPARTMENTS].route}}>
-            <NavItem eventKey={3} > { map[ALLOCATIONS_DEPARTMENTS].title } </NavItem>
+            <NavItem eventKey={4} > { map[ALLOCATIONS_DEPARTMENTS].title } </NavItem>
+          </LinkContainer>
+          <LinkContainer to={{ pathname: map[PLACES].route}}>
+            <NavItem eventKey={5} > { map[PLACES].title } </NavItem>
           </LinkContainer>
         </Nav>
         {this.props.children}

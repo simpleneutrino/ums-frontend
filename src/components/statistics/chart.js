@@ -1,15 +1,20 @@
 /*global AmCharts :true*/
 import React, { Component, PropTypes } from 'react'
-import 'amcharts3/amcharts/amcharts';
+//import 'amcharts3/amcharts/amcharts';
+import 'amcharts3';
 import 'amcharts3/amcharts/serial'
 import 'amcharts3/amcharts/pie'
 import 'amcharts3/amcharts/themes/light'
+import 'ammap3'
+import 'ammap3/ammap/themes/light.js'
 import { connect } from 'react-redux'
-import { loadStatistics } from './../../modules/statistics/actions'
+import ukraineLow from './ukraineLow'
+import {statActions, statHelpers } from './../../modules/statistics'
+import { STATISTICS_MAP as map } from './../../modules/statistics/constants'
 
-import {
-  STATISTICS_MAP as map
-} from './../../modules/statistics/constants'
+let { fillMapWithData } = statHelpers;
+let { loadStatistics } = statActions;
+
 
 class Chart extends Component {
   static propTypes = {
@@ -21,8 +26,7 @@ class Chart extends Component {
     dataProvider: PropTypes.object.isRequired
   };
 
-// https://github.com/reactjs/react-router
-// /blob/fb192a707a84d0ae65a3afe0e2f2900e94a5fc9e/docs/guides/ComponentLifecycle.md
+
   componentDidMount() {
     console.log('componentDidMount Chart this.props', this.props);
     this.props.getChartData(this.props.chartId);
@@ -31,6 +35,9 @@ class Chart extends Component {
     console.log('componentWillUnmount!');
     AmCharts.clear();
   }
+  /**
+   * when component is updated (rendered) - paste an amChart
+   */
   componentDidUpdate(prevProps, prevState) {
     console.log('componentDidUpdate prevProps', prevProps);
     let { dataProvider } = this.props;
@@ -38,6 +45,10 @@ class Chart extends Component {
       this.renderChart();
     }
   }
+
+  /**
+   * if chart changed - delete previous and request data for a next one.
+   */
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps nextProps', nextProps);
     if (nextProps.chartId !== this.props.chartId) {
@@ -46,8 +57,19 @@ class Chart extends Component {
     }
   }
 
+  /**
+   * merge amChart configs with data from a server (dataProvider)
+   * amChartConfig - predefined configs (from constants) for amChart
+   */
   renderChart() {
-    let { amChartConfig, dataProvider, chartId } = this.props;
+    let { dataProvider, chartId } = this.props;
+    let { amChartConfig }  = this.props.config;
+    if (amChartConfig.type === 'map') {
+      AmCharts.maps.ukraineLow = ukraineLow;
+      amChartConfig.listeners[0].method = fillMapWithData(dataProvider.data);
+      AmCharts.makeChart(chartId, amChartConfig);
+      return;
+    }
     amChartConfig.dataProvider = dataProvider.data;
     console.log('renderChart! amChartConfig', amChartConfig);
     AmCharts.makeChart(chartId, amChartConfig);
@@ -71,17 +93,23 @@ class Chart extends Component {
   }
 }
 
+/**
+ *
+ * @returns dataProvider - data for chart
+ * @returns config - config fot this component
+ * @returns chartId - id form route parameters
+ **/
 const mapStateToChartFactory = (state, ownProps) => {
   let { chartId } =  ownProps.params;
+  console.log('chartId', chartId);
   return {
     dataProvider: state.statistics[chartId],
     config: map[chartId],
-    amChartConfig: map[chartId].amChartConfig,
     chartId: chartId
   }
 };
 
-const mapDispatchToChartFactory = (dispatch, ownProps) => {
+const mapDispatchToChartFactory = (dispatch) => {
   return {
     getChartData: (chartId) => dispatch(loadStatistics(map[chartId].callApi, chartId))
   };

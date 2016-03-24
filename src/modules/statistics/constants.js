@@ -6,6 +6,7 @@ export const PRIORITIES = 'PRIORITIES';
 export const ALLOCATIONS_ADMINUNITS = 'ALLOCATIONS_ADMINUNITS';
 export const ALLOCATIONS_ADMINUNITS_MAP = 'ALLOCATIONS_ADMINUNITS_MAP';
 export const ALLOCATIONS_DEPARTMENTS = 'ALLOCATIONS_DEPARTMENTS';
+export const PLACES = 'PLACES';
 
 // CONSTANTS
 export const STATISTICS_REDUCER = 'statistics';
@@ -114,27 +115,15 @@ export const STATISTICS_MAP = {
       },
       'valueLegend': {
         'right': 10,
-        'minValue': 'little',
-        'maxValue': 'a lot!'
+        'minValue': 'Трохи заявок',
+        'maxValue': 'Багато!'
       },
       'zoomControl': {
         'minZoomLevel': 0.9
       },
       'titles': 'titles',
       'listeners':[{'event':'init', 'method': function updateHeatmap(event) {
-        console.log('dfdfdf');
-        let map = event.chart;
-        let { mapData } = map;
-        mapData.forEach((entry) => {
-          let adminUnit = map.dataProvider.areas.find((area) => area.id = entry.adminUnitId)[0];
-          console.log('adminUnit', adminUnit);
-          //area[mapData.adminUnitId].entrantCount = admin.entrantCount;
-        });
-        //for ( var i = 0; i < map.dataProvider.areas.length; i++ ) {
-        //  map.dataProvider.areas[admin.adminUnitId].value = admin.entrantCount;
-        //}
-        console.log('dataProvider', map.dataProvider.areas);
-        map.validateNow();
+
       } }]
     }
   },
@@ -208,6 +197,29 @@ export const STATISTICS_MAP = {
       }
     }
   },
+  [PLACES]: {
+    callApi: {
+      url: '/stats/8/entrants/places',
+      params: {},
+      cache: true,
+      cacheTime: 300
+    },
+    route: `/statistics/chart/${PLACES}`,
+    title: 'Статистика по місцям',
+    amChartConfig: {
+      'type': 'pie',
+      'theme': 'light',
+      'dataProvider': null,
+      'valueField': 'entrantPlace',
+      'titleField': 'departmentName',
+      'balloon':{
+        'fixedPosition':true
+      },
+      'export': {
+        'enabled': true
+      }
+    }
+  }
 
 };
 

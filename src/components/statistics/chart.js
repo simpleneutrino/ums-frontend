@@ -8,11 +8,13 @@ import 'amcharts3/amcharts/themes/light'
 import 'ammap3'
 import 'ammap3/ammap/themes/light.js'
 import { connect } from 'react-redux'
-import { loadStatistics } from './../../modules/statistics/actions'
+import ukraineLow from './ukraineLow'
+import {statActions, statHelpers } from './../../modules/statistics'
+import { STATISTICS_MAP as map } from './../../modules/statistics/constants'
 
-import {
-  STATISTICS_MAP as map
-} from './../../modules/statistics/constants'
+let { fillMapWithData } = statHelpers;
+let { loadStatistics } = statActions;
+
 
 class Chart extends Component {
   static propTypes = {
@@ -63,8 +65,8 @@ class Chart extends Component {
     let { dataProvider, chartId } = this.props;
     let { amChartConfig }  = this.props.config;
     if (amChartConfig.type === 'map') {
-      //amChartConfig.mapData = dataProvider.data;
-      AmCharts.maps.ukraineLow = require('./ukraineLow');
+      AmCharts.maps.ukraineLow = ukraineLow;
+      amChartConfig.listeners[0].method = fillMapWithData(dataProvider.data);
       AmCharts.makeChart(chartId, amChartConfig);
       return;
     }

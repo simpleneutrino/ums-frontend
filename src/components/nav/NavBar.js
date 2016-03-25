@@ -39,6 +39,10 @@ export default class TopNav extends Component {
               <NavItem>Персони</NavItem>
             </LinkContainer>
 
+            <LinkContainer to={{ pathname: '/rating'}}>
+              <NavItem>Рейтинг</NavItem>
+            </LinkContainer>
+
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
               <MenuItem eventKey={3.2}>Another action</MenuItem>

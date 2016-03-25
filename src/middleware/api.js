@@ -22,7 +22,8 @@ export default store => next => action => {
   let entityData = store.getState()[reducerName]; // get entity (e.g. enrolmentList) state
   const { offset, limit, isLoading } = entityData;
 
-  console.info(`URL ${url} is loading. Reducer name: ${reducerName}. Action type: ${type}, params: ${params}`);
+  console.info(`URL ${url} is loading. Reducer name: ${reducerName}.
+    Action type: ${type}, params: ${JSON.stringify(params)}`);
   if (isLoading) return next(action); // don't fetch if req already in process
 
   next({...rest, ...{ type: type + _START}}); 

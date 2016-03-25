@@ -18,7 +18,7 @@ const initialState = {
 const actionHandlers = {
   [LOAD_ALL_ENROLMENTS + _START]: (state, action) => {
     // console.log('LOAD_ALL_ENROLMENTS + _START ', action);
-    return Object.assign(  {}, state,
+    return Object.assign({}, state,
       {
         isLoading: true,
         resources: [] // clear data
@@ -32,7 +32,7 @@ const actionHandlers = {
     return Object.assign({},
       state,
       {
-        isLoading: false,
+        isLoading: false
       },
       action
     )

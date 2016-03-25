@@ -4,3 +4,4 @@ export {default as Chart} from './statistics/chart';
 export {default as StatisticsIndex} from './statistics/StatisticsIndex';
 export {default as EnrolmentList} from './enrolment.list/enrolmentList';
 export {default as Persons} from './persons/Persons';
+export {default as SpecofferChooser} from './rating/SpecofferChooser';

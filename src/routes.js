@@ -10,7 +10,8 @@ const {
   EnrolmentList,
   Persons,
   StatisticsIndex,
-  Chart
+  Chart,
+  SpecofferChooser
 } = components;
 
 export default (
@@ -25,6 +26,7 @@ export default (
       <Route path="chart/:chartId" component={Chart}/>
     </Route>
     <Route path="persons" component={Persons}/>
+    <Route path="rating" component={SpecofferChooser}/>
     <Route path="logout" onEnter={logout}/>
   </Route>
 );

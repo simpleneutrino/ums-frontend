@@ -10,7 +10,8 @@ export function loadAllEnrolments() {
   return {
     type: LOAD_ALL_ENROLMENTS,
     callAPI: {
-      url: `/enrolments`
+      url: `/enrolments`,
+      cache: false
     },
     meta: {
       reducerName: ENROLMENT_LIST_REDUCER

@@ -60,7 +60,7 @@ const getEntry = function (env) {
 
 const getLoaders = function (env) {
   const loaders = [
-    {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
+    {test: /\.(js|jsx)$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
     {test: /\.(jpe?g|png|gif|svg|eot|woff2|woff|ttf)$/i, loaders: ['file']}
   ];
 
@@ -78,7 +78,6 @@ function getConfig(env) {
   env = process.env.NODE_ENV || 'development';
   console.log('current environment is a ', env);
   return {
-    debug: true,
     devtool: env === productionEnvironment ? 'source-map' : 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
     noInfo: true, // set to false to see a list of every file being bundled.
     entry: getEntry(env),
@@ -91,6 +90,9 @@ function getConfig(env) {
     plugins: getPlugins(env),
     module: {
       loaders: getLoaders(env)
+    },
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.scss', '.css']
     }
   };
 }

@@ -34,6 +34,10 @@ class EnrolmentsListPage extends Component {
         <tr>
           <th>id</th>
           <th>docSeries</th>
+          <th>isInterview</th>
+          <th>isState</th>
+          <th>departmentId</th>
+          <th>enrolmentTypeId</th>
         </tr>
         </thead>
         <tbody>

@@ -1,12 +1,23 @@
 import React, {PropTypes} from 'react';
+import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 
 const EnrolmentItem = (props)=> {
-  let {docSeries, id} = props.item;
+  let {id, docSeries, isInterview, isState, departmentId, enrolmentTypeId} = props.item;
+  let path = `/enrolments/${id}/info`;
 
-  return (<tr>
-    <td>{id}</td>
-    <td>{docSeries}</td>
-  </tr>);
+  return (
+    <tr>
+      <td>
+        <LinkContainer to={{ pathname: path}}>
+          <a>{id}</a>
+        </LinkContainer>
+      </td>
+      <td>{docSeries}</td>
+      <td>{isInterview}</td>
+      <td>{isState}</td>
+      <td>{departmentId}</td>
+      <td>{enrolmentTypeId}</td>
+    </tr>);
 };
 
 EnrolmentItem.propTypes = {

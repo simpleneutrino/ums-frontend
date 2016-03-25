@@ -2,9 +2,13 @@
 
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {loadAllEnrolments} from './../../modules/enrolment.list/actions'
-import {dictActions, dictConstants} from './../../modules/dictionaries'
-import {enrolListHelpers} from './../../modules/enrolment.list'
+import {loadAllEnrolments} from './../../../modules/enrolment/list/actions'
+import {dictActions, dictConstants} from './../../../modules/dictionaries'
+import { enrolHelpers } from './../../../modules/enrolment'
+import { isDataForEnrolmentLoaded } from './../../../modules/enrolment/list/helpers'
+import { ENROLMENT_LIST_REDUCER } from './../../../modules/enrolment/list/constants'
+import { enrolConstants } from './../../../modules/enrolment'
+
 import Table from 'react-bootstrap/lib/Table';
 import EnrolmentItem from './EnrolmentItem';
 
@@ -16,10 +20,7 @@ let {
   ENROLMENTS_STATUS_TYPES
 } = dictConstants;
 
-let {
-  isDataForEnrolmentLoaded,
-  decodeEnrolments
-} = enrolListHelpers;
+let { decodeEnrolments } = enrolHelpers;
 
 
 class EnrolmentList extends Component {
@@ -36,8 +37,8 @@ class EnrolmentList extends Component {
     // console.log('nextProps', nextProps);
     // console.log('nextState', nextState);
     let {enrolmentList, dictionaries} = nextProps;
-    if (isDataForEnrolmentLoaded()) {
-      this.setState({decodedEnrolmentsList: decodeEnrolments(enrolmentList.resources, dictionaries)})
+    if (isDataForEnrolmentLoaded(ENROLMENT_LIST_REDUCER)) {
+      this.setState({decodedEnrolmentsList: decodeEnrolments(enrolmentList.resources, dictionaries, enrolConstants)})
     }
   }
 
@@ -49,7 +50,7 @@ class EnrolmentList extends Component {
 
   render() {
 
-    if (!isDataForEnrolmentLoaded()) {
+    if (!isDataForEnrolmentLoaded(ENROLMENT_LIST_REDUCER)) {
       return <div>load</div>
     }
 
@@ -60,7 +61,7 @@ class EnrolmentList extends Component {
     // console.log('render: dictionaries', dictionaries);
     // console.log('render: decodedEnrolmentsList', decodedEnrolmentsList);
 
-    let enrolments = enrolmentList.resources.map((item)=> {
+    let enrolments = decodedEnrolmentsList.map((item)=> {
       return <EnrolmentItem {...item}/>
     });
 
@@ -70,6 +71,10 @@ class EnrolmentList extends Component {
         <tr>
           <th>id</th>
           <th>docSeries</th>
+          <th>isInterview</th>
+          <th>isState</th>
+          <th>departmentId</th>
+          <th>enrolmentTypeId</th>
         </tr>
         </thead>
         <tbody>

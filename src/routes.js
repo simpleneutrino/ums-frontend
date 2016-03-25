@@ -8,6 +8,11 @@ const {
   Application,
   Statistics,
   EnrolmentList,
+  EnrolmentView,
+  MainInfoTab,
+  Benefits,
+  Subjects,
+  Statuses,
   Persons,
   StatisticsIndex,
   Chart,
@@ -20,6 +25,12 @@ export default (
     <Redirect from="/enrolment" to="/enrolment/list"/>
     <Route path="enrolment">
       <Route path='list' component={EnrolmentList}/>
+      <Route path=":id" component={EnrolmentView}>
+        <Route path='mainInfo' component={MainInfoTab}/>
+        <Route path='benefits' component={Benefits}/>
+        <Route path='subjects' component={Subjects}/>
+        <Route path='statuses' component={Statuses}/>
+      </Route>
     </Route>
     <Route path="statistics" component={Statistics}>
       <IndexRoute component={StatisticsIndex} />

@@ -32,8 +32,6 @@ class MainInfoTab extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    console.log('nextProps', nextProps);
-    // console.log('nextState', nextState);
     let {enrolmentView, dictionaries} = nextProps;
     if (isDataForEnrolmentLoaded(ENROLMENT_VIEW_REDUCER)) {
       this.setState({decodedEnrolment: decodeOneEnrolment(enrolmentView.data, dictionaries, enrolConstants)})
@@ -41,7 +39,6 @@ class MainInfoTab extends Component {
   }
 
   componentDidMount() {
-    //debugger;
     console.log(this.props);
     this.props.getDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]);
     this.props.getEnrolment(this.props.params.id);
@@ -82,7 +79,6 @@ class MainInfoTab extends Component {
 }
 
 const mapStateToMainInfoTab = (state, ownProps) => {
-  let { id } =  ownProps.params;
   return {
     enrolmentView: state.enrolmentView,
     dictionaries: state.dictionaries

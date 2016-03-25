@@ -2,9 +2,9 @@
  * Created by nikolaykozhukharenko on 3/6/16.
  */
 
-import { LOAD_ALL_ENROLMENTS, LOAD_ENROLMENT_BY_ID } from './constants'
-import { _START, _SUCCESS, _FAIL } from '../../constants'
-import createReducer from '../../utils/create-reducer'
+import { LOAD_ALL_ENROLMENTS } from './constants'
+import { _START, _SUCCESS, _FAIL } from '../../../constants'
+import createReducer from '../../../utils/create-reducer'
 
 const initialState = {
   isLoading: false,
@@ -38,9 +38,7 @@ const actionHandlers = {
     )
   },
 
-  [LOAD_ALL_ENROLMENTS + _FAIL]: (state, action) => action.resources,
-
-  [LOAD_ENROLMENT_BY_ID]: () => ({ token: null })
+  [LOAD_ALL_ENROLMENTS + _FAIL]: (state, action) => action.resources
 };
 
 export default createReducer(initialState, actionHandlers)

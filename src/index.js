@@ -16,7 +16,7 @@ render(
 );
 
 
-// TODO: implement auth. check this
+// TO-DO: implement auth. check this
 //https://github.com/GetExpert/redux-blog-example/blob/102f95f823c153f5c213f4a2418dd7c1e210379e/app/routes/index.js
 //function walk(routes, cb) {
 //  cb(routes);

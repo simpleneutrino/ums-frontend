@@ -1,5 +1,5 @@
 /* global __BASIC_URL__ */
-import {AUTH_SUCCESS} from '../../components/auth/constants';
+import {AUTH_SUCCESS} from '../../modules/auth/constants';
 
 const defaultState = {
   backendHost: __BASIC_URL__,

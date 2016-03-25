@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
-import NavBar from './navbar/NavBar'
+import React, {Component} from 'react';
+import NavBar from './navbar/NavBar';
 
 export default class Application extends Component {
-
   render() {
     return (
       <div id="layout">
@@ -11,6 +10,6 @@ export default class Application extends Component {
           {this.props.children}
         </div>
       </div>
-    )
+    );
   }
 }

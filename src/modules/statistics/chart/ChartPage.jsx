@@ -1,18 +1,18 @@
-import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import Chart from './Chart';
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
-import {loadStatistics} from './../actions'
+import {loadStatistics} from './../actions';
 
 import {
   PRIORITIES,
   ALLOCATIONS_ADMINUNITS,
   ALLOCATIONS_DEPARTMENTS,
   STATISTICS_MAP as map
-} from './../constants'
+} from './../constants';
 
-class StatisticsPage extends Component {
+class ChartPage extends Component {
   static propTypes = {
     children: PropTypes.any
   };
@@ -40,19 +40,19 @@ class StatisticsPage extends Component {
           </Tab>
         </Tabs>
       </div>
-    )
+    );
   }
 }
 
-StatisticsPage.propTypes = {
+ChartPage.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
 const select = (state)=> {
   return {
     statistics: state.statistics
-  }
+  };
 };
 
-export default connect(select)(StatisticsPage)
+export default connect(select)(ChartPage);
 

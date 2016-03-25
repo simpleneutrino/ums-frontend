@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-import Application from './../components/Application';
-import LoginPage from './../components/auth/ui/LoginPage';
-import LogoutPage from './../components/auth/ui/LogoutPage';
-import AuthContainer from './../components/auth/ui/AuthContainer';
-import PersonsPage from './../components/persons/PersonsPage';
-import EnrolmentsPage from './../components/enrolments/ui/EnrolmentsPage';
-import StatisticsPage from './../components/statistics/ui/StatisticsPage';
+import Application from './../modules/Application';
+import LoginPage from './../modules/auth/login/LoginPage';
+import LogoutPage from './../modules/auth/logout/LogoutPage';
+import AuthContainer from './../modules/auth/auth/AuthContainer';
+import PersonsPage from './../modules/persons/PersonsPage';
+import EnrolmentsPage from './../modules/enrolments/list/EnrolmentsListPage';
+import ChartPage from './../modules/statistics/chart/ChartPage';
 
 //configure permissions
 export const routes = {
@@ -21,7 +21,7 @@ export default (
   <Route component={Application} path="/">
     <IndexRedirect to="enrolments"/>
     <Route path='enrolments' component={EnrolmentsPage}/>
-    <Route path="statistics" component={StatisticsPage}/>
+    <Route path="statistics" component={ChartPage}/>
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>

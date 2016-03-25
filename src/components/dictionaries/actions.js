@@ -1,4 +1,4 @@
-import * as consts from './constants'
+import * as consts from './constants';
 import {REQUEST_API} from '../../system/constants';
 
 export default function loadDictionaries(listOfDict) {
@@ -23,8 +23,6 @@ export default function loadDictionaries(listOfDict) {
           collectionName: dicName
         }
       });
-
     });
-  }
-
+  };
 }

@@ -1,9 +1,9 @@
-import {createDataMap} from './helpers'
-import * as types  from './constants'
+import {createDataMap} from './helpers';
+import * as types  from './constants';
 
 export default function dictionaries(state = {}, action = {}) {
   switch (action.type) {
-    
+
     case types.DICTIONARY_LOAD_START:
       return Object.assign({}, state, {
         [action.payload.collectionName]: {isLoading: true}

@@ -1,4 +1,4 @@
-import * as types from './constants'
+import * as types from './constants';
 import {push} from 'react-router-redux';
 import {REQUEST_API} from '../../system/constants';
 

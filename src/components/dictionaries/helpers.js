@@ -7,12 +7,14 @@ import forEach from 'lodash/forEach';
  */
 export function isDictLoaded(listOfDict, storeState) {
   let dictState = storeState['dictionaries'];
+
   listOfDict.forEach((dicName) => {
     let dicData = dictState[dicName];
     if (dicData && dicData.resources && (dicData.isLoading || !dicData.loaded || !dicData.resources.length)) {
       return false;
     }
   });
+
   return true;
 }
 
@@ -23,9 +25,11 @@ export function isDictLoaded(listOfDict, storeState) {
  */
 export function createDataMap(data) {
   let map = [];
+
   forEach(data, (item) => {
     //todo review
-    map[item.id] = item.name
+    map[item.id] = item.name;
   });
-  return map
+
+  return map;
 }

@@ -1,4 +1,4 @@
-import * as types from './constants'
+import * as types from './constants';
 
 const defaultState = {
   isLoading: true,
@@ -12,7 +12,7 @@ const defaultState = {
 
 export default function enrolments(state = defaultState, action = {}) {
   switch (action.type) {
-    
+
     case types.LOAD_ALL_ENROLMENTS_START:
       return Object.assign({}, state, {isLoading: true, resources: []});
 

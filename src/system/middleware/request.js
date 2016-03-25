@@ -33,7 +33,7 @@ export default store => next => action => {
         dispatchAction(store.dispatch, success, {response: response.body}, {payload: payload});
       }
     });
-}
+};
 
 
 function dispatchAction(dispatch, action, ...rest) {

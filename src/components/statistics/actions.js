@@ -1,5 +1,5 @@
 import {REQUEST_API} from '../../system/constants';
-import * as types from './constants'
+import * as types from './constants';
 
 export function loadStatistics(url, collectionName) {
   return {
@@ -16,5 +16,5 @@ export function loadStatistics(url, collectionName) {
     payload: {
       collectionName: collectionName
     }
-  }
+  };
 }

@@ -33,7 +33,7 @@ function contains(firstArr = [], secondArr = []) {
       }
 
       if (result) {
-        break
+        break;
       }
     }
   }

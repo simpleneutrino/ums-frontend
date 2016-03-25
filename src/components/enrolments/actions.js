@@ -1,5 +1,5 @@
 import {REQUEST_API} from '../../system/constants';
-import * as types from './constants'
+import * as types from './constants';
 
 export function loadEnrolments(params) {
   return {
@@ -13,5 +13,5 @@ export function loadEnrolments(params) {
       },
       params
     }
-  }
+  };
 }

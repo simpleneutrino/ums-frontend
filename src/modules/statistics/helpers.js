@@ -2,7 +2,7 @@ import forEach from 'lodash/forEach';
 import find from 'lodash/find';
 
 /**
- *
+ * func for putting data to MAP
  * @param data
  * @returns {Array}
  */
@@ -21,5 +21,5 @@ export function fillMapWithData(mapData) {
     map.validateNow();
     console.log('map.dataProvider.areas', map.dataProvider.areas);
     return map.dataProvider.areas; // for testing purpuses;
-  }
+  };
 }

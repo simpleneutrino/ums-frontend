@@ -1,24 +1,28 @@
-import { LOAD_ } from '../../constants'
-import { DICTIONARY_MAP, DICTIONARY } from './constants'
+import * as consts from './constants';
+import {REQUEST_API} from '../../system/constants';
 
-export function loadDictionaries(listOfDict) {
+export default function loadDictionaries(listOfDict) {
   return dispatch => {
     listOfDict.forEach((dicName) => {
-      let { url, params, cache } = DICTIONARY_MAP[dicName];
-      let action = {
-        type: LOAD_ + DICTIONARY,
-        callDicAPI: {
-          url,
-          params,
-          cache
+      let {url, params} = consts.DICTIONARY_MAP[dicName];
+      //todo check state + cache
+
+      dispatch({
+        type: REQUEST_API,
+        request: {
+          url: url,
+          actions: {
+            start: {type: consts.DICTIONARY_LOAD_START},
+            success: {type: consts.DICTIONARY_LOAD_SUCCESS},
+            fail: {type: consts.DICTIONARY_LOAD_FAIL}
+          },
+          params
         },
-        meta: {
-          reducerName: 'dictionaries',
+
+        payload: {
           collectionName: dicName
         }
-      };
-      dispatch(action)
+      });
     });
-  }
-
+  };
 }

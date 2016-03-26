@@ -1,46 +1,33 @@
+import * as types  from './constants';
 
-import { _START, _SUCCESS, _FAIL } from '../../constants'
-import createReducer from '../../utils/create-reducer'
-import { LOAD_STATISTICS } from './constants'
+export default function (state = {}, action = {}) {
+  switch (action.type) {
 
-const initialState = {};
+    case types.STATISTICS_LOAD_START:
+      console.log('STATISTICS_LOAD_START', action);
+      return Object.assign({}, state, {
+        [action.payload.collectionName]: {isLoading: true}
+      });
 
-const actionHandlers = {
-  [LOAD_STATISTICS + _START]: (state, action) => {
-    // console.log(LOAD_STATISTICS + _START, action);
-    return Object.assign({}, state,
-      {
-        [action.meta.collectionName] : {
-          isLoading: true
-        }
-      }
-    )
-  },
-
-  [LOAD_STATISTICS + _SUCCESS]: (state, action) => {
-    // console.log(LOAD_STATISTICS + _SUCCESS, action);
-    return Object.assign({}, state,
-      {
-        [action.meta.collectionName] : {
+    case types.STATISTICS_LOAD_SUCCESS:
+      console.log('STATISTICS_LOAD_SUCCESS', action);
+      return Object.assign({}, state, {
+        [action.payload.collectionName]: {
           isLoading: false,
-          loaded: true,
-          data: action.payload.data
+          data: action.response
         }
-      }
-    )
-  },
+      });
 
-  [LOAD_STATISTICS + _FAIL]: (state, action) => {
-    return Object.assign({}, state,
-      {
-        [action.meta.collectionName] : {
+    case types.STATISTICS_LOAD_FAIL:
+      console.log('STATISTICS_LOAD_FAIL', action);
+      return Object.assign({}, state, {
+        [action.payload.collectionName]: {
           isLoading: false,
-          loaded: false,
-          error: action.error
+          error: action.error.message
         }
-      }
-    )
+      });
+
+    default:
+      return state;
   }
-};
-
-export default createReducer(initialState, actionHandlers)
+}

@@ -1,4 +1,0 @@
-// ACTION TYPES
-export const LOAD_ALL_ENROLMENTS= 'LOAD_ALL_ENROLMENTS';
-
-export const ENROLMENT_LIST_REDUCER = 'enrolmentList';

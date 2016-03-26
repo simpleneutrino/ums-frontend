@@ -1,5 +1,10 @@
 // ACTION TYPES
-export const LOAD_STATISTICS = 'LOAD_STATISTICS';
+export const STATISTICS_LOAD_START = 'STATISTICS_LOAD_START';
+export const STATISTICS_LOAD_SUCCESS = 'STATISTICS_LOAD_SUCCESS';
+export const STATISTICS_LOAD_FAIL = 'STATISTICS_LOAD_FAIL';
+
+// CONSTANTS
+export const STATISTICS_REDUCER = 'statistics';
 
 // statistics entities names
 export const PRIORITIES = 'PRIORITIES';
@@ -8,10 +13,6 @@ export const ALLOCATIONS_ADMINUNITS_MAP = 'ALLOCATIONS_ADMINUNITS_MAP';
 export const ALLOCATIONS_DEPARTMENTS = 'ALLOCATIONS_DEPARTMENTS';
 export const PLACES = 'PLACES';
 
-// CONSTANTS
-export const STATISTICS_REDUCER = 'statistics';
-
-//
 /**
  * callApi - info for fetching data from a server
  * cacheTime - 5h x 60sec = 300
@@ -220,6 +221,4 @@ export const STATISTICS_MAP = {
       }
     }
   }
-
 };
-

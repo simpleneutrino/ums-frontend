@@ -1,21 +1,19 @@
-import {
-  LOAD_STATISTICS,
-  STATISTICS_REDUCER } from './constants'
+import {REQUEST_API} from '../../system/constants';
+import * as types from './constants';
 
-/**
- * ACTION CREATOR - dispatch action for fetching statistics data
- * @param callApiData
- * @param statisticCollectionName
- * @returns {{type, callDicAPI: {url: *}, meta: {reducerName, collectionName: *}}}
- */
-export function loadStatistics (callApiData, statisticCollectionName) {
-  console.log('callApiData',callApiData );
+export function loadStatistics(url, collectionName) {
   return {
-    type: LOAD_STATISTICS,
-    callDicAPI: callApiData,
-    meta: {
-      reducerName: STATISTICS_REDUCER,
-      collectionName: statisticCollectionName
+    type: REQUEST_API,
+    request: {
+      url,
+      actions: {
+        start: {type: types.STATISTICS_LOAD_START},
+        success: {type: types.STATISTICS_LOAD_SUCCESS},
+        fail: {type: types.STATISTICS_LOAD_FAIL}
+      }
+    },
+    payload: {
+      collectionName
     }
-  }
+  };
 }

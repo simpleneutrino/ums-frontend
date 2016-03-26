@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isDataForEnrolmentLoaded} from './helpers';
+import {isDataForEnrolmentLoaded} from './../helpers';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import {ENROLMENT_VIEW_REDUCER} from './constants';
+import {ENROLMENT_VIEW_REDUCER} from './../constants';
 import Loading from '../../commons/Loading';
 
 export default class Benefits extends Component {

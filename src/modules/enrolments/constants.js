@@ -6,6 +6,8 @@ export const LOAD_ONE_ENROLMENT_START = 'LOAD_ONE_ENROLMENT_START';
 export const LOAD_ONE_ENROLMENT_SUCCESS = 'LOAD_ONE_ENROLMENT_SUCCESS';
 export const LOAD_ONE_ENROLMENT_FAIL = 'LOAD_ONE_ENROLMENT_FAIL';
 
+export const ENROLMENT_VIEW_REDUCER = 'enrolmentView';
+
 export const isStateNames = ['\u2718', '\u2713'];
 export const isContractNames = ['\u2718', '\u2713'];
 export const isPrivilegeNames = ['пільги відсутні', 'є пільги'];

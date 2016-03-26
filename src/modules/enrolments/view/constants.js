@@ -1,1 +1,0 @@
-export const ENROLMENT_VIEW_REDUCER = 'enrolmentView';

@@ -32,10 +32,6 @@ export default class NavBar extends Component {
             <NavItem>Рейтинг</NavItem>
           </LinkContainer>
 
-          <NavDropdown eventKey={3} title="Optins" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
-          </NavDropdown>
-
           {this.authItem('persons', 'Персони')}
         </Nav>
 
@@ -53,25 +49,29 @@ export default class NavBar extends Component {
   };
 
   authItem(path, name) {
-    let result = null;
-
     if (checkAuth(this.props.auth, path)) {
-      result = (
+      return (
         <LinkContainer to={{ pathname: path}}>
           <NavItem>{name}</NavItem>
         </LinkContainer>
-      );
+       );
     }
-
-    return result;
+    return null;
   }
 
   loginItem() {
-    if (this.props.auth.user.authenticated) {
+    let {user} = this.props.auth;
+    if (user.authenticated) {
       return (
-        <LinkContainer to={{pathname: '/logout'}}>
-          <NavItem >Logout</NavItem>
-        </LinkContainer>
+        <NavDropdown eventKey={3} title={user.login} id="basic-nav-dropdown">
+          <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey={3.3}>
+            <LinkContainer to={{pathname: '/logout'}}>
+              <NavItem >Logout</NavItem>
+            </LinkContainer>
+          </MenuItem>
+        </NavDropdown>
       );
     } else {
       return (

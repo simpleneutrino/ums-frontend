@@ -1,4 +1,4 @@
-import {default as enrolmentList} from './../../modules/enrolments/reducer';
+import {default as enrolmentList} from './../../modules/enrolments/list/reducer';
 import {default as dictionaries} from '../../modules/dictionaries/reducer';
 import {default as statistics} from './../../modules/statistics/reducer';
 import {default as auth} from '../../modules/auth/reducer';

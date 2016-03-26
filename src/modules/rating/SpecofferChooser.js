@@ -23,16 +23,16 @@ class SpecofferChooser extends Component {
 
   render() {
     let {rating} = this.props;
-
+    console.log('SpecofferChooser rendr: this.props', this.props);
     if (!rating) {
-      return <div>loading</div>;
+      return <div>loading...</div>;
     }
 
     console.log(this.props);
 
     return (
       <div> SpecofferChooser
-        <Tabs defaultActiveKey={2} position="left" tabWidth={3}>
+        <Tabs defaultActiveKey={2} position="left" tabWidth={2}>
           <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
           <Tab eventKey={2} title="Tab 2">Tab 2 content</Tab>
           <Tab eventKey={3} title="Tab 3">Tab 3 content</Tab>

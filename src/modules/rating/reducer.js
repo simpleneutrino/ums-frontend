@@ -22,7 +22,7 @@ export default function enrolments(state = defaultState, action = {}) {
       return Object.assign({}, state,
         {
           isLoading: false,
-          ...action.response
+          resources: [...action.response]
         }
       );
 

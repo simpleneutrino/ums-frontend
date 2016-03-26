@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {loadEnrolments} from './../actions';
+
 import * as dictConst from '../../dictionaries/constants';
+import {loadEnrolments} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
+import {isDataForEnrolmentLoaded, decodeEnrolments} from '../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import EnrolmentItem from './EnrolmentItem';
 
@@ -18,13 +20,13 @@ class EnrolmentsListPage extends Component {
   }
 
   render() {
-    let {enrolmentList} = this.props;
 
-    if (enrolmentList.isLoading) {
+    if (!isDataForEnrolmentLoaded('enrolmentList')) {
       return <div>load</div>;
     }
 
-    let enrolments = enrolmentList.resources.map((item)=> {
+    let {enrolmentList, dictionaries} = this.props;
+    let enrolments = decodeEnrolments(enrolmentList, dictionaries).map((item)=> {
       return <EnrolmentItem item={item} key={item.id}/>;
     });
 

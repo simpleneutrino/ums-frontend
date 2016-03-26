@@ -28,8 +28,6 @@ class TimePeriodId extends Component {
 
   render() {
 
-    console.log('isDictLoaded([TIMEPERIODS], this.props.dictionaries)',
-      !!isDictLoaded([TIMEPERIODS], this.props.dictionaries) );
     if (!isDictLoaded([TIMEPERIODS], this.props.dictionaries)) {
       return <div>loading...</div>;
     }

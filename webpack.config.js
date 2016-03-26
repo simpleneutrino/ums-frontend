@@ -96,7 +96,10 @@ function getConfig(env) {
       return [autoprefixer];
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss', '.css']
+      extensions: ['', '.js', '.jsx', '.scss', '.css'],
+      alias: {
+        store: path.resolve(__dirname, './src/system/store.js')
+      }
     }
   };
 }

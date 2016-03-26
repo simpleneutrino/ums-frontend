@@ -1,4 +1,4 @@
-import store from '../../system/store';
+import store from 'store';
 import * as dictConstants from '../dictionaries/constants';
 import {isDictLoaded} from '../dictionaries/helpers';
 import * as constants from './constants';

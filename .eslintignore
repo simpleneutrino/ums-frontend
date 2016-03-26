@@ -2,3 +2,4 @@ webpack.*
 tools
 dist
 server.js
+/src/modules/statistics/components/UkraineMap.js

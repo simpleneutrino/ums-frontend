@@ -5,16 +5,15 @@ export function loadStatistics(url, collectionName) {
   return {
     type: REQUEST_API,
     request: {
-      url: url,
+      url,
       actions: {
         start: {type: types.STATISTICS_LOAD_START},
         success: {type: types.STATISTICS_LOAD_SUCCESS},
         fail: {type: types.STATISTICS_LOAD_FAIL}
       }
     },
-
     payload: {
-      collectionName: collectionName
+      collectionName
     }
   };
 }

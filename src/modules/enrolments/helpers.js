@@ -27,7 +27,7 @@ export function isEntityDataLoaded(storeState, reducerName) {
  */
 export function isDataForEnrolmentLoaded(reducerName) {
   let state = store.getState();
-  return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state)
+  return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
     && isEntityDataLoaded(state, reducerName);
 }
 

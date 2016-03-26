@@ -1,13 +1,14 @@
 import forEach from 'lodash/forEach';
 /**
  * check whether a specific distionaries is loaded
- * @param listOfDict {Array} - arry of dict
- * @param storeState {Object} - state
+ * @param listOfDict {Array} - array of dict
+ * @param dictState {Object} - state
  * @returns {boolean}
  */
-export function isDictLoaded(listOfDict, storeState) {
-  let dictState = storeState['dictionaries'];
+export function isDictLoaded(listOfDict, dictState) {
+  if (!Object.keys(dictState).length) return false;
 
+  console.log('dictState', dictState);
   listOfDict.forEach((dicName) => {
     let dicData = dictState[dicName];
     if (dicData && dicData.resources && (dicData.isLoading || !dicData.loaded || !dicData.resources.length)) {
@@ -25,11 +26,6 @@ export function isDictLoaded(listOfDict, storeState) {
  */
 export function createDataMap(data) {
   let map = [];
-
-  forEach(data, (item) => {
-    //todo review
-    map[item.id] = item.name;
-  });
-
+  forEach(data, (item) => map[item.id] = item.name);
   return map;
 }

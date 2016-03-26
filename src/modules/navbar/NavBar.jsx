@@ -3,7 +3,10 @@ import {connect} from 'react-redux';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import NavDropdown from 'react-bootstrap/lib/NavDropdown';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import SettingsModal from './../settings/components/SettingsModal';
 import checkAuth from '../auth/helpers';
 
 export default class NavBar extends Component {
@@ -29,15 +32,25 @@ export default class NavBar extends Component {
             <NavItem>Рейтинг</NavItem>
           </LinkContainer>
 
+          <NavDropdown eventKey={3} title="Optins" id="basic-nav-dropdown">
+            <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
+          </NavDropdown>
+
           {this.authItem('persons', 'Персони')}
         </Nav>
 
         <Nav className='pull-right'>
           {this.loginItem()}
         </Nav>
+
+        <SettingsModal ref='SetModal'/>
       </Navbar>
     );
   }
+
+  _onSettingModalClick = () => {
+    this.refs.SetModal.openModal();
+  };
 
   authItem(path, name) {
     let result = null;

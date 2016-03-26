@@ -10,7 +10,7 @@ export function changeTimePeriodId(timePeriodId) {
   };
 }
 
-export default function settings(state = { timePeriodId: 8 }, action = {}) {
+export function settings(state = { timePeriodId: 8 }, action = {}) {
   switch (action.type) {
 
     case TIMEPERIODID_CHANGED:

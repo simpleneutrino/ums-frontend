@@ -1,49 +1,50 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Input from 'react-bootstrap/lib/Input';
+import { TIMEPERIODS} from './../../dictionaries/constants';
+import { isDictLoaded } from './../../dictionaries/helpers';
+import loadDictionaries from './../../dictionaries/actions';
+import { changeTimePeriodId } from './../widget';
 
-import { dictActions, dictConstants } from './../../modules/dictionaries'
-import { changeTimePeriodId } from '../../modules/settings/actions'
-import { isDataForSettingsLoaded } from '../../modules/settings/helpers'
-
-let { loadDictionaries } = dictActions;
-let { TIMEPERIODS } = dictConstants;
 
 class TimePeriodId extends Component {
   static propTypes = {
-    children: PropTypes.any
+    children: PropTypes.any,
+    dispatch: PropTypes.func.isRequired
   };
   constructor (props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.getDictionaries([TIMEPERIODS]);
+    this.props.loadDictionaries([TIMEPERIODS]);
   }
 
   handleOptionChange  = (event) => {
-    this.props.sendTimePeriodId( event.target.value )
+    this.props.sendTimePeriodId( event.target.value );
   }
 
   render() {
 
-    if (!isDataForSettingsLoaded()) {
-      return <div>load</div>
+    console.log('isDictLoaded([TIMEPERIODS], this.props.dictionaries)',
+      !!isDictLoaded([TIMEPERIODS], this.props.dictionaries) );
+    if (!isDictLoaded([TIMEPERIODS], this.props.dictionaries)) {
+      return <div>loading...</div>;
     }
 
     let { dictionaries, timePeriodId } = this.props;
     let timeperiods = dictionaries[TIMEPERIODS].resourcesMap;
 
     const optionList = timeperiods.map((item, i) => {
-      return <option value = {i}>{item}</option>
+      return <option value = {i}>{item}</option>;
     });
 
     return (
       <div className="body">
         <Input type="select" label="Оберіть вступну кампанію"
-             value = {timePeriodId} onChange={this.handleOptionChange} >
+             value = {timePeriodId} onChange={this.handleOptionChange}>
           { optionList }
         </Input>
       </div>
@@ -51,9 +52,17 @@ class TimePeriodId extends Component {
   }
 }
 
+
+TimePeriodId.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
+
 const mapStateToSettings = (state) => {
-  const { dictionaries, application } = state;
-  return { dictionaries, timePeriodId: application.timePeriodId }
+  console.log('state', state);
+  return {
+    dictionaries: state.dictionaries,
+    timePeriodId: state.settings.timePeriodId
+  };
 };
 
 const mapDispatchToChartFactory = (dispatch) => {
@@ -61,8 +70,8 @@ const mapDispatchToChartFactory = (dispatch) => {
     sendTimePeriodId: (timePeriodId) => {
       dispatch(changeTimePeriodId(timePeriodId));
     },
-    getDictionaries: (dictionaries) => {
-      dispatch(loadDictionaries(dictionaries));
+    loadDictionaries: (dictList) => {
+      dispatch(loadDictionaries(dictList));
     }
   };
 };
@@ -70,4 +79,4 @@ const mapDispatchToChartFactory = (dispatch) => {
 export default connect(
   mapStateToSettings,
   mapDispatchToChartFactory
-)(TimePeriodId)
+)(TimePeriodId);

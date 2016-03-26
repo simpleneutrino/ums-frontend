@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
-import TimePeriodId from './timePeriodId'
+import TimePeriodId from './../containers/timePeriodId';
 
 export default class SettingsModal extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ export default class SettingsModal extends Component {
   }
 
   openModal = () => {
+    console.log('open_model');
     this.setState({ isModalOpen: true });
   };
 
@@ -29,6 +30,6 @@ export default class SettingsModal extends Component {
           <TimePeriodId/>
         </Modal.Body>
       </Modal>
-    )
+    );
   }
 }

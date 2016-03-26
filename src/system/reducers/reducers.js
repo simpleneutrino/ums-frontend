@@ -4,6 +4,7 @@ import {default as statistics} from './../../modules/statistics/reducer';
 import {default as auth} from '../../modules/auth/reducer';
 import {default as enrolmentView} from '../../modules/enrolments/view/reducer';
 import {default as rating} from '../../modules/rating/reducer';
+import {settings} from '../../modules/settings/widget';
 import config from './configReducer';
 import {routeReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   config,
   enrolmentView,
   rating,
+  settings,
   routing: routeReducer
 });
 

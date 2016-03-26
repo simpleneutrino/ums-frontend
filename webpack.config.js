@@ -3,6 +3,7 @@
 // file generates a webpack config for the environment passed to the getConfig method.
 var webpack = require('webpack');
 var path = require('path');
+var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -66,9 +67,9 @@ const getLoaders = function (env) {
 
   if (env === productionEnvironment) {
     // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
-    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")});
+    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!postcss!sass?sourceMap")});
   } else {
-    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']});
+    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']});
   }
 
   return loaders;
@@ -90,6 +91,9 @@ function getConfig(env) {
     plugins: getPlugins(env),
     module: {
       loaders: getLoaders(env)
+    },
+    postcss: function () {
+      return [autoprefixer];
     },
     resolve: {
       extensions: ['', '.js', '.jsx', '.scss', '.css']

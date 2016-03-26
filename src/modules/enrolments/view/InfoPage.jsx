@@ -13,7 +13,12 @@ class InfoPage extends Component {
           <LinkContainer to={{ pathname: `/enrolments/${this.props.params.id}/benefits`}}>
             <Button eventKey={2} className="btn btn-default"> Benefits </Button>
           </LinkContainer>
-
+          <LinkContainer to={{ pathname: `/enrolments/${this.props.params.id}/statuses`}}>
+            <Button eventKey={3} className="btn btn-default"> Statuses </Button>
+          </LinkContainer>
+          <LinkContainer to={{ pathname: `/enrolments/${this.props.params.id}/subjects`}}>
+            <Button eventKey={4} className="btn btn-default"> Subjects </Button>
+          </LinkContainer>
         </div>
         {this.props.children}
       </div>

@@ -7,6 +7,7 @@ export const DICTIONARY_LOAD_FAIL = 'DICTIONARY_LOAD_FAIL';
 export const DEPARTMENTS = 'DEPARTMENTS';
 export const ENROLMENTS_TYPES = 'ENROLMENTS_TYPES';
 export const ENROLMENTS_STATUS_TYPES = 'ENROLMENTS_STATUS_TYPES';
+export const TIMEPERIODS = 'TIMEPERIODS';
 
 // CONSTANTS:
 export const DICTIONARY_MAP = {
@@ -27,6 +28,13 @@ export const DICTIONARY_MAP = {
   },
   [ENROLMENTS_STATUS_TYPES]: {
     url: '/enrolments/statustypes',
+    params: {
+      limit: 300
+    },
+    cache: true
+  },
+  [TIMEPERIODS]: {
+    url: '/timeperiods',
     params: {
       limit: 300
     },

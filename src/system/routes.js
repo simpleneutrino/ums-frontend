@@ -14,6 +14,7 @@ import InfoPage from '../modules/enrolments/view/InfoPage';
 import Statistics from '../modules/statistics/components/Statistics';
 import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
 import Chart from '../modules/statistics/containers/Chart';
+import SpecofferChooser from '../modules/rating/SpecofferChooser';
 
 //configure permissions
 export const routes = {
@@ -39,6 +40,7 @@ export default (
       <Route path="chart/:chartId" component={Chart}/>
     </Route>
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
+    <Route path="rating" component={SpecofferChooser}/>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
   </Route>

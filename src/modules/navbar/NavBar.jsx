@@ -25,6 +25,10 @@ export default class NavBar extends Component {
             <NavItem>Статистика</NavItem>
           </LinkContainer>
 
+          <LinkContainer to={{ pathname: '/rating'}}>
+            <NavItem>Рейтинг</NavItem>
+          </LinkContainer>
+
           {this.authItem('persons', 'Персони')}
         </Nav>
 

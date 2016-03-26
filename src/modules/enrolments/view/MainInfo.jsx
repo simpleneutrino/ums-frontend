@@ -1,11 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isDataForEnrolmentLoaded} from './helpers';
-import {decodeOneEnrolment} from '../helpers';
+import {isDataForEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import {ENROLMENT_VIEW_REDUCER} from './constants';
+import {ENROLMENT_VIEW_REDUCER} from './../constants';
 import Loading from '../../commons/Loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 

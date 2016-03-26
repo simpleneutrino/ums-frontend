@@ -7,6 +7,8 @@ import loadDictionaries from '../../dictionaries/actions';
 import {isDataForEnrolmentLoaded, decodeEnrolments} from '../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import EnrolmentItem from './EnrolmentItem';
+import Loading from '../../commons/Loading';
+import {ENROLMENT_LIST_REDUCER} from './../constants';
 
 class EnrolmentsListPage extends Component {
   constructor(props) {
@@ -21,8 +23,8 @@ class EnrolmentsListPage extends Component {
 
   render() {
 
-    if (!isDataForEnrolmentLoaded('enrolmentList')) {
-      return <div>load</div>;
+    if (!isDataForEnrolmentLoaded(ENROLMENT_LIST_REDUCER)) {
+      return <Loading/>;
     }
 
     let {enrolmentList, dictionaries} = this.props;

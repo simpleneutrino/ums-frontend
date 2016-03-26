@@ -15,9 +15,15 @@ let {
  * @param reducerName
  * @returns {boolean}
  */
-export function isEntityDataLoaded(storeState, reducerName) {
+export function isEntityDataLoaded(storeState, reducerName, params) {
   let entityData = storeState[reducerName];
-  return !entityData.isLoading && (entityData.resources && !!entityData.resources.length);
+  if (reducerName === constants.ENROLMENT_LIST_REDUCER) {
+    return !entityData.isLoading && (entityData.resources && !!entityData.resources.length);
+  } else {
+    let enrolId = params.enrolId;
+    let data = entityData.data[params.enrolId];
+    return !entityData.isLoading && (data && !!Object.keys(data).length);
+  }
 }
 
 /**
@@ -25,10 +31,10 @@ export function isEntityDataLoaded(storeState, reducerName) {
  * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForEnrolmentLoaded(reducerName) {
+export function isDataForEnrolmentLoaded(reducerName, params = {}) {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataLoaded(state, reducerName);
+    && isEntityDataLoaded(state, reducerName, params);
 }
 
 export function decodeOneEnrolment(item, dictionaries) {

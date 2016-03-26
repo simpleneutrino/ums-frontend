@@ -16,8 +16,11 @@ export default class MainInfo extends Component {
   }
 
   render() {
-    if (isDataForEnrolmentLoaded(ENROLMENT_VIEW_REDUCER)) {
-      let item = decodeOneEnrolment(this.props.enrolmentView.data, this.props.dictionaries);
+    if (!isDataForEnrolmentLoaded(ENROLMENT_VIEW_REDUCER, {'enrolId': this.props.params.id})) {
+      return <Loading/>;
+    } else {
+
+      let item = decodeOneEnrolment(this.props.enrolmentView.data[this.props.params.id], this.props.dictionaries);
 
       return (
         <Table striped bordered condensed hover>
@@ -55,8 +58,6 @@ export default class MainInfo extends Component {
           </tbody>
         </Table>
       );
-    } else {
-      return <Loading/>;
     }
   }
 }

@@ -27,6 +27,9 @@ export function loadEnrolmentById(id) {
         success: {type: types.LOAD_ONE_ENROLMENT_SUCCESS},
         fail: {type: types.LOAD_ALL_ENROLMENTS_FAIL}
       }
+    },
+    payload: {
+      id: id
     }
   };
 }

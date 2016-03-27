@@ -1,24 +1,25 @@
 import * as types from './constants';
+import {combineReducers} from 'redux';
+import {LOCATION_CHANGE} from 'react-router-redux';
 
-const defaultState = {
+/**
+ * lost of departments and specoffers to choose
+ */
+const specofferChooserInitialState = {
   isLoading: true,
   resources: [],
+  departmentId: 498,
+  specofferId: null,
   error: null
 };
 
-export default function enrolments(state = defaultState, action = {}) {
-  switch (action.type) {
 
+export function specofferChooser(state = specofferChooserInitialState, action = {}) {
+  switch (action.type) {
     case types.LOAD_SPECOFFER_CHOOSER_START:
-      console.log('LOAD_SPECOFFER_CHOOSER_START', action);
-      return Object.assign({}, state,
-        {
-          isLoading: true, resources: []
-        }
-      );
+      return Object.assign({}, state, {isLoading: true, resources: []});
 
     case types.LOAD_SPECOFFER_CHOOSER_SUCCESS:
-      console.log('LOAD_SPECOFFER_CHOOSER_SUCCESS', action);
       return Object.assign({}, state,
         {
           isLoading: false,
@@ -27,15 +28,52 @@ export default function enrolments(state = defaultState, action = {}) {
       );
 
     case types.LOAD_SPECOFFER_CHOOSER_FAIL:
-      console.log('LOAD_SPECOFFER_CHOOSER_FAIL', action);
-      return Object.assign({}, state,
-        {
-          isLoading: false,
-          error: action.error.message
-        }
-      );
+      return Object.assign({}, state, {isLoading: false, error: action.error.message});
+
+    case LOCATION_CHANGE: // listen to query parameters changes
+      if (action.payload.pathname !== '/rating') return state;
+      let {
+        departmentId = state.departmentId,
+        specofferId = state.specofferId } = action.payload.query;
+      return Object.assign({}, state, {departmentId, specofferId});
 
     default:
       return state;
   }
 }
+
+/**
+ * list of enrolments sorted by rating;
+ */
+const initialEnrolmentsState = {
+  isLoading: true,
+  resources: [],
+  error: null
+};
+
+export function ratingList(state = initialEnrolmentsState, action = {}) {
+  switch (action.type) {
+    case types.LOAD_RATING_START:
+      return Object.assign({}, state, {isLoading: true, resources: []});
+
+    case types.LOAD_RATING_SUCCESS:
+      return Object.assign({}, state,
+        {
+          isLoading: false,
+          resources: [...action.response]
+        }
+      );
+
+    case types.LOAD_RATING_FAIL:
+      return Object.assign({}, state, {isLoading: false, error: action.error.message});
+
+    default:
+      return state;
+  }
+}
+
+
+export default combineReducers({
+  specofferChooser,
+  ratingList
+});

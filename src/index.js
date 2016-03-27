@@ -6,11 +6,15 @@ import store from 'store';
 import routes from './system/routes';
 import '../assets/stylesheets/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import {syncHistoryWithStore} from 'react-router-redux';
+
+// Create an enhanced history that syncs navigation events with the store
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
     <div>
-      <Router history={browserHistory} routes={routes}/>
+      <Router history={history} routes={routes}/>
     </div>
   </Provider>, document.getElementById('app')
 );

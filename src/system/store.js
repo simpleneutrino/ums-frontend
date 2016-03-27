@@ -1,12 +1,10 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import {browserHistory} from 'react-router';
-import {syncHistory} from 'react-router-redux';
 import rootReducer from './reducers/reducers';
 import thunk from 'redux-thunk';
 import {default as request} from './middleware/request';
 
-const storeMiddlewareHistory = syncHistory(browserHistory);
-const middleware = [storeMiddlewareHistory, thunk, request];
+const middleware = [thunk, request];
 const devMode = process.env.NODE_ENV === 'development';
 
 if (devMode) {
@@ -21,7 +19,6 @@ const finalCreateStore = compose(
 
 function configureStore(initState) {
   const store = finalCreateStore(rootReducer, initState);
-  storeMiddlewareHistory.listenForReplays(store);
 
   if (module.hot)
   // Enable Webpack hot module replacement for reducers
@@ -33,6 +30,6 @@ function configureStore(initState) {
   return store;
 }
 
-const store = configureStore({}, storeMiddlewareHistory);
+const store = configureStore({});
 
 export default store;

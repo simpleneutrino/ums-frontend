@@ -48,7 +48,7 @@ class Chart extends Component {
    */
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps nextProps', nextProps);
-    if (nextProps.chartId !== this.props.chartId || nextProps.timePeriodId !== this.props.timePeriodId) {
+    if (nextProps.chartId !== this.props.chartId) {
       console.log('clear', this.props);
       AmCharts.clear();
       this.props.getChartData(nextProps.chartId);
@@ -102,8 +102,7 @@ const mapStateToChartFactory = (state, ownProps) => {
   return {
     dataProvider: state.statistics[chartId],
     config: map[chartId],
-    chartId: chartId,
-    timePeriodId: state.settings.timePeriodId
+    chartId: chartId
   };
 };
 

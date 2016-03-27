@@ -54,7 +54,7 @@ class EnrolmentsListPage extends Component {
 
 const select = (state)=> {
   return {
-    enrolmentList: state.enrolmentList,
+    enrolmentList: state.enrolments.list,
     dictionaries: state.dictionaries
   };
 };

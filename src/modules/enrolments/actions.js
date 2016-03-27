@@ -25,7 +25,41 @@ export function loadEnrolmentById(id) {
       actions: {
         start: {type: types.LOAD_ONE_ENROLMENT_START},
         success: {type: types.LOAD_ONE_ENROLMENT_SUCCESS},
-        fail: {type: types.LOAD_ALL_ENROLMENTS_FAIL}
+        fail: {type: types.LOAD_ONE_ENROLMENT_FAIL}
+      }
+    },
+    payload: {
+      id: id
+    }
+  };
+}
+
+export function loadBenefitsById(id) {
+  return {
+    type: REQUEST_API,
+    request: {
+      url: `/enrolments/${id}/benefits`,
+      actions: {
+        start: {type: types.LOAD_ONE_BENEFIT_START},
+        success: {type: types.LOAD_ONE_BENEFIT_SUCCESS},
+        fail: {type: types.LOAD_ONE_BENEFIT_FAIL}
+      }
+    },
+    payload: {
+      id: id
+    }
+  };
+}
+
+export function loadStatusesById(id) {
+  return {
+    type: REQUEST_API,
+    request: {
+      url: `/enrolments/${id}/statuses`,
+      actions: {
+        start: {type: types.LOAD_ONE_STATUS_START},
+        success: {type: types.LOAD_ONE_STATUS_SUCCESS},
+        fail: {type: types.LOAD_ONE_STATUS_FAIL}
       }
     },
     payload: {

@@ -63,7 +63,7 @@ const mapStateToSettings = (state) => {
   };
 };
 
-const mapDispatchToChartFactory = (dispatch) => {
+const mapDispatchToSettings = (dispatch) => {
   return {
     sendTimePeriodId: (timePeriodId) => {
       dispatch(changeTimePeriodId(timePeriodId));
@@ -76,5 +76,5 @@ const mapDispatchToChartFactory = (dispatch) => {
 
 export default connect(
   mapStateToSettings,
-  mapDispatchToChartFactory
+  mapDispatchToSettings
 )(TimePeriodId);

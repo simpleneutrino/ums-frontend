@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isDataForEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
+import {isDataForOneEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import {ENROLMENT_VIEW_REDUCER} from './../constants';
+import {ENROLMENT_MAININFO_REDUCER} from './../constants';
 import Loading from '../../commons/Loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 
@@ -16,11 +16,10 @@ export default class MainInfo extends Component {
   }
 
   render() {
-    if (!isDataForEnrolmentLoaded(ENROLMENT_VIEW_REDUCER, {'enrolId': this.props.params.id})) {
+    if (!isDataForOneEnrolmentLoaded(ENROLMENT_MAININFO_REDUCER, {'enrolId': this.props.params.id})) {
       return <Loading/>;
     } else {
-
-      let item = decodeOneEnrolment(this.props.enrolmentView.data[this.props.params.id], this.props.dictionaries);
+      let item = decodeOneEnrolment(this.props.mainInfo.data[this.props.params.id], this.props.dictionaries);
 
       return (
         <Table striped bordered condensed hover>
@@ -68,7 +67,7 @@ MainInfo.propTypes = {
 
 const select = (state)=> {
   return {
-    enrolmentView: state.enrolmentView,
+    mainInfo: state.enrolments.view.mainInfo,
     dictionaries: state.dictionaries
   };
 };

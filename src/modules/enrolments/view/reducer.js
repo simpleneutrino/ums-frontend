@@ -1,39 +1,25 @@
 import * as types from '../constants';
+import {combineReducers} from 'redux';
 
-const defaultState = {
+const mainInfoDefaultState = {
   isLoading: false,
-  loaded: false,
   data: {}
 };
 
-export default function enrolments(state = defaultState, action = {}) {
+export function mainInfo(state = mainInfoDefaultState, action = {}) {
   switch (action.type) {
 
     case types.LOAD_ONE_ENROLMENT_START:
-      return Object.assign({}, state, {isLoading: true, loaded: false});
+      return Object.assign({}, state, {isLoading: true});
 
     case types.LOAD_ONE_ENROLMENT_SUCCESS:
-      let enrolPresented = state.data[action.payload.id];
-
-      if (enrolPresented) {
-        return Object.assign({}, state,
-          {
-            isLoading: false,
-            loaded: true
-          }
-        );
-      } else {
-        let newObj = {...state.data};
-        newObj[action.payload.id] = action.response;
-
-        return Object.assign({}, state,
-          {
-            isLoading: false,
-            loaded: true,
-            data: Object.assign({}, state.data, newObj)
-          }
-        );
-      }
+      return Object.assign({}, state,
+        {
+          isLoading: false,
+          data: Object.assign({}, state.data,
+            { [action.payload.id]:  action.response })
+        }
+      );
 
     case types.LOAD_ONE_ENROLMENT_FAIL:
       return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
@@ -42,3 +28,65 @@ export default function enrolments(state = defaultState, action = {}) {
       return state;
   }
 }
+
+const benefitsDefaultState = {
+  isLoading: false,
+  data: {}
+};
+
+export function benefits(state = benefitsDefaultState, action = {}) {
+  switch (action.type) {
+
+    case types.LOAD_ONE_BENEFIT_START:
+      return Object.assign({}, state, {isLoading: true});
+
+    case types.LOAD_ONE_BENEFIT_SUCCESS:
+      return Object.assign({}, state,
+        {
+          isLoading: false,
+          data: Object.assign({}, state.data,
+            { [action.payload.id]:  action.response })
+        }
+      );
+
+    case types.LOAD_ONE_BENEFIT_FAIL:
+      return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
+
+    default:
+      return state;
+  }
+}
+
+const statusesDefaultState = {
+  isLoading: false,
+  data: {}
+};
+
+export function statuses(state = statusesDefaultState, action = {}) {
+  switch (action.type) {
+
+    case types.LOAD_ONE_STATUS_START:
+      return Object.assign({}, state, {isLoading: true});
+
+    case types.LOAD_ONE_STATUS_SUCCESS:
+      return Object.assign({}, state,
+        {
+          isLoading: false,
+          data: Object.assign({}, state.data,
+            { [action.payload.id]:  action.response })
+        }
+      );
+
+    case types.LOAD_ONE_STATUS_FAIL:
+      return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
+
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  mainInfo,
+  benefits,
+  statuses
+});

@@ -6,8 +6,19 @@ export const LOAD_ONE_ENROLMENT_START = 'LOAD_ONE_ENROLMENT_START';
 export const LOAD_ONE_ENROLMENT_SUCCESS = 'LOAD_ONE_ENROLMENT_SUCCESS';
 export const LOAD_ONE_ENROLMENT_FAIL = 'LOAD_ONE_ENROLMENT_FAIL';
 
-export const ENROLMENT_VIEW_REDUCER = 'enrolmentView';
-export const ENROLMENT_LIST_REDUCER = 'enrolmentList';
+export const LOAD_ONE_BENEFIT_START = 'LOAD_ONE_BENEFIT_START';
+export const LOAD_ONE_BENEFIT_SUCCESS = 'LOAD_ONE_BENEFIT_SUCCESS';
+export const LOAD_ONE_BENEFIT_FAIL = 'LOAD_ONE_BENEFIT_FAIL';
+
+export const LOAD_ONE_STATUS_START = 'LOAD_ONE_STATUS_START';
+export const LOAD_ONE_STATUS_SUCCESS = 'LOAD_ONE_STATUS_SUCCESS';
+export const LOAD_ONE_STATUS_FAIL = 'LOAD_ONE_STATUS_FAIL';
+
+export const ENROLMENT_REDUCER = 'enrolments';
+export const ENROLMENT_LIST_REDUCER = 'list';
+export const ENROLMENT_VIEW_REDUCER = 'view';
+export const ENROLMENT_MAININFO_REDUCER = 'mainInfo';
+
 
 export const isStateNames = ['\u2718', '\u2713'];
 export const isContractNames = ['\u2718', '\u2713'];

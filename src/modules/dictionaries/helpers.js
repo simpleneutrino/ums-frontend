@@ -7,16 +7,19 @@ import forEach from 'lodash/forEach';
  */
 export function isDictLoaded(listOfDict, dictState) {
   if (!Object.keys(dictState).length) return false;
+  let commonResult = true;
 
   console.log('dictState', dictState);
   listOfDict.forEach((dicName) => {
     let dicData = dictState[dicName];
-    if (dicData && dicData.resources && (dicData.isLoading || !dicData.loaded || !dicData.resources.length)) {
+    // if (dicData && dicData.resources && (dicData.isLoading || !dicData.loaded || !dicData.resources.length)) {
+    if (!dicData || dicData.isLoading || !dicData.resources || !dicData.resources.length) {
+      commonResult = false;
       return false;
     }
   });
 
-  return true;
+  return commonResult;
 }
 
 /**

@@ -5,7 +5,7 @@ export function loadSpecoffersChooser() {
   return {
     type: REQUEST_API,
     request: {
-      url: `/departments/timeperiods/8/specoffers`,
+      url: `/departments/timeperiods/{{timePeriodId}}/specoffers`,
       actions: {
         start: {type: types.LOAD_SPECOFFER_CHOOSER_START},
         success: {type: types.LOAD_SPECOFFER_CHOOSER_SUCCESS},

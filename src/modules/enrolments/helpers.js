@@ -15,20 +15,44 @@ let {
  * @param reducerName
  * @returns {boolean}
  */
-export function isEntityDataLoaded(storeState, reducerName) {
-  let entityData = storeState[reducerName];
+export function isEntityDataLoaded(entityData) {
   return !entityData.isLoading && (entityData.resources && !!entityData.resources.length);
 }
 
 /**
- * check if enrolments loaded && dictionaries (used only inside enrolment list, view containers)
+ * check if enrolments loaded && dictionaries (used only inside enrolment list container)
  * @param reducerName
  * @returns {*|boolean}
  */
 export function isDataForEnrolmentLoaded(reducerName) {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataLoaded(state, reducerName);
+    && isEntityDataLoaded(
+      state[constants.ENROLMENT_REDUCER][reducerName]);
+}
+
+/**
+ * check if data is loaded
+ * @param storeState
+ * @param reducerName
+ * @returns {boolean}
+ */
+export function isEntityDataForOneLoaded(entityData, params) {
+  let data = entityData.data[params.enrolId];
+  return !entityData.isLoading && (data && !!Object.keys(data).length);
+}
+
+/**
+ * check if enrolments loaded && dictionaries (used only inside enrolment view container)
+ * @param reducerName
+ * @returns {*|boolean}
+ */
+export function isDataForOneEnrolmentLoaded(reducerName, params = {}) {
+  let state = store.getState();
+  return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
+    && isEntityDataForOneLoaded(
+      state[constants.ENROLMENT_REDUCER][constants.ENROLMENT_VIEW_REDUCER][reducerName],
+      params);
 }
 
 export function decodeOneEnrolment(item, dictionaries) {

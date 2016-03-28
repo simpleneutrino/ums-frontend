@@ -28,8 +28,6 @@ class TimePeriodId extends Component {
 
   render() {
 
-    console.log('isDictLoaded([TIMEPERIODS], this.props.dictionaries)',
-      !!isDictLoaded([TIMEPERIODS], this.props.dictionaries) );
     if (!isDictLoaded([TIMEPERIODS], this.props.dictionaries)) {
       return <div>loading...</div>;
     }
@@ -65,7 +63,7 @@ const mapStateToSettings = (state) => {
   };
 };
 
-const mapDispatchToChartFactory = (dispatch) => {
+const mapDispatchToSettings = (dispatch) => {
   return {
     sendTimePeriodId: (timePeriodId) => {
       dispatch(changeTimePeriodId(timePeriodId));
@@ -78,5 +76,5 @@ const mapDispatchToChartFactory = (dispatch) => {
 
 export default connect(
   mapStateToSettings,
-  mapDispatchToChartFactory
+  mapDispatchToSettings
 )(TimePeriodId);

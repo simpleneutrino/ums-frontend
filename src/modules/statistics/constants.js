@@ -24,7 +24,7 @@ export const PLACES = 'PLACES';
 export const STATISTICS_MAP = {
   [PRIORITIES]: {
     callApi: {
-      url: '/stats/8/priorities',
+      url: '/stats/{{timePeriodId}}/priorities',
       params: {},
       cache: true,
       cacheTime: 300
@@ -69,7 +69,7 @@ export const STATISTICS_MAP = {
   },
   [ALLOCATIONS_ADMINUNITS]: {
     callApi: {
-      url: '/stats/8/entrants/allocations/adminunits',
+      url: '/stats/{{timePeriodId}}/entrants/allocations/adminunits',
       params: {},
       cache: true,
       cacheTime: 300
@@ -93,7 +93,7 @@ export const STATISTICS_MAP = {
   },
   [ALLOCATIONS_ADMINUNITS_MAP]: {
     callApi: {
-      url: '/stats/8/entrants/allocations/adminunits',
+      url: '/stats/{{timePeriodId}}/entrants/allocations/adminunits',
       params: {},
       cache: true,
       cacheTime: 300
@@ -130,7 +130,7 @@ export const STATISTICS_MAP = {
   },
   [ALLOCATIONS_DEPARTMENTS]: {
     callApi: {
-      url: '/stats/8/entrants/allocations/departments',
+      url: '/stats/{{timePeriodId}}/entrants/allocations/departments',
       params: {},
       cache: true,
       cacheTime: 300
@@ -200,7 +200,7 @@ export const STATISTICS_MAP = {
   },
   [PLACES]: {
     callApi: {
-      url: '/stats/8/entrants/places',
+      url: '/stats/{{timePeriodId}}/entrants/places',
       params: {},
       cache: true,
       cacheTime: 300

@@ -4,11 +4,10 @@ import React, {Component, PropTypes} from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import { LinkContainer } from 'react-router-bootstrap';
-import find from 'lodash/find'
 
 export default class SpecoffersList extends Component {
   static propTypes = {
-    specofferChooserData: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    specoffers: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     departmentId: PropTypes.string.isRequired
   };
 
@@ -21,14 +20,14 @@ export default class SpecoffersList extends Component {
     );
   }
   specoffersList() {
-    let pickedDepartment = find(this.props.specofferChooserData, {departmentId: parseInt(this.props.departmentId)});
-    if (!pickedDepartment) {
+    let {specoffers, departmentId} = this.props;
+    if (!specoffers) {
       return <div>Choose a department at first!</div>
     }
-    return pickedDepartment.specoffers.map((specoffer) => {
+    return specoffers.specoffers.map((specoffer) => {
       return <LinkContainer key={specoffer.specofferId}
         to={{ pathname: '/rating',
-              query: {departmentId: pickedDepartment.departmentId, specofferId: specoffer.specofferId} }}>
+              query: {departmentId: departmentId, specofferId: specoffer.specofferId} }}>
         <NavItem eventKey={specoffer.specofferId}> {specoffer.name} {specoffer.specofferId}</NavItem>
       </LinkContainer>;
     });

@@ -7,7 +7,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class DepartmentsList extends Component {
   static propTypes = {
-    specofferChooserData: PropTypes.arrayOf(React.PropTypes.object).isRequired
+    departments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    departmentId: PropTypes.string.isRequired
   };
   render() {
     return (
@@ -17,7 +18,7 @@ export default class DepartmentsList extends Component {
     );
   }
   departmentsList() {
-    return this.props.specofferChooserData.map((department) => {
+    return this.props.departments.map((department) => {
       return <LinkContainer to={{ pathname: '/rating', query: {departmentId: department.departmentId} }}
                             key={department.departmentId}>
         <NavItem eventKey={department.departmentId}> {department.departmentName}</NavItem>

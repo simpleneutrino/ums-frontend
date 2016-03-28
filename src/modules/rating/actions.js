@@ -6,13 +6,13 @@ export function loadSpecoffersChooser() {
     type: REQUEST_API,
     request: {
       url: `/departments/timeperiods/8/specoffers`,
-      shouldRequest: (state) => !!state.rating.specofferChooser.resources.length,
       actions: {
         start: {type: types.LOAD_SPECOFFER_CHOOSER_START},
         success: {type: types.LOAD_SPECOFFER_CHOOSER_SUCCESS},
         fail: {type: types.LOAD_SPECOFFER_CHOOSER_FAIL}
       }
     },
+    interrupt: (store) => !!store.getState().rating.specofferChooser.resources.length,
     meta: {
       reducerName: types.RATING
     }

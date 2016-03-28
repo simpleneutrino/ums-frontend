@@ -12,6 +12,7 @@ export function loadSpecoffersChooser() {
         fail: {type: types.LOAD_SPECOFFER_CHOOSER_FAIL}
       }
     },
+    interrupt: (store) => !!store.getState().rating.specofferChooser.resources.length,
     meta: {
       reducerName: types.RATING
     }

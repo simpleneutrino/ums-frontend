@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, IndexRedirect, IndexRoute} from 'react-router';
+import {Route, IndexRedirect, IndexRoute, Redirect, browserHistory} from 'react-router';
 import Application from '../modules/Application';
 import LoginPage from '../modules/auth/login/LoginPage';
 import LogoutPage from '../modules/auth/logout/LogoutPage';
@@ -14,7 +14,7 @@ import InfoPage from '../modules/enrolments/view/InfoPage';
 import Statistics from '../modules/statistics/components/Statistics';
 import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
 import Chart from '../modules/statistics/containers/Chart';
-import SpecofferChooser from '../modules/rating/SpecofferChooser';
+import SpecofferChooser from '../modules/rating/container/SpecofferChooser';
 
 //configure permissions
 export const routes = {
@@ -43,5 +43,7 @@ export default (
     <Route path="rating" component={SpecofferChooser}/>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
+    <Redirect from='*' to='/404' />
   </Route>
 );
+

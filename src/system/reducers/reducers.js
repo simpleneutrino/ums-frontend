@@ -5,7 +5,7 @@ import {default as auth} from '../../modules/auth/reducer';
 import {default as rating} from '../../modules/rating/reducer';
 import {settings} from '../../modules/settings/widget';
 import config from './configReducer';
-import {routeReducer} from 'react-router-redux';
+import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   config,
   rating,
   settings,
-  routing: routeReducer
+  routing: routerReducer
 });
 
 export default rootReducer;

@@ -8,6 +8,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import SettingsModal from './../settings/components/SettingsModal';
 import checkAuth from '../auth/helpers';
+import { IndexLink } from 'react-router'
 
 export default class NavBar extends Component {
   render() {
@@ -15,7 +16,7 @@ export default class NavBar extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">UMS</a>
+            <IndexLink to={`/`}>UMS</IndexLink>
           </Navbar.Brand>
         </Navbar.Header>
 
@@ -28,7 +29,7 @@ export default class NavBar extends Component {
             <NavItem>Статистика</NavItem>
           </LinkContainer>
 
-          <LinkContainer to={{ pathname: '/rating'}}>
+          <LinkContainer to={{ pathname: '/rating', query: this.props.ratingQueryParams }}>
             <NavItem>Рейтинг</NavItem>
           </LinkContainer>
 
@@ -43,7 +44,6 @@ export default class NavBar extends Component {
       </Navbar>
     );
   }
-
   _onSettingModalClick = () => {
     this.refs.SetModal.openModal();
   };
@@ -89,7 +89,11 @@ NavBar.propTypes = {
 
 function select(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
+    ratingQueryParams: {
+      departmentId: state.rating.specofferChooser.departmentId,
+      specofferId: state.rating.specofferChooser.specofferId
+    }
   };
 }
 

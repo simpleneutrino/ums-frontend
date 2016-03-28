@@ -14,7 +14,6 @@ export function settings(state = { timePeriodId: 8 }, action = {}) {
   switch (action.type) {
 
     case TIMEPERIODID_CHANGED:
-      console.log('TIMEPERIODID_CHANGED', action);
       return Object.assign({}, state,
         {
           timePeriodId: action.payload.timePeriodId

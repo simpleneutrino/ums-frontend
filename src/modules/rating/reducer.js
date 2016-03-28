@@ -1,6 +1,7 @@
 import * as types from './constants';
 import {combineReducers} from 'redux';
 import {LOCATION_CHANGE} from 'react-router-redux';
+import { ignoreActions } from 'redux-ignore';
 
 /**
  * lost of departments and specoffers to choose
@@ -31,7 +32,8 @@ export function specofferChooser(state = specofferChooserInitialState, action = 
       return Object.assign({}, state, {isLoading: false, error: action.error.message});
 
     case LOCATION_CHANGE: // listen to query parameters changes
-      if (action.payload.pathname !== '/rating') return state;
+      //if (action.payload.pathname !== '/rating') return state;
+      console.log('LOCATION_CHANGE', action);
       let {
         departmentId = state.departmentId,
         specofferId = state.specofferId } = action.payload.query;
@@ -74,6 +76,7 @@ export function ratingList(state = initialEnrolmentsState, action = {}) {
 
 
 export default combineReducers({
-  specofferChooser,
+  specofferChooser: ignoreActions(specofferChooser,
+    (action) => action.type === LOCATION_CHANGE && action.payload.pathname !== '/rating'),
   ratingList
 });

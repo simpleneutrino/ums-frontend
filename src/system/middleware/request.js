@@ -1,8 +1,7 @@
 import * as requestAjax from 'superagent';
 import {REQUEST_API} from '../constants';
 import isFunction from 'lodash/isFunction';
-import isObject from 'lodash/isObject';
-import {replaceTimePeriodId} from '../helpers';
+import {dispatchAction} from './helpers';
 
 /**
  {
@@ -41,12 +40,9 @@ export default store => next => action => {
   const {url, headers={}, method='get', params} = request;
   const {start, success, fail} = request.actions;
   const sendType = method === 'get' ? 'query' : 'send';
-
-  let parsedUrl = replaceTimePeriodId(url, store.getState().settings.timePeriodId);
-
   dispatchAction(store.dispatch, start, {payload: payload});
 
-  const currentRequest = requestAjax[method](backendHost + parsedUrl)
+  const currentRequest = requestAjax[method](backendHost + url)
     .set('Authorization', token)
     .set('Accept', 'application/json');
 
@@ -63,18 +59,3 @@ export default store => next => action => {
       }
     });
 };
-
-
-function dispatchAction(dispatch, action, ...rest) {
-  if (isFunction(action)) {
-    let result = action(...rest);
-
-    if (isFunction(result)) {
-      result(dispatch);
-    } else {
-      dispatch(result);
-    }
-  } else if (isObject(action)) {
-    dispatch(Object.assign(action, ...rest));
-  }
-}

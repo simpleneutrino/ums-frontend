@@ -1,20 +1,17 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import Input from 'react-bootstrap/lib/Input';
-import { TIMEPERIODS} from './../../dictionaries/constants';
-import { isDictLoaded } from './../../dictionaries/helpers';
+import {TIMEPERIODS} from './../../dictionaries/constants';
+import {isDictLoaded} from './../../dictionaries/helpers';
 import loadDictionaries from './../../dictionaries/actions';
-import { changeTimePeriodId } from './../widget';
+import {changeTimePeriodId} from './../widget';
 
 
 class TimePeriodId extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    dispatch: PropTypes.func.isRequired
-  };
-  constructor (props) {
+
+  constructor(props) {
     super(props);
   }
 
@@ -22,8 +19,8 @@ class TimePeriodId extends Component {
     this.props.loadDictionaries([TIMEPERIODS]);
   }
 
-  handleOptionChange  = (event) => {
-    this.props.sendTimePeriodId( event.target.value );
+  handleOptionChange = (event) => {
+    this.props.sendTimePeriodId(event.target.value);
   }
 
   render() {
@@ -32,17 +29,17 @@ class TimePeriodId extends Component {
       return <div>loading...</div>;
     }
 
-    let { dictionaries, timePeriodId } = this.props;
+    let {dictionaries, timePeriodId} = this.props;
     let timeperiods = dictionaries[TIMEPERIODS].resourcesMap;
 
     const optionList = timeperiods.map((item, i) => {
-      return <option value = {i}>{item}</option>;
+      return <option value={i} key={i}>{item}</option>;
     });
 
     return (
       <div className="body">
         <Input type="select" label="Оберіть вступну кампанію"
-             value = {timePeriodId} onChange={this.handleOptionChange}>
+               value={timePeriodId} onChange={this.handleOptionChange}>
           { optionList }
         </Input>
       </div>
@@ -52,7 +49,7 @@ class TimePeriodId extends Component {
 
 
 TimePeriodId.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  children: PropTypes.any
 };
 
 const mapStateToSettings = (state) => {

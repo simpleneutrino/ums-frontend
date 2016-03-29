@@ -1,4 +1,4 @@
-import * as constants from '../../system/constants';
+import lcache from '../../system/lcache';
 export const TIMEPERIODID_CHANGED = 'TIMEPERIODID_CHANGED';
 
 export function changeTimePeriodId(timePeriodId) {
@@ -10,7 +10,7 @@ export function changeTimePeriodId(timePeriodId) {
   };
 }
 
-export function settings(state = { timePeriodId: 8 }, action = {}) {
+export function settings(state = {timePeriodId: lcache.get('timePeriodId') || 8}, action = {}) {
   switch (action.type) {
 
     case TIMEPERIODID_CHANGED:

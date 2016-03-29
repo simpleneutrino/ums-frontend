@@ -10,7 +10,6 @@ const statisticsOneElementState = {
 const statisticsInitialState = {
   [types.PRIORITIES]: statisticsOneElementState,
   [types.ALLOCATIONS_ADMINUNITS]: statisticsOneElementState,
-  [types.ALLOCATIONS_ADMINUNITS_MAP]: statisticsOneElementState,
   [types.ALLOCATIONS_DEPARTMENTS]: statisticsOneElementState,
   [types.PLACES]: statisticsOneElementState
 };
@@ -19,13 +18,11 @@ export default function (state = statisticsInitialState, action = {}) {
   switch (action.type) {
 
     case types.STATISTICS_LOAD_START:
-      console.log('STATISTICS_LOAD_START', action);
       return Object.assign({}, state, {
         [action.payload.collectionName]: {isLoading: true}
       });
 
     case types.STATISTICS_LOAD_SUCCESS:
-      console.log('STATISTICS_LOAD_SUCCESS', action);
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,
@@ -34,7 +31,6 @@ export default function (state = statisticsInitialState, action = {}) {
       });
 
     case types.STATISTICS_LOAD_FAIL:
-      console.log('STATISTICS_LOAD_FAIL', action);
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,

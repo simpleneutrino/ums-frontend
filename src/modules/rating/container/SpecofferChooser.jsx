@@ -3,9 +3,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {loadSpecoffersChooser} from './../actions';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import { LinkContainer } from 'react-router-bootstrap';
 import find from 'lodash/find'
 import DepartmentsList from './../components/DepartmentsList'
 import SpecoffersList from './../components/SpecoffersList'
@@ -13,7 +10,8 @@ import { createSelector } from 'reselect';
 
 class SpecofferChooser extends Component {
   static propTypes = {
-    specofferChooserData: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    departments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    specoffers: PropTypes.object.isRequired,
     departmentId: PropTypes.string,
     specofferId: PropTypes.string
   };
@@ -39,15 +37,6 @@ class SpecofferChooser extends Component {
     );
   }
 }
-// TO COMPARE WITH CODE BELOW!
-//const mapStateToSpecofferChooser = (state, ownProps) => {
-//  let { query } =  ownProps.location;
-//  return {
-//    specofferChooserData: state.rating.specofferChooser.resources,
-//    departmentId: query.departmentId,
-//    specofferId: query.specofferId
-//  };
-//};
 
 /**
  * departments, specoffers data to parse
@@ -56,12 +45,12 @@ class SpecofferChooser extends Component {
  * and this: http://jaysoo.ca/2016/02/28/organizing-redux-application/#rule-2-create-strict-module-boundaries
  * for more informations
  */
-const mapStateToSpecofferChooser = createSelector(
-  (state) => state.rating,
-  (state, ownProps) => ownProps.location.query,
-  (rating, query) => ({
-    departments: rating.specofferChooser.resources,
-    specoffers: find(rating.specofferChooser.resources, {departmentId: parseInt(query.departmentId)}),
+const mapStateToRatingList = createSelector(
+  (state) => state.rating.specofferChooser,
+  (specofferChooser, ownProps) => ownProps.location.query,
+  (specofferChooser, query) => ({
+    departments: specofferChooser.resources,
+    specoffers: find(specofferChooser.resources, {departmentId: parseInt(query.departmentId)}),
     departmentId: query.departmentId,
     specofferId: query.specofferId
   })
@@ -69,6 +58,6 @@ const mapStateToSpecofferChooser = createSelector(
 
 
 export default connect(
-  mapStateToSpecofferChooser,
+  mapStateToRatingList,
   { loadSpecoffersChooser }
 )(SpecofferChooser);

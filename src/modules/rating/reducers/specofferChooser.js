@@ -1,7 +1,5 @@
-import * as types from './constants';
-import {combineReducers} from 'redux';
+import * as types from '../constants';
 import {LOCATION_CHANGE} from 'react-router-redux';
-import { ignoreActions } from 'redux-ignore';
 
 /**
  * lost of departments and specoffers to choose
@@ -15,7 +13,7 @@ const specofferChooserInitialState = {
 };
 
 
-export function specofferChooser(state = specofferChooserInitialState, action = {}) {
+export default function specofferChooser(state = specofferChooserInitialState, action = {}) {
   switch (action.type) {
     case types.LOAD_SPECOFFER_CHOOSER_START:
       return Object.assign({}, state, {isLoading: true, resources: []});
@@ -43,40 +41,3 @@ export function specofferChooser(state = specofferChooserInitialState, action = 
       return state;
   }
 }
-
-/**
- * list of enrolments sorted by rating;
- */
-const initialEnrolmentsState = {
-  isLoading: true,
-  resources: [],
-  error: null
-};
-
-export function ratingList(state = initialEnrolmentsState, action = {}) {
-  switch (action.type) {
-    case types.LOAD_RATING_START:
-      return Object.assign({}, state, {isLoading: true, resources: []});
-
-    case types.LOAD_RATING_SUCCESS:
-      return Object.assign({}, state,
-        {
-          isLoading: false,
-          resources: [...action.response]
-        }
-      );
-
-    case types.LOAD_RATING_FAIL:
-      return Object.assign({}, state, {isLoading: false, error: action.error.message});
-
-    default:
-      return state;
-  }
-}
-
-
-export default combineReducers({
-  specofferChooser: ignoreActions(specofferChooser,
-    (action) => action.type === LOCATION_CHANGE && action.payload.pathname !== '/rating'),
-  ratingList
-});

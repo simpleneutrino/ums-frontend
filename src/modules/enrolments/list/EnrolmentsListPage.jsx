@@ -22,7 +22,6 @@ class EnrolmentsListPage extends Component {
   }
 
   render() {
-
     if (!isDataForEnrolmentLoaded(ENROLMENT_LIST_REDUCER)) {
       return <Loading/>;
     }

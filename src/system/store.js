@@ -1,10 +1,24 @@
 import {createStore, compose, applyMiddleware} from 'redux';
-import {browserHistory} from 'react-router';
 import rootReducer from './reducers/reducers';
 import thunk from 'redux-thunk';
 import {default as request} from './middleware/request';
+import {default as requestLocalStorage} from './middleware/request.localstorage.proxy';
+import {default as requestTimePeriod} from './middleware/request.time.period';
+import {default as requestCachePopulate} from './middleware/request.cache.populate';
+import {default as timePeriodChange} from './middleware/time.period.id.middleware';
+import {DICTIONARY_MAP} from '../modules/dictionaries/constants';
+import {configToCache} from './helpers';
+import {browserHistory} from 'react-router';
+import {routerMiddleware} from 'react-router-redux';
 
-const middleware = [thunk, request];
+
+const middleware = [thunk,
+  routerMiddleware(browserHistory),
+  requestCachePopulate(configToCache(DICTIONARY_MAP)),
+  requestTimePeriod, requestLocalStorage, request,
+  timePeriodChange
+];
+
 const devMode = process.env.NODE_ENV === 'development';
 
 if (devMode) {

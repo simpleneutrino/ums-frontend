@@ -11,7 +11,8 @@ export function loadEnrolments(params) {
         success: {type: types.LOAD_ALL_ENROLMENTS_SUCCESS},
         fail: {type: types.LOAD_ALL_ENROLMENTS_FAIL}
       },
-      params
+      params,
+      cache: true
     }
   };
 }
@@ -26,7 +27,8 @@ export function loadEnrolmentById(id) {
         start: {type: types.LOAD_ONE_ENROLMENT_START},
         success: {type: types.LOAD_ONE_ENROLMENT_SUCCESS},
         fail: {type: types.LOAD_ONE_ENROLMENT_FAIL}
-      }
+      },
+      cache: true
     },
     payload: {
       id: id

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, IndexRedirect, IndexRoute, Redirect, browserHistory} from 'react-router';
+import {Route, IndexRedirect, IndexRoute, Redirect} from 'react-router';
 import Application from '../modules/Application';
 import LoginPage from '../modules/auth/login/LoginPage';
 import LogoutPage from '../modules/auth/logout/LogoutPage';
@@ -22,7 +22,8 @@ export const routes = {
     login: 'admin',
     roles: ['ROLE_ADMIN'],
     groups: ['developers']
-  }
+  },
+  rating: {}
 };
 
 export default (
@@ -36,14 +37,14 @@ export default (
       <Route path='statuses' component={Statuses}/>
     </Route>
     <Route path="statistics" component={Statistics}>
-      <IndexRoute component={StatisticsIndex} />
+      <IndexRoute component={StatisticsIndex}/>
       <Route path="chart/:chartId" component={Chart}/>
     </Route>
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
-    <Route path="rating" component={SpecofferChooser}/>
+    <Route path="rating" component={AuthContainer} AuthComponent={SpecofferChooser}/>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
-    <Redirect from='*' to='/404' />
+    <Redirect from='*' to='/404'/>
   </Route>
 );
 

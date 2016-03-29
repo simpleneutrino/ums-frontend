@@ -8,7 +8,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import SettingsModal from './../settings/components/SettingsModal';
 import checkAuth from '../auth/helpers';
-import { IndexLink } from 'react-router'
+import {IndexLink} from 'react-router'
 
 export default class NavBar extends Component {
   render() {
@@ -29,10 +29,7 @@ export default class NavBar extends Component {
             <NavItem>Статистика</NavItem>
           </LinkContainer>
 
-          <LinkContainer to={{ pathname: '/rating', query: this.props.ratingQueryParams }}>
-            <NavItem>Рейтинг</NavItem>
-          </LinkContainer>
-
+          {this.authItem('rating', 'Рейтинг', {query: this.props.ratingQueryParams})}
           {this.authItem('persons', 'Персони')}
         </Nav>
 
@@ -44,17 +41,18 @@ export default class NavBar extends Component {
       </Navbar>
     );
   }
+
   _onSettingModalClick = () => {
     this.refs.SetModal.openModal();
   };
 
-  authItem(path, name) {
-    if (checkAuth(this.props.auth, path)) {
+  authItem(pathname, name, rest) {
+    if (checkAuth(this.props.auth, pathname)) {
       return (
-        <LinkContainer to={{ pathname: path}}>
+        <LinkContainer to={{ pathname: pathname, ...rest}}>
           <NavItem>{name}</NavItem>
         </LinkContainer>
-       );
+      );
     }
     return null;
   }
@@ -65,10 +63,10 @@ export default class NavBar extends Component {
       return (
         <NavDropdown eventKey={3} title={user.login} id="basic-nav-dropdown">
           <MenuItem eventKey={3.1} onClick={this._onSettingModalClick}>Налаштування</MenuItem>
-          <MenuItem divider />
+          <MenuItem divider/>
           <MenuItem eventKey={3.3}>
             <LinkContainer to={{pathname: '/logout'}}>
-              <NavItem >Logout</NavItem>
+              <span>Logout</span>
             </LinkContainer>
           </MenuItem>
         </NavDropdown>

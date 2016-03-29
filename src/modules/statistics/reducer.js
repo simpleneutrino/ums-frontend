@@ -1,6 +1,21 @@
 import * as types  from './constants';
+import { TIMEPERIODID_CHANGED } from '../settings/widget';
 
-export default function (state = {}, action = {}) {
+const statisticsOneElementState = {
+  isLoading: false,
+  data: [],
+  error: null
+};
+
+const statisticsInitialState = {
+  [types.PRIORITIES]: statisticsOneElementState,
+  [types.ALLOCATIONS_ADMINUNITS]: statisticsOneElementState,
+  [types.ALLOCATIONS_ADMINUNITS_MAP]: statisticsOneElementState,
+  [types.ALLOCATIONS_DEPARTMENTS]: statisticsOneElementState,
+  [types.PLACES]: statisticsOneElementState
+};
+
+export default function (state = statisticsInitialState, action = {}) {
   switch (action.type) {
 
     case types.STATISTICS_LOAD_START:
@@ -26,6 +41,11 @@ export default function (state = {}, action = {}) {
           error: action.error.message
         }
       });
+
+    case TIMEPERIODID_CHANGED:
+      return Object.assign({}, state,
+        statisticsInitialState
+      );
 
     default:
       return state;

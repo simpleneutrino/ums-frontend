@@ -56,6 +56,8 @@ export function isDataForOneEnrolmentLoaded(reducerName, params = {}) {
 }
 
 export function decodeOneEnrolment(item, dictionaries) {
+  if (!item) return {};
+
   let {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} = dictionaries;
   let {
     isStateNames,

@@ -14,6 +14,7 @@ export function loadStatistics(url, collectionName) {
     },
     payload: {
       collectionName
-    }
+    },
+    interrupt: (store) => !!store.getState().statistics[collectionName].data.length
   };
 }

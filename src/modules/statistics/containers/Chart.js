@@ -91,9 +91,10 @@ class Chart extends Component {
  **/
 const mapStateToChartFactory = (state, ownProps) => {
   let { chartId } =  ownProps.params;
+  let collectionName = map[chartId].callApi.collectionName || chartId;
   console.log('chartId', chartId);
   return {
-    dataProvider: state.statistics[chartId],
+    dataProvider: state.statistics[collectionName],
     config: map[chartId],
     chartId: chartId
   };
@@ -104,6 +105,7 @@ const mapDispatchToChartFactory = (dispatch) => {
     getChartData: (chartId) => {
       // get collection name for case then there are two chart depends on one API
       let collectionName = map[chartId].callApi.collectionName || chartId;
+      console.log('collectionName', collectionName);
       dispatch(loadStatistics(map[chartId].callApi.url, collectionName))
     }
   };

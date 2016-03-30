@@ -18,6 +18,7 @@ export default function loadDictionaries(listOfDict) {
           },
           params
         },
+        interrupt: (store) => !!store.getState().dictionaries[dicName].resources.length,
 
         payload: {
           collectionName: dicName

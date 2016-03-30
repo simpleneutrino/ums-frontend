@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import { createSelector } from 'reselect';
 
 import * as dictConst from '../../dictionaries/constants';
 import {loadEnrolments} from './../actions';
@@ -7,7 +8,7 @@ import loadDictionaries from '../../dictionaries/actions';
 import {isDataForEnrolmentLoaded, decodeEnrolments} from '../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import EnrolmentItem from './EnrolmentItem';
-import Loading from '../../commons/Loading';
+import Loading from 'loading';
 import {ENROLMENT_LIST_REDUCER} from './../constants';
 
 class EnrolmentsListPage extends Component {
@@ -26,8 +27,7 @@ class EnrolmentsListPage extends Component {
       return <Loading/>;
     }
 
-    let {enrolmentList, dictionaries} = this.props;
-    let enrolments = decodeEnrolments(enrolmentList, dictionaries).map((item)=> {
+    let enrolments = this.props.decodedEnrolments.map((item)=> {
       return <EnrolmentItem item={item} key={item.id}/>;
     });
 
@@ -51,11 +51,20 @@ class EnrolmentsListPage extends Component {
   }
 }
 
-const select = (state)=> {
-  return {
-    enrolmentList: state.enrolments.list,
-    dictionaries: state.dictionaries
-  };
-};
+// const select = (state)=> {
+//   return {
+//     enrolmentList: state.enrolments.list,
+//     dictionaries: state.dictionaries
+//   };
+// };
 
-export default connect(select, {loadEnrolments, loadDictionaries})(EnrolmentsListPage);
+export const getDecodedEnrolments = createSelector(
+  [ (state) => state.enrolments.list,
+   (state) => state.dictionaries],
+  (enrolmentList, listOfDict) => ({
+    decodedEnrolments: decodeEnrolments(enrolmentList, listOfDict),
+    enrolmentList: enrolmentList
+  })
+)
+
+export default connect(getDecodedEnrolments, {loadEnrolments, loadDictionaries})(EnrolmentsListPage);

@@ -13,7 +13,8 @@ export function loadEnrolments(params) {
       },
       params,
       cache: true
-    }
+    },
+    interrupt: (store) => !!store.getState().enrolments.list.resources.length
   };
 }
 
@@ -30,6 +31,7 @@ export function loadEnrolmentById(id) {
       },
       cache: true
     },
+    interrupt: (store) => !!store.getState().enrolments.view.mainInfo.data[id],
     payload: {
       id: id
     }

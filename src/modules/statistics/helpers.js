@@ -19,7 +19,6 @@ export function fillMapWithData(mapData) {
       return area;
     });
     map.validateNow();
-    console.log('map.dataProvider.areas', map.dataProvider.areas);
     return map.dataProvider.areas; // for testing purpuses;
   };
 }

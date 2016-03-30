@@ -6,7 +6,7 @@ import Input from 'react-bootstrap/lib/Input';
 import {TIMEPERIODS} from './../../dictionaries/constants';
 import {isDictLoaded} from './../../dictionaries/helpers';
 import loadDictionaries from './../../dictionaries/actions';
-import {changeTimePeriodId} from './../widget';
+import {changeTimePeriodId} from './../duck';
 
 
 class TimePeriodId extends Component {

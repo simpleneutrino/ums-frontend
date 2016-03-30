@@ -23,7 +23,11 @@ export const routes = {
     roles: ['ROLE_ADMIN'],
     groups: ['developers']
   },
-  rating: {}
+  rating: {
+    login: 'admin',
+    roles: ['ROLE_ADMIN'],
+    groups: ['developers']
+  }
 };
 
 export default (

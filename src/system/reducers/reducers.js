@@ -3,7 +3,7 @@ import {default as dictionaries} from '../../modules/dictionaries/reducer';
 import {default as statistics} from './../../modules/statistics/reducer';
 import {default as auth} from '../../modules/auth/reducer';
 import {default as rating} from '../../modules/rating/reducers';
-import {settings} from '../../modules/settings/widget';
+import {settings} from '../../modules/settings/duck';
 import config from './configReducer';
 import {routerReducer} from 'react-router-redux';
 import {combineReducers} from 'redux';

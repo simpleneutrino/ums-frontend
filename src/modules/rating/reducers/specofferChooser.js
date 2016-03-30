@@ -1,7 +1,7 @@
 import * as types from '../constants';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
-import { TIMEPERIODID_CHANGED } from '../settings/widget';
+import { TIMEPERIODID_CHANGED } from '../../settings/duck';
 
 /**
  * lost of departments and specoffers to choose

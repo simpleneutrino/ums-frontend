@@ -13,7 +13,8 @@ import { createSelector } from 'reselect';
 
 class SpecofferChooser extends Component {
   static propTypes = {
-    specofferChooserData: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    departments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    specoffers: PropTypes.object.isRequired,
     departmentId: PropTypes.string,
     specofferId: PropTypes.string
   };

@@ -23,11 +23,9 @@ class Chart extends Component {
   };
 
   componentDidMount() {
-    console.log('componentDidMount Chart this.props', this.props);
     this.props.getChartData(this.props.chartId);
   }
   componentWillUnmount() {
-    console.log('componentWillUnmount!');
     AmCharts.clear();
   }
   /**
@@ -37,9 +35,7 @@ class Chart extends Component {
     console.log('componentDidUpdate prevProps', prevProps);
 
     let { dataProvider } = this.props;
-    console.log('componentDidUpdate dataProvider', dataProvider);
     if (dataProvider && dataProvider.data && !dataProvider.isLoading) {
-      console.log('dataProvider--', dataProvider);
       this.renderChart();
     }
   }
@@ -47,7 +43,6 @@ class Chart extends Component {
    * if chart changed - delete previous and request data for a next one.
    */
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps nextProps', nextProps);
     if (nextProps.chartId !== this.props.chartId) {
       console.log('clear', this.props);
       AmCharts.clear();
@@ -68,13 +63,11 @@ class Chart extends Component {
       return;
     }
     amChartConfig.dataProvider = dataProvider.data;
-    console.log('renderChart! amChartConfig', amChartConfig);
     AmCharts.makeChart(chartId, amChartConfig);
   }
 
   render() {
     let { dataProvider, chartId } = this.props;
-    console.log('Chart rendering!! this.props', this.props);
     return (
       <div>
         <div> {this.addSpinner(dataProvider)}</div>
@@ -108,7 +101,11 @@ const mapStateToChartFactory = (state, ownProps) => {
 
 const mapDispatchToChartFactory = (dispatch) => {
   return {
-    getChartData: (chartId) => dispatch(loadStatistics(map[chartId].callApi.url, chartId))
+    getChartData: (chartId) => {
+      // get collection name for case then there are two chart depends on one API
+      let collectionName = map[chartId].callApi.collectionName || chartId;
+      dispatch(loadStatistics(map[chartId].callApi.url, collectionName))
+    }
   };
 };
 

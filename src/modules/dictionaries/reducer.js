@@ -1,7 +1,21 @@
 import {createDataMap} from './helpers';
 import * as types  from './constants';
 
-export default function dictionaries(state = {}, action = {}) {
+const dictInitialState = {
+  isLoading: false,
+  resources: [],
+  resourcesMap: [],
+  error: null
+};
+
+const disctionariesDefaultState = {
+  [types.DEPARTMENTS]: dictInitialState,
+  [types.ENROLMENTS_TYPES]: dictInitialState,
+  [types.ENROLMENTS_STATUS_TYPES]: dictInitialState,
+  [types.TIMEPERIODS]: dictInitialState
+};
+
+export default function dictionaries(state = disctionariesDefaultState, action = {}) {
   switch (action.type) {
 
     case types.DICTIONARY_LOAD_START:
@@ -13,7 +27,6 @@ export default function dictionaries(state = {}, action = {}) {
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,
-          loaded: true,
           resources: action.response.resources,
           resourcesMap: createDataMap(action.response.resources)
         }
@@ -23,7 +36,6 @@ export default function dictionaries(state = {}, action = {}) {
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,
-          loaded: false,
           error: action.error.message
         }
       });

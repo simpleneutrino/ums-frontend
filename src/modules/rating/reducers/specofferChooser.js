@@ -1,6 +1,8 @@
 import * as types from '../constants';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
+import { TIMEPERIODID_CHANGED } from '../settings/widget';
+
 /**
  * lost of departments and specoffers to choose
  */
@@ -28,6 +30,14 @@ export default function specofferChooser(state = specofferChooserInitialState, a
 
     case types.LOAD_SPECOFFER_CHOOSER_FAIL:
       return Object.assign({}, state, {isLoading: false, error: action.error.message});
+
+    case TIMEPERIODID_CHANGED:
+      return Object.assign({}, state,
+        {
+          isLoading: false,
+          resources: []
+        }
+      );
 
     case LOCATION_CHANGE: // listen to query parameters changes
       //if (action.payload.pathname !== '/rating') return state;

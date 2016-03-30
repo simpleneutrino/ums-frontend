@@ -5,10 +5,15 @@ import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
 import {ENROLMENT_MAININFO_REDUCER} from './../constants';
-import Loading from '../../commons/Loading';
+import Loading from 'loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
+import { createSelector } from 'reselect';
 
 export default class MainInfo extends Component {
+  static propTypes = {
+    decodedEnrolment: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    id: PropTypes.string.isRequired
+  };
 
   componentDidMount() {
     this.props.dispatch(loadDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]));
@@ -16,11 +21,10 @@ export default class MainInfo extends Component {
   }
 
   render() {
-    if (!isDataForOneEnrolmentLoaded(ENROLMENT_MAININFO_REDUCER, {'enrolId': this.props.params.id})) {
+    let { isDataLoaded, decodedEnrolment } = this.props;
+    if (!isDataLoaded) {
       return <Loading/>;
     } else {
-      let item = decodeOneEnrolment(this.props.mainInfo.data[this.props.params.id], this.props.dictionaries);
-
       return (
         <Table striped bordered condensed hover>
           <thead>
@@ -32,27 +36,27 @@ export default class MainInfo extends Component {
           <tbody>
           <tr>
             <td>id</td>
-            <td>{item.id}</td>
+            <td>{decodedEnrolment.id}</td>
           </tr>
           <tr>
             <td>docSeries</td>
-            <td>{item.docSeries}</td>
+            <td>{decodedEnrolment.docSeries}</td>
           </tr>
           <tr>
             <td>isInterview</td>
-            <td>{item.isInterview}</td>
+            <td>{decodedEnrolment.isInterview}</td>
           </tr>
           <tr>
             <td>isState</td>
-            <td>{item.isState}</td>
+            <td>{decodedEnrolment.isState}</td>
           </tr>
           <tr>
             <td>departmentId</td>
-            <td>{item.departmentId}</td>
+            <td>{decodedEnrolment.departmentId}</td>
           </tr>
           <tr>
             <td>enrolmentTypeId</td>
-            <td>{item.enrolmentTypeId}</td>
+            <td>{decodedEnrolment.enrolmentTypeId}</td>
           </tr>
           </tbody>
         </Table>
@@ -65,11 +69,21 @@ MainInfo.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const select = (state)=> {
-  return {
-    mainInfo: state.enrolments.view.mainInfo,
-    dictionaries: state.dictionaries
-  };
-};
+// const select = (state)=> {
+//   return {
+//     mainInfo: state.enrolments.view.mainInfo,
+//     dictionaries: state.dictionaries
+//   };
+// };
 
-export default connect(select)(MainInfo);
+export const getOneDecodedEnrolment = createSelector(
+  [ (state) => state.enrolments.view.mainInfo,
+   (state) => state.dictionaries,
+   (state, ownProps) => ownProps.params.id],
+  (mainInfo, listOfDict, enrolId) => ({
+    decodedEnrolment: decodeOneEnrolment(mainInfo.data[enrolId], listOfDict),
+    isDataLoaded: isDataForOneEnrolmentLoaded(ENROLMENT_MAININFO_REDUCER, {'enrolId': enrolId})
+  })
+)
+
+export default connect(getOneDecodedEnrolment)(MainInfo);

@@ -98,7 +98,8 @@ function getConfig(env) {
     resolve: {
       extensions: ['', '.js', '.jsx', '.scss', '.css'],
       alias: {
-        store: path.resolve(__dirname, './src/system/store.js')
+        store: path.resolve(__dirname, './src/system/store.js'),
+        loading: path.resolve(__dirname, './src/modules/commons/Loading.jsx')
       }
     }
   };

@@ -94,6 +94,7 @@ export const STATISTICS_MAP = {
   [ALLOCATIONS_ADMINUNITS_MAP]: {
     callApi: {
       url: '/stats/{{timePeriodId}}/entrants/allocations/adminunits',
+      collectionName: ALLOCATIONS_ADMINUNITS,
       params: {},
       cache: true,
       cacheTime: 300

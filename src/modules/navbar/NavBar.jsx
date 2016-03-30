@@ -29,6 +29,10 @@ export default class NavBar extends Component {
             <NavItem>Статистика</NavItem>
           </LinkContainer>
 
+          <LinkContainer to={{ pathname: '/specoffers/list', query: this.props.specoffersQueryParams}}>
+            <NavItem>Пропозиції</NavItem>
+          </LinkContainer>
+
           {this.authItem('rating', 'Рейтинг', {query: this.props.ratingQueryParams})}
           {this.authItem('persons', 'Персони')}
         </Nav>
@@ -91,6 +95,10 @@ function select(state) {
     ratingQueryParams: {
       departmentId: state.rating.specofferChooser.departmentId,
       specofferId: state.rating.specofferChooser.specofferId
+    },
+    specoffersQueryParams: {
+      timePeriodId: state.specoffers.list.timePeriodId,
+      limit: state.specoffers.list.limit
     }
   };
 }

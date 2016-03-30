@@ -14,6 +14,7 @@ import InfoPage from '../modules/enrolments/view/InfoPage';
 import PageNotFound from '../modules/commons/PageNotFound';
 import RatingRoute from '../modules/rating/routes';
 import StatisticRoute from '../modules/statistics/route';
+import SpecoffersRoute from '../modules/specoffers/routes';
 
 //configure permissions
 export const routes = {
@@ -40,6 +41,7 @@ export default (
       <Route path='statuses' component={Statuses}/>
     </Route>
     {StatisticRoute}
+    {SpecoffersRoute}
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
     {RatingRoute}
     <Route path="login" component={LoginPage}/>

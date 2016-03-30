@@ -9,10 +9,14 @@ let {
   ENROLMENTS_STATUS_TYPES
 } = dictConstants;
 
+export function getEnrolmentIdByIndex(index) {
+  let state = store.getState();
+  return state[constants.ENROLMENT_REDUCER][constants.ENROLMENT_LIST_REDUCER].resources[index]['id'];
+}
+
 /**
  * check if data is loaded
- * @param storeState
- * @param reducerName
+ * @param entityData
  * @returns {boolean}
  */
 export function isEntityDataLoaded(entityData) {
@@ -90,6 +94,8 @@ export function decodeOneEnrolment(item, dictionaries) {
  * @returns {Array} - array of decoded enrolments
  */
 export function decodeEnrolments(rowEnrolments, dictionaries) {
+  if (!rowEnrolments) return [];
+
   return rowEnrolments.resources.map((item)=> {
     return decodeOneEnrolment(item, dictionaries);
   });

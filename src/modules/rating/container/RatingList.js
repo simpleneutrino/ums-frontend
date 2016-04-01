@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { loadEnrolmnetList } from './../actions';
+import { loadRatingList } from './../actions';
 import { createSelector } from 'reselect';
 
 class SpecofferChooser extends Component {
@@ -11,24 +11,34 @@ class SpecofferChooser extends Component {
   };
 
   componentDidMount() {
-    this.props.loadSpecoffersChooser(this.props.specofferId);
+    if (this.props.specofferId) {
+      this.props.loadRatingList(this.props.specofferId);
+    }
   }
   componentWillReceiveProps(nextProps) {
-    console.log('SpecofferChooser WillReceiveProps', nextProps);
+    if (nextProps.specofferId && nextProps.specofferId !== this.props.specofferId) {
+      this.props.loadRatingList(nextProps.specofferId)
+    }
   }
   render() {
     let {ratingList, specofferId} = this.props;
+    //console.log('ratingList', ratingList);
+    //console.log('ratingList resources', ratingList.resources);
     if (!ratingList.length) {
       return <div>loading...</div>;
     }
     return (
       <div>
-        rating list
+        {ratingList.resources}
       </div>
     );
   }
 }
 
+/**
+ * ratingList: list of enrolments sorted by rating
+ * specoffer id - query param
+ */
 const mapStateToSpecofferChooser = createSelector(
   (state) => state.rating.ratingList,
   (state, ownProps) => ownProps.location.query.specofferId,
@@ -38,8 +48,13 @@ const mapStateToSpecofferChooser = createSelector(
   })
 );
 
+const mapDispatchToChartFactory = (dispatch) => {
+  return {
+    loadRatingList: (specofferId) => dispatch(loadRatingList(specofferId))
+  };
+};
 
 export default connect(
   mapStateToSpecofferChooser,
-  { loadEnrolmnetList }
+  mapDispatchToChartFactory
 )(SpecofferChooser);

@@ -15,6 +15,8 @@ import Statistics from '../modules/statistics/components/Statistics';
 import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
 import Chart from '../modules/statistics/containers/Chart';
 import SpecofferChooser from '../modules/rating/container/SpecofferChooser';
+import RatingList from '../modules/rating/container/RatingList';
+import Rating from '../modules/rating/components/Rating';
 
 //configure permissions
 export const routes = {
@@ -45,7 +47,9 @@ export default (
       <Route path="chart/:chartId" component={Chart}/>
     </Route>
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
-    <Route path="rating" component={AuthContainer} AuthComponent={SpecofferChooser}/>
+    <Route component={AuthContainer} AuthComponent={Rating}>
+      <Route path="rating" components={{SpecofferChooser, RatingList}} />
+    </Route>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
     <Redirect from='*' to='/404'/>

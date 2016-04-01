@@ -32,8 +32,6 @@ class Chart extends Component {
    * when component is updated (rendered) - paste an amChart
    */
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate prevProps', prevProps);
-
     let { dataProvider } = this.props;
     if (dataProvider && dataProvider.data && !dataProvider.isLoading) {
       this.renderChart();
@@ -44,7 +42,6 @@ class Chart extends Component {
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.chartId !== this.props.chartId) {
-      console.log('clear', this.props);
       AmCharts.clear();
       this.props.getChartData(nextProps.chartId);
     }
@@ -105,7 +102,6 @@ const mapDispatchToChartFactory = (dispatch) => {
     getChartData: (chartId) => {
       // get collection name for case then there are two chart depends on one API
       let collectionName = map[chartId].callApi.collectionName || chartId;
-      console.log('collectionName', collectionName);
       dispatch(loadStatistics(map[chartId].callApi.url, collectionName))
     }
   };

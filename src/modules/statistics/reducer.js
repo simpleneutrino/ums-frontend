@@ -1,5 +1,5 @@
 import * as types  from './constants';
-import { TIMEPERIODID_CHANGED } from '../settings/widget';
+import { TIMEPERIODID_CHANGED } from '../settings/duck';
 
 const statisticsOneElementState = {
   isLoading: false,

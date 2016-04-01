@@ -18,3 +18,18 @@ export function loadSpecoffersChooser() {
     }
   };
 }
+
+
+export function loadRatingList(specofferId) {
+  return {
+    type: REQUEST_API,
+    request: {
+      url: `/enrolments/${specofferId}/ratings`,
+      actions: {
+        start: {type: types.LOAD_RATING_LIST_START},
+        success: {type: types.LOAD_RATING_LIST_SUCCESS},
+        fail: {type: types.LOAD_RATING_LIST_FAIL}
+      }
+    }
+  };
+}

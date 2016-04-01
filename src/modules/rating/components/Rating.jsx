@@ -7,10 +7,10 @@ export default class Rating extends React.Component {
     const { SpecofferChooser, RatingList } = this.props;
     return (
       <div>
-        <div className="SpecofferChooser">
+        <div className="col-sm-4 SpecofferChooser">
           {SpecofferChooser}
         </div>
-        <div className="RatingList">
+        <div className="col-sm-8 RatingList">
           {RatingList}
         </div>
       </div>

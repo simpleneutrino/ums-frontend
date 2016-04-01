@@ -13,7 +13,7 @@ import {IndexLink} from 'react-router'
 export default class NavBar extends Component {
   render() {
     return (
-      <Navbar>
+      <Navbar fluid className="nav-header">
         <Navbar.Header>
           <Navbar.Brand>
             <IndexLink to={`/`}>UMS</IndexLink>

@@ -12,9 +12,8 @@ export default class SpecoffersList extends Component {
   };
 
   render() {
-    console.log('this.specoffersList()', this.specoffersList());
     return (
-      <Nav bsStyle="pills" key={100} stacked activeKey={1} pullLeft onSelect={this.handleSelect}>
+      <Nav className="chooser" bsStyle="pills" key={100} stacked activeKey={1} pullLeft onSelect={this.handleSelect}>
         {this.specoffersList()}
       </Nav>
     );

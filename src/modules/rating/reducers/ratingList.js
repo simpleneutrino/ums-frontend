@@ -5,7 +5,7 @@ import { TIMEPERIODID_CHANGED } from './../../settings/duck';
  * list of enrolments sorted by rating;
  */
 const initialEnrolmentsState = {
-  isLoading: true,
+  isLoading: false,
   resources: [],
   error: null
 };

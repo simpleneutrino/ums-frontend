@@ -10,6 +10,8 @@ html {
     box-sizing: inherit;
 }
 
+
+/* CHART STYLES */
 .amchart_div {
     width: 100%;
     min-height: 600px;
@@ -27,7 +29,26 @@ html {
     bottom: 0;
 }
 
+/* LOADING SPINNER */
 .data-loading__text {
     color: #337ab7;
     font-size: 3rem;
 }
+
+/* HEADER STYLES */
+.nav-header > .container-fluid {
+    max-width: 1400px;
+}
+
+
+/* MAIN CONTAINER */
+.main-container {
+    max-width: 1400px;
+}
+
+/* CHOOSER BLOCK */
+.chooser {
+    max-width: 175px;
+}
+
+

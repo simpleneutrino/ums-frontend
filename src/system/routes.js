@@ -11,12 +11,8 @@ import Benefits from '../modules/enrolments/view/Benefits';
 import Statuses from '../modules/enrolments/view/Statuses';
 import Subjects from '../modules/enrolments/view/Subjects';
 import InfoPage from '../modules/enrolments/view/InfoPage';
-import Statistics from '../modules/statistics/components/Statistics';
-import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
-import Chart from '../modules/statistics/containers/Chart';
-import SpecofferChooser from '../modules/rating/container/SpecofferChooser';
-import RatingList from '../modules/rating/container/RatingList';
-import Rating from '../modules/rating/components/Rating';
+import RatingRoute from '../modules/rating/routes';
+import StatisticRoute from '../modules/statistics/route';
 
 //configure permissions
 export const routes = {
@@ -42,14 +38,9 @@ export default (
       <Route path='subjects' component={Subjects}/>
       <Route path='statuses' component={Statuses}/>
     </Route>
-    <Route path="statistics" component={Statistics}>
-      <IndexRoute component={StatisticsIndex}/>
-      <Route path="chart/:chartId" component={Chart}/>
-    </Route>
+    {StatisticRoute}
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
-    <Route component={AuthContainer} AuthComponent={Rating}>
-      <Route path="rating" components={{SpecofferChooser, RatingList}} />
-    </Route>
+    {RatingRoute}
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
     <Redirect from='*' to='/404'/>

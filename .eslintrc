@@ -35,6 +35,14 @@ rules:
   strict: 0
   vars-on-top: 2
   indent: [ 2, 2, { SwitchCase: 1 } ]
+  padded-blocks: 0
+  no-alert: 0
+
+  import/default: 0
+  import/no-duplicates: 0
+  import/named: 0
+  import/namespace: 0
+  import/no-unresolved: 0
 
   # React stuff.
   react/display-name: 0
@@ -49,3 +57,7 @@ rules:
   react/no-unknown-property: 2
   react/react-in-jsx-scope: 2
   react/self-closing-comp: 2
+
+globals:
+  AmCharts: true
+  __BASIC_URL__: true

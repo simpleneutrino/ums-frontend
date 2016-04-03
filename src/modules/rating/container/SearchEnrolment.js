@@ -16,7 +16,7 @@ function renderSuggestion(suggestion) {
 class SearchEnrolment extends Component {
   static propTypes = {
     children: PropTypes.any,
-    ratingList: PropTypes.object.isRequired,
+    enrolments: PropTypes.array.isRequired,
     highlighEnrolment: PropTypes.func.isRequired
   };
   constructor() {
@@ -29,7 +29,7 @@ class SearchEnrolment extends Component {
 
   onSuggestionsUpdateRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value, this.props.ratingList.resources)
+      suggestions: getSuggestions(value, this.props.enrolments)
     });
   }
 
@@ -41,9 +41,9 @@ class SearchEnrolment extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.ratingList && nextProps.ratingList.resources.length) {
+    if (nextProps.enrolments && nextProps.enrolments.length) {
       this.setState({
-        suggestions: nextProps.ratingList.resources
+        suggestions: nextProps.enrolments
       })
     }
   }
@@ -70,7 +70,7 @@ class SearchEnrolment extends Component {
 }
 
 const mapStateToSpecofferChooser = (state) => (
-  { ratingList: state.rating.ratingList }
+  { enrolments: state.rating.ratingList.enrolments }
 );
 const mapDispatchToChartFactory = (dispatch) => (
   { highlighEnrolment: (enrolmentId) => dispatch(highlighEnrolment(enrolmentId)) }

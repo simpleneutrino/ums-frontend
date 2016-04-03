@@ -26,7 +26,7 @@ export default class RatingTable extends Component {
   render() {
     let { ratingData, size, highlightedEnrolment } =  this.props;
     const highlightedIndex = findIndex(ratingData, {'enrolmentId': highlightedEnrolment});
-    console.log('highlightedIndex', highlightedIndex);
+
     return (
       <Table
         rowHeight={50}

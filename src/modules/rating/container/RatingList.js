@@ -23,7 +23,7 @@ class SpecofferChooser extends Component {
   }
   render() {
     let {ratingList, specofferId} = this.props;
-    let {isLoading, resources, highlightedEnrolment} = ratingList;
+    let {isLoading, enrolments, highlightedEnrolment} = ratingList;
 
     if (isLoading) {
       return <div>loading...</div>;
@@ -31,12 +31,12 @@ class SpecofferChooser extends Component {
     if (!specofferId) {
       return <div>Для того щоб отримати перелік заяв потрібно обрати пропозицію!</div>;
     }
-    if (!isLoading && !resources.length) {
+    if (!isLoading && !enrolments.length) {
       return <div>Данних по данній пропозиції немає!</div>;
     }
 
     return (
-        <RatingTable ratingData={resources} size={resources.length}
+        <RatingTable ratingData={enrolments} size={enrolments.length}
                      highlightedEnrolment={highlightedEnrolment}/>
     );
   }

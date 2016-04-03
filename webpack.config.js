@@ -6,6 +6,7 @@ var path = require('path');
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var cssnext = require('cssnext');
 
 const developmentEnvironment = 'development';
 const productionEnvironment = 'production';
@@ -68,8 +69,11 @@ const getLoaders = function (env) {
   if (env === productionEnvironment) {
     // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
     loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!postcss!sass?sourceMap")});
+    //loaders.push({test: /(\.css|\.styl)$/, loader: ExtractTextPlugin.extract('css?sourceMap!postcss!stylus?sourceMap')});
   } else {
     loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']});
+    //loaders.push({test: /(\.css|\.styl)$/, loaders: ['style', 'css?sourceMap&localIdentName=[local]___[hash:base64:10]', 'postcss', 'stylus?sourceMap']});
+    //loaders.push({test: /(\.css|\.styl)$/, loaders: ['style!css?modules&localIdentName=[local]___[hash:base64:10]!stylus']});
   }
 
   return loaders;
@@ -93,10 +97,10 @@ function getConfig(env) {
       loaders: getLoaders(env)
     },
     postcss: function () {
-      return [autoprefixer];
+      return [autoprefixer, cssnext];
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss', '.css'],
+      extensions: ['', '.js', '.jsx', '.styl', '.css'],
       alias: {
         store: path.resolve(__dirname, './src/system/store.js'),
         loading: path.resolve(__dirname, './src/modules/commons/Loading.jsx')

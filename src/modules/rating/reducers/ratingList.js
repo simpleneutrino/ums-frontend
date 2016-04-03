@@ -8,7 +8,7 @@ const initialRatingListState = {
   isLoading: false,
   resources: [],
   error: null,
-  highlightedEnrolment: 2
+  highlightedEnrolment: null
 };
 
 export default function ratingList(state = initialRatingListState, action = {}) {

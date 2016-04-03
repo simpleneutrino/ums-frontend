@@ -1,7 +1,6 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import classNames from 'classnames';
 import 'fixed-data-table/dist/fixed-data-table.min.css'
 import FixedDataTable from 'fixed-data-table';
 const {Table, Column, Cell} = FixedDataTable;
@@ -26,10 +25,8 @@ export default class RatingTable extends Component {
 
   render() {
     let { ratingData, size, highlightedEnrolment } =  this.props;
-    console.log('highlightedEnrolment', highlightedEnrolment);
     const highlightedIndex = findIndex(ratingData, {'enrolmentId': highlightedEnrolment});
     console.log('highlightedIndex', highlightedIndex);
-
     return (
       <Table
         rowHeight={50}

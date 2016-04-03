@@ -12,7 +12,7 @@ export default class DepartmentsList extends Component {
   };
   render() {
     return (
-      <Nav bsStyle="pills" stacked key={1} activeKey={1} pullLeft onSelect={this.handleSelect}>
+      <Nav className="chooser" bsStyle="pills" stacked key={1} activeKey={1} pullLeft onSelect={this.handleSelect}>
         {this.departmentsList()}
       </Nav>
     );

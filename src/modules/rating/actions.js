@@ -33,3 +33,12 @@ export function loadRatingList(specofferId) {
     }
   };
 }
+
+export function highlighEnrolment(enrolmentId) {
+  return {
+    type: types.HIGHLIGH_ENROLMENT,
+    payload: {
+      enrolmentId
+    }
+  };
+}

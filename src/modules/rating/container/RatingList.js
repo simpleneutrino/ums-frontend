@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { loadRatingList } from './../actions';
 import { createSelector } from 'reselect';
+import RatingTable from './../components/RatingTable';
 
 class SpecofferChooser extends Component {
   static propTypes = {
@@ -22,15 +23,21 @@ class SpecofferChooser extends Component {
   }
   render() {
     let {ratingList, specofferId} = this.props;
-    //console.log('ratingList', ratingList);
-    //console.log('ratingList resources', ratingList.resources);
-    if (!ratingList.length) {
+    let {isLoading, enrolments, highlightedEnrolment} = ratingList;
+
+    if (isLoading) {
       return <div>loading...</div>;
     }
+    if (!specofferId) {
+      return <div>Для того щоб отримати перелік заяв потрібно обрати пропозицію!</div>;
+    }
+    if (!isLoading && !enrolments.length) {
+      return <div>Данних по данній пропозиції немає!</div>;
+    }
+
     return (
-      <div>
-        {ratingList.resources}
-      </div>
+        <RatingTable ratingData={enrolments} size={enrolments.length}
+                     highlightedEnrolment={highlightedEnrolment}/>
     );
   }
 }

@@ -4,14 +4,15 @@ import React, {Component, PropTypes} from 'react';
 
 export default class Rating extends React.Component {
   render () {
-    const { SpecofferChooser, RatingList } = this.props;
+    const { SpecofferChooser, RatingList, SearchEnrolment } = this.props;
     return (
-      <div>
-        <div className="SpecofferChooser">
+      <div className="rating">
+        <div className="rating__specoffer-chooser">
           {SpecofferChooser}
         </div>
-        <div className="RatingList">
-          {RatingList}
+        <div className="rating__rating-list">
+          <div>{SearchEnrolment}</div>
+          <div>{RatingList}</div>
         </div>
       </div>
     )

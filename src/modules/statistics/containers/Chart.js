@@ -1,4 +1,3 @@
-/*global AmCharts :true*/
 import React, { Component, PropTypes } from 'react';
 import 'amcharts3';
 import 'amcharts3/amcharts/serial';

@@ -6,7 +6,7 @@ export default class Application extends Component {
     return (
       <div id="layout">
         <NavBar />
-        <div id="main" className="container">
+        <div id="main" className="container-fluid main-container">
           {this.props.children}
         </div>
       </div>

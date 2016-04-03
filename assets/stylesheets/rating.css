@@ -1,0 +1,37 @@
+/* CHOOSER BLOCK */
+.chooser {
+    max-width: 175px;
+}
+
+.rating {
+    display: flex;
+}
+.rating__specoffer-chooser {
+    flex: 6;
+}
+
+.rating__rating-list {
+    flex: 11;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* HIGHLIGHT ROW ON HOVER */
+.fixedDataTableRowLayout_rowWrapper:hover .public_fixedDataTableCell_main {
+    background-color: lightgoldenrodyellow;
+}
+
+@keyframes highlight {
+    0% {
+        background: yellow;
+    }
+    100% {
+        background: none;
+    }
+}
+
+/* HIGHLIGHT ROW ON SEARCH */
+.row--higlighted .public_fixedDataTableCell_main{
+    animation: highlight 5s;
+}

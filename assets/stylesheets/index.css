@@ -1,7 +1,7 @@
-/*
-Use `border-box` properly:
-https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
-*/
+body {
+    font-family: Helvetica, sans-serif;
+}
+
 html {
     box-sizing: border-box;
 }
@@ -17,23 +17,6 @@ html {
     min-height: 600px;
 }
 
-.data-loading {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left: 0;
-    right: 0;
-    background: rgba(204, 204, 204, 0.51);
-    top: 0;
-    bottom: 0;
-}
-
-/* LOADING SPINNER */
-.data-loading__text {
-    color: #337ab7;
-    font-size: 3rem;
-}
 
 /* HEADER STYLES */
 .nav-header > .container-fluid {
@@ -46,9 +29,6 @@ html {
     max-width: 1400px;
 }
 
-/* CHOOSER BLOCK */
-.chooser {
-    max-width: 175px;
-}
-
-
+@import url('spinner.css');
+@import url('enrolmentSearch.css');
+@import url('rating.css');

@@ -7,7 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class SpecoffersList extends Component {
   static propTypes = {
-    specoffers: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    specoffers: PropTypes.object.isRequired,
     departmentId: PropTypes.string.isRequired
   };
 

@@ -1,4 +1,3 @@
-/* global __BASIC_URL__ */
 import {AUTH_SUCCESS} from '../../modules/auth/constants';
 
 const defaultState = {

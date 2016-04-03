@@ -7,5 +7,7 @@ export const LOAD_RATING_LIST_START = 'LOAD_RATING_LIST_START';
 export const LOAD_RATING_LIST_SUCCESS= 'LOAD_RATING_LIST_SUCCESS';
 export const LOAD_RATING_LIST_FAIL = 'LOAD_RATING_LIST_FAIL';
 
+export const HIGHLIGH_ENROLMENT = 'HIGHLIGH_ENROLMENT';
+
 // reducer name
 export const RATING = 'rating';

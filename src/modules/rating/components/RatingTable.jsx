@@ -1,10 +1,11 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import FixedDataTable from 'fixed-data-table';
+import classNames from 'classnames';
 import 'fixed-data-table/dist/fixed-data-table.min.css'
+import FixedDataTable from 'fixed-data-table';
 const {Table, Column, Cell} = FixedDataTable;
-
+import findIndex from 'lodash/findIndex'
 
 const CostomCell = ({rowIndex, data, field, ...props}) => (
   <Cell {...props}>
@@ -12,51 +13,57 @@ const CostomCell = ({rowIndex, data, field, ...props}) => (
   </Cell>
 );
 
+const rowClassNameGetter = (highlightedIndex) => (index, b) => {
+  if (highlightedIndex === index)
+    return 'row--higlighted';
+}
+
 export default class RatingTable extends Component {
   static propTypes = {
-    ratingList: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    ratingData: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     size: PropTypes.number.isRequired
   };
 
   render() {
+    let { ratingData, size, highlightedEnrolment } =  this.props;
+    console.log('highlightedEnrolment', highlightedEnrolment);
+    const highlightedIndex = findIndex(ratingData, {'enrolmentId': highlightedEnrolment});
+    console.log('highlightedIndex', highlightedIndex);
 
-    let { ratingList, size } =  this.props;
-    console.log('RatingTable: ratingList', ratingList);
-    console.log('RatingTable: size', size);
     return (
       <Table
         rowHeight={50}
+        scrollToRow={highlightedIndex}
         headerHeight={50}
         rowsCount={size}
-        width={900}
-        maxHeight={1000}
+        width={650}
+        maxHeight={900}
+        rowClassNameGetter={rowClassNameGetter(highlightedIndex)}
         {...this.props}>
         <Column
           header={<Cell>Призвіще</Cell>}
-          cell={<CostomCell data={ratingList} field="surname" />}
-          width={200}
+          cell={<CostomCell data={ratingData} field="surname"/>}
           flexGrow={2}
-          fixed
+          width={200}
         />
         <Column
           header={<Cell>Імя</Cell>}
-          cell={<CostomCell data={ratingList} field="firstname" />}
+          cell={<CostomCell data={ratingData} field="firstname"/>}
           width={100}
         />
         <Column
           header={<Cell>По-батькові</Cell>}
-          cell={<CostomCell data={ratingList} field="fathername" />}
-          flexGrow={1}
+          cell={<CostomCell data={ratingData} field="fathername"/>}
           width={150}
         />
         <Column
           header={<Cell>Бал</Cell>}
-          cell={<CostomCell data={ratingList} field="kb" />}
+          cell={<CostomCell data={ratingData} field="kb"/>}
           width={100}
         />
         <Column
           header={<Cell>Пріоритет</Cell>}
-          cell={<CostomCell data={ratingList} field="ratingPriority" />}
+          cell={<CostomCell data={ratingData} field="ratingPriority"/>}
           width={100}
         />
       </Table>

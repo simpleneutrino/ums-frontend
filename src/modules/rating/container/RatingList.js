@@ -23,20 +23,21 @@ class SpecofferChooser extends Component {
   }
   render() {
     let {ratingList, specofferId} = this.props;
-    console.log('ratingList', ratingList);
-    console.log('ratingList resources', ratingList.resources);
-    if (ratingList.isLoading) {
+    let {isLoading, resources, highlightedEnrolment} = ratingList;
+
+    if (isLoading) {
       return <div>loading...</div>;
     }
     if (!specofferId) {
       return <div>Для того щоб отримати перелік заяв потрібно обрати пропозицію!</div>;
     }
-    if (!ratingList.isLoading && !ratingList.resources.length) {
+    if (!isLoading && !resources.length) {
       return <div>Данних по данній пропозиції немає!</div>;
     }
 
     return (
-        <RatingTable ratingList={ratingList.resources} size={ratingList.resources.length}/>
+        <RatingTable ratingData={resources} size={resources.length}
+                     highlightedEnrolment={highlightedEnrolment}/>
     );
   }
 }

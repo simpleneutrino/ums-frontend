@@ -34,9 +34,13 @@ const getPlugins = function (env) {
 
   switch (env) {
     case productionEnvironment:
-      plugins.push(new ExtractTextPlugin('styles.css'));
+      plugins.push(new ExtractTextPlugin('app.css',{ allChunks: true }));
       plugins.push(new webpack.optimize.DedupePlugin());
-      plugins.push(new webpack.optimize.UglifyJsPlugin());
+      plugins.push(new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      }));
       break;
 
     case developmentEnvironment:
@@ -55,7 +59,7 @@ const getEntry = function (env) {
     entry.push('webpack-hot-middleware/client');
   }
 
-  entry.push('babel-polyfill', './src/index');
+  entry.push('babel-polyfill', './src/index.js');
 
   return entry;
 };
@@ -67,13 +71,11 @@ const getLoaders = function (env) {
   ];
 
   if (env === productionEnvironment) {
-    // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
-    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!postcss!sass?sourceMap")});
-    //loaders.push({test: /(\.css|\.styl)$/, loader: ExtractTextPlugin.extract('css?sourceMap!postcss!stylus?sourceMap')});
+    loaders.push({test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')});
+    loaders.push({test: /\.styl$/, loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus?sourceMap')});
   } else {
-    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']});
-    //loaders.push({test: /(\.css|\.styl)$/, loaders: ['style', 'css?sourceMap&localIdentName=[local]___[hash:base64:10]', 'postcss', 'stylus?sourceMap']});
-    //loaders.push({test: /(\.css|\.styl)$/, loaders: ['style!css?modules&localIdentName=[local]___[hash:base64:10]!stylus']});
+    loaders.push({test: /\.css$/, loaders: ['style', 'css']});
+    loaders.push({test: /\.styl$/, loaders: ['style', 'css?sourceMap', 'postcss', 'stylus?sourceMap']});
   }
 
   return loaders;
@@ -81,9 +83,10 @@ const getLoaders = function (env) {
 
 function getConfig(env) {
   env = process.env.NODE_ENV || 'development';
-  console.log('current environment is a ', env);
+  console.log(`current environment is a: ${env}`);
   return {
-    devtool: env === productionEnvironment ? 'source-map' : 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+    // FIXME: source map for production too large (up tp 7MB). Just remote it or find a way to fix.
+    devtool: env === productionEnvironment ? 'source-map' : 'cheap-module-eval-source-map', // more info: https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
     noInfo: true, // set to false to see a list of every file being bundled.
     entry: getEntry(env),
     target: env === testEnvironment ? 'node' : 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test

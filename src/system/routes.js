@@ -15,6 +15,7 @@ import Statistics from '../modules/statistics/components/Statistics';
 import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
 import Chart from '../modules/statistics/containers/Chart';
 import SpecofferChooser from '../modules/rating/container/SpecofferChooser';
+import PageNotFound from '../modules/commons/PageNotFound';
 
 //configure permissions
 export const routes = {
@@ -44,7 +45,7 @@ export default (
     <Route path="rating" component={AuthContainer} AuthComponent={SpecofferChooser}/>
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
+    <Route path="404" component={PageNotFound}/>
     <Redirect from='*' to='/404'/>
   </Route>
 );
-

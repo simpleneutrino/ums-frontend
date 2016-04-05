@@ -8,7 +8,7 @@ import { createSelector } from 'reselect';
 import {TIMEPERIODS} from './../../dictionaries/constants';
 import {isDictLoaded} from './../../dictionaries/helpers';
 import loadDictionaries from './../../dictionaries/actions';
-import {changeTimePeriodId} from './../widget';
+import {changeTimePeriodId} from './../duck';
 
 class TimePeriodId extends Component {
 

@@ -4,12 +4,8 @@ var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var colors = require('colors');
 
-//const webpackConfig = webpackConfigBuilder('development');
-
 var app = express();
 var compiler = webpack(webpackConfig);
-console.log('webpackConfig', webpackConfig);
-//console.log('webpackConfig.output.publicPath', webpackConfig.output);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath, // Dev middleware can't access webpackConfig, so we provide publicPath

@@ -8,6 +8,7 @@ export function replaceTimePeriodId(url, timePeriodId) {
   return url;
 }
 
+// TODO: remove this funcitno at all; dont import whole lodash ! It's too big!
 //convert a config to cache config
 export function configToCache(config) {
   return _.chain(_.values(config))

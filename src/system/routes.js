@@ -11,11 +11,16 @@ import Benefits from '../modules/enrolments/view/Benefits';
 import Statuses from '../modules/enrolments/view/Statuses';
 import Subjects from '../modules/enrolments/view/Subjects';
 import InfoPage from '../modules/enrolments/view/InfoPage';
+<<<<<<< HEAD
 import Statistics from '../modules/statistics/components/Statistics';
 import StatisticsIndex from '../modules/statistics/components/StatisticsIndex';
 import Chart from '../modules/statistics/containers/Chart';
 import SpecofferChooser from '../modules/rating/container/SpecofferChooser';
 import PageNotFound from '../modules/commons/PageNotFound';
+=======
+import RatingRoute from '../modules/rating/routes';
+import StatisticRoute from '../modules/statistics/route';
+>>>>>>> refs/remotes/mkozhukharenko/master
 
 //configure permissions
 export const routes = {
@@ -24,7 +29,11 @@ export const routes = {
     roles: ['ROLE_ADMIN'],
     groups: ['developers']
   },
-  rating: {}
+  rating: {
+    login: 'admin',
+    roles: ['ROLE_ADMIN'],
+    groups: ['developers']
+  }
 };
 
 export default (
@@ -37,12 +46,9 @@ export default (
       <Route path='subjects' component={Subjects}/>
       <Route path='statuses' component={Statuses}/>
     </Route>
-    <Route path="statistics" component={Statistics}>
-      <IndexRoute component={StatisticsIndex}/>
-      <Route path="chart/:chartId" component={Chart}/>
-    </Route>
+    {StatisticRoute}
     <Route path="persons" component={AuthContainer} AuthComponent={PersonsPage}/>
-    <Route path="rating" component={AuthContainer} AuthComponent={SpecofferChooser}/>
+    {RatingRoute}
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
     <Route path="404" component={PageNotFound}/>

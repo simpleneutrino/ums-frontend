@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {Router, browserHistory} from 'react-router';
 import store from 'store';
 import routes from './system/routes';
-import '../assets/stylesheets/index.css';
+import '../assets/stylesheets/index.styl';
 import 'bootstrap/dist/css/bootstrap.css';
 import {syncHistoryWithStore} from 'react-router-redux';
 

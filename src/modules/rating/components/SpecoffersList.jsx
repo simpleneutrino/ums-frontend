@@ -7,14 +7,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class SpecoffersList extends Component {
   static propTypes = {
-    specoffers: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    specoffers: PropTypes.object.isRequired,
     departmentId: PropTypes.string.isRequired
   };
 
   render() {
-    console.log('this.specoffersList()', this.specoffersList());
     return (
-      <Nav bsStyle="pills" key={100} stacked activeKey={1} pullLeft onSelect={this.handleSelect}>
+      <Nav className="chooser" bsStyle="pills" key={100} stacked activeKey={1} pullLeft onSelect={this.handleSelect}>
         {this.specoffersList()}
       </Nav>
     );

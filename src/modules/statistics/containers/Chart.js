@@ -1,4 +1,3 @@
-/*global AmCharts :true*/
 import React, { Component, PropTypes } from 'react';
 import 'amcharts3';
 import 'amcharts3/amcharts/serial';
@@ -32,8 +31,6 @@ class Chart extends Component {
    * when component is updated (rendered) - paste an amChart
    */
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate prevProps', prevProps);
-
     let { dataProvider } = this.props;
     if (dataProvider && dataProvider.data && !dataProvider.isLoading) {
       this.renderChart();
@@ -44,7 +41,6 @@ class Chart extends Component {
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.chartId !== this.props.chartId) {
-      console.log('clear', this.props);
       AmCharts.clear();
       this.props.getChartData(nextProps.chartId);
     }
@@ -91,9 +87,10 @@ class Chart extends Component {
  **/
 const mapStateToChartFactory = (state, ownProps) => {
   let { chartId } =  ownProps.params;
+  let collectionName = map[chartId].callApi.collectionName || chartId;
   console.log('chartId', chartId);
   return {
-    dataProvider: state.statistics[chartId],
+    dataProvider: state.statistics[collectionName],
     config: map[chartId],
     chartId: chartId
   };

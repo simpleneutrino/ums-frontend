@@ -1,4 +1,4 @@
-import {TIMEPERIODID_CHANGED} from '../../modules/settings/widget';
+import {TIMEPERIODID_CHANGED} from '../../modules/settings/duck';
 import lcache from '../lcache';
 
 export default store => next => action => {

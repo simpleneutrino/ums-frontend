@@ -2,7 +2,7 @@
 
 import chai  from 'chai';
 import configureStore from 'redux-mock-store';
-import { loadSpecoffersChooser, loadRatingList, highlighEnrolment } from './actions'
+import {loadSpecoffersChooser, loadRatingList, highlighEnrolment} from './actions'
 import {REQUEST_API} from '../../system/constants';
 import * as types from './constants';
 
@@ -15,19 +15,19 @@ describe('Rating actions', () => {
     let initialData = {
       rating: {
         specofferChooser: {
-          resources: [1,2,3]
+          resources: [1, 2, 3]
         }
       }
     };
     const interrupt = loadSpecoffersChooser().interrupt;
 
-    it('interrupt for loadSpecoffersChooser should return true ' +
+    it('interrupt loadSpecoffersChooser ' +
         'when data fro specoffeShoose is available (full array)', () => {
       let store = mockStore(initialData);
       expect(interrupt(store)).to.equal(true)
     });
 
-    it('interrupt for loadSpecoffersChooser should return false ' +
+    it('not interrupt loadSpecoffersChooser ' +
         'when data for specoffer choose is not available (empty)', () => {
       initialData.rating.specofferChooser.resources = [];
       let store = mockStore(initialData);
@@ -37,7 +37,7 @@ describe('Rating actions', () => {
   });
 
   describe('loadRatingList, highlighEnrolment ACs', () => {
-    
+
     it('should create an action to load rating list ', () => {
       const specofferId = 1;
 

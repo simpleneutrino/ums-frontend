@@ -11,6 +11,7 @@ import Benefits from '../modules/enrolments/view/Benefits';
 import Statuses from '../modules/enrolments/view/Statuses';
 import Subjects from '../modules/enrolments/view/Subjects';
 import InfoPage from '../modules/enrolments/view/InfoPage';
+import PageNotFound from '../modules/commons/PageNotFound';
 import RatingRoute from '../modules/rating/routes';
 import StatisticRoute from '../modules/statistics/route';
 
@@ -43,7 +44,7 @@ export default (
     {RatingRoute}
     <Route path="login" component={LoginPage}/>
     <Route path="logout" component={LogoutPage}/>
+    <Route path="404" component={PageNotFound}/>
     <Redirect from='*' to='/404'/>
   </Route>
 );
-

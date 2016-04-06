@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+export default class  PageNotFound {
 
-const PageNotFound = React.createClass({
-  render: function() {
+  render() {
     return (
       <div className='center-align'>
         <h1 className='center-align'>
@@ -14,6 +14,4 @@ const PageNotFound = React.createClass({
 
     );
   }
-});
-
-export default PageNotFound;
+};

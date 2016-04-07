@@ -11,7 +11,6 @@ import {isDataForEnrolmentLoaded, decodeEnrolments, getEnrolmentIdByIndex} from 
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 
 import Loading from 'loading';
-import {ENROLMENT_LIST_REDUCER, FIELD_NAMES} from './../constants';
 
 class EnrolmentsListPage extends Component {
   constructor(props) {
@@ -22,9 +21,9 @@ class EnrolmentsListPage extends Component {
     this.props.setFieldWidthEnrolments(newColumnWidth, columnKey);
   }
 
-  _onClickRow = (e, index) => {
+  _goToDetailed = (e, index) => {
     let id = getEnrolmentIdByIndex(index);
-    this.props.onClickRow(id);
+    this.props.goToDetailed(id);
   }
 
   componentDidMount() {
@@ -34,24 +33,24 @@ class EnrolmentsListPage extends Component {
   }
 
   render() {
-    if (!isDataForEnrolmentLoaded(ENROLMENT_LIST_REDUCER)) {
+    if (!isDataForEnrolmentLoaded()) {
       return <Loading/>;
     }
 
-    let {decodedEnrolments, fieldWidth} = this.props;
+    let {decodedEnrolments, enrolmentsFieldNames} = this.props;
 
-    let cells = FIELD_NAMES.map((item) => {
+    let cells = Object.keys(enrolmentsFieldNames).map((field) => {
       return <Column
-          columnKey={item.field}
-          header={<Cell>{item.name}</Cell>}
+          columnKey={field}
+          header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
           cell={props => (
             <Cell {...props}>
-              {decodedEnrolments[props.rowIndex][item.field]}
+              {decodedEnrolments[props.rowIndex][field]}
             </Cell>
             )
           }
           isResizable
-          width={fieldWidth[item.field]}
+          width={enrolmentsFieldNames[field].width}
         />
     });
 
@@ -62,7 +61,7 @@ class EnrolmentsListPage extends Component {
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
-        onRowClick={this._onClickRow}
+        onRowClick={this._goToDetailed}
         width={950}
         height={420}
       >
@@ -82,11 +81,11 @@ class EnrolmentsListPage extends Component {
 export const getDecodedEnrolments = createSelector(
   [ (state) => state.enrolments.list,
    (state) => state.dictionaries,
-   (state) => state.enrolments.list.fieldWidth],
-  (enrolmentList, listOfDict, fieldWidth) => ({
+   (state) => state.enrolments.list.enrolmentsFieldNames],
+  (enrolmentList, listOfDict, enrolmentsFieldNames) => ({
     decodedEnrolments: decodeEnrolments(enrolmentList, listOfDict),
     enrolmentList: enrolmentList,
-    fieldWidth: fieldWidth
+    enrolmentsFieldNames: enrolmentsFieldNames
   })
 )
 
@@ -94,7 +93,7 @@ const mapDispatchToEnrolments = (dispatch) => (
   { loadEnrolments: (params) => dispatch(loadEnrolments(params)),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
     setFieldWidthEnrolments: (newWidth, columnKey) => dispatch(setFieldWidthEnrolments(newWidth, columnKey)),
-    onClickRow: (id) => dispatch(push(`/enrolments/${id}/info`))
+    goToDetailed: (id) => dispatch(push(`/enrolments/${id}/info`))
   }
 );
 

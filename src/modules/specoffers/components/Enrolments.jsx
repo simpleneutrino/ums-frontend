@@ -9,7 +9,6 @@ import Loading from 'loading';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
 import {decodeEnrolments} from '../../enrolments/helpers';
-import {FIELD_NAMES} from '../../enrolments/constants';
 import {getEnrolmentIdByIndex} from '../helpers';
 
 import {loadEnrolmentsListBySpecoffer, setFieldWidthEnrolments} from './../actions';
@@ -24,39 +23,39 @@ class SpecofferEnrolments extends Component {
     this.props.setFieldWidthEnrolments(newColumnWidth, columnKey);
   }
 
-  _onClickRow = (e, index) => {
-    let id = getEnrolmentIdByIndex(this.props.specOfferId, index);
-    this.props.onClickRow(id);
+  _goToDetailed = (e, index) => {
+    let id = getEnrolmentIdByIndex(this.props.specofferId, index);
+    this.props.goToDetailed(id);
   }
 
   componentDidMount() {
     this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.ENROLMENTS_TYPES, dictConst.ENROLMENTS_STATUS_TYPES]);
-    this.props.loadEnrolmentsListBySpecoffer(this.props.specOfferId);
+    this.props.loadEnrolmentsListBySpecoffer({specofferId: this.props.specofferId});
   }
 
   render() {
-    let {decodedEnrolments, fieldWidth} = this.props;
+    let {decodedEnrolments, enrolmentsFieldNames} = this.props;
 
-    if (!isDataForEnrolmentLoaded(this.props.specOfferId)) {
+    if (!isDataForEnrolmentLoaded(this.props.specofferId)) {
       return <Loading/>;
     }
     if (!decodedEnrolments.length) {
       return <div>Данних по данній пропозиції немає!</div>;
     }
 
-    let cells = FIELD_NAMES.map((item) => {
-      if (item.field === 'specOfferId') return null;
+    let cells = Object.keys(enrolmentsFieldNames).map((field) => {
+      if (field === 'specOfferId') return null;
       return <Column
-          columnKey={item.field}
-          header={<Cell>{item.name}</Cell>}
+          columnKey={field}
+          header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
           cell={props => (
             <Cell {...props}>
-              {decodedEnrolments[props.rowIndex][item.field]}
+              {decodedEnrolments[props.rowIndex][field]}
             </Cell>
             )
           }
           isResizable
-          width={fieldWidth[item.field]}
+          width={enrolmentsFieldNames[field].width}
         />
     });
 
@@ -67,7 +66,7 @@ class SpecofferEnrolments extends Component {
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
-        onRowClick={this._onClickRow}
+        onRowClick={this._goToDetailed}
         width={950}
         height={380}>
         {cells}
@@ -80,19 +79,19 @@ const mapStateToSpecofferEnrolments = createSelector(
   (state, ownProps) => state.specoffers.view.specofferEnrolments.data[ownProps.params.id],
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.params.id,
-  (state) => state.specoffers.view.specofferEnrolments.fieldWidth,
-  (enrolments, listOfDict, specOfferId, fieldWidth) => ({
+  (state) => state.specoffers.view.specofferEnrolments.enrolmentsFieldNames,
+  (enrolments, listOfDict, specofferId, enrolmentsFieldNames) => ({
     decodedEnrolments: decodeEnrolments(enrolments, listOfDict),
-    specOfferId: specOfferId,
-    fieldWidth: fieldWidth
+    specofferId: specofferId,
+    enrolmentsFieldNames: enrolmentsFieldNames
   })
 );
 
 const mapDispatchToEnrolments = (dispatch) => (
-  { loadEnrolmentsListBySpecoffer: (specofferId) => dispatch(loadEnrolmentsListBySpecoffer(specofferId)),
+  { loadEnrolmentsListBySpecoffer: (params) => dispatch(loadEnrolmentsListBySpecoffer(params)),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
     setFieldWidthEnrolments: (newWidth, columnKey) => dispatch(setFieldWidthEnrolments(newWidth, columnKey)),
-    onClickRow: (id) => dispatch(push(`/enrolments/${id}/info`))
+    goToDetailed: (id) => dispatch(push(`/enrolments/${id}/info`))
   }
 );
 

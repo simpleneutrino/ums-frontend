@@ -5,7 +5,7 @@ export function loadSpecoffersList(params) {
   return {
     type: REQUEST_API,
     request: {
-      url: `/specoffers?timePeriodId=${params.timePeriodId}&limit=${params.limit}`,
+      url: `/specoffers`,
       actions: {
         start: {type: types.LOAD_ALL_SPECOFFERS_START},
         success: {type: types.LOAD_ALL_SPECOFFERS_SUCCESS},
@@ -18,11 +18,11 @@ export function loadSpecoffersList(params) {
   };
 }
 
-export function loadOneSpecoffer(specOfferId) {
+export function loadOneSpecoffer(specofferId) {
   return {
     type: REQUEST_API,
     request: {
-      url: `/specoffers/${specOfferId}`,
+      url: `/specoffers/${specofferId}`,
       actions: {
         start: {type: types.LOAD_ONE_SPECOFFER_START},
         success: {type: types.LOAD_ONE_SPECOFFER_SUCCESS},
@@ -30,33 +30,34 @@ export function loadOneSpecoffer(specOfferId) {
       },
       cache: true
     },
-    interrupt: (store) => !!store.getState().specoffers.view.mainInfo.data[specOfferId],
+    interrupt: (store) => !!store.getState().specoffers.view.mainInfo.data[specofferId],
     payload: {
-      specOfferId: specOfferId
+      specofferId: specofferId
     }
   };
 }
 
-export function loadEnrolmentsListBySpecoffer(specOfferId) {
+export function loadEnrolmentsListBySpecoffer(params) {
   return {
     type: REQUEST_API,
     request: {
-      url: `/enrolments?specOfferId=${specOfferId}`,
+      url: `/enrolments`,
       actions: {
         start: {type: types.LOAD_ENROLMENTS_BY_SPECOFFERS_START},
         success: {type: types.LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS},
         fail: {type: types.LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL}
       },
+      params,
       cache: true
     },
-    interrupt: (store) => !!store.getState().specoffers.view.specofferEnrolments.data[specOfferId],
+    interrupt: (store) => !!store.getState().specoffers.view.specofferEnrolments.data[params.specofferId],
     payload: {
-      specOfferId: specOfferId
+      specofferId: params.specofferId
     }
   };
 }
 
-export function setFieldWidth(newColumnWidth, columnKey) {
+export function setSpecofferFieldWidth(newColumnWidth, columnKey) {
   return {
     type: types.SPECOFFERS_LIST_WIDTH_CHANGED,
     payload: {

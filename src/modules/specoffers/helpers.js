@@ -1,8 +1,6 @@
 import store from 'store';
 import * as dictConstants from '../dictionaries/constants';
 import {isDictLoaded} from '../dictionaries/helpers';
-import {SPECOFFERS_REDUCER, SPECOFFERS_VIEW_REDUCER,
-   SPECOFFERS_ENROLMENTS_REDUCER, SPECOFFERS_LIST_REDUCER} from './constants';
 
 let {
   DEPARTMENTS,
@@ -12,26 +10,25 @@ let {
 
 /**
  * check if enrolments loaded && dictionaries (used only inside enrolment list container)
- * @param reducerName
+ * @param specofferId
  * @returns {*|boolean}
  */
-export function isDataForEnrolmentLoaded(specOfferId) {
+export function isDataForEnrolmentLoaded(specofferId) {
   let state = store.getState();
-  let entity = state[SPECOFFERS_REDUCER][SPECOFFERS_VIEW_REDUCER][SPECOFFERS_ENROLMENTS_REDUCER];
+  let entity = state.specoffers.view.specofferEnrolments;
 
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
     && !entity.isLoading
-    && !!entity.data[specOfferId];
+    && !!entity.data[specofferId];
 }
 
 /**
  * check if specoffers loaded && dictionaries (used only inside specoffers list container)
- * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForSpecoffersLoaded(reducerName) {
+export function isDataForSpecoffersLoaded() {
   let state = store.getState();
-  let entity = state[SPECOFFERS_REDUCER][reducerName];
+  let entity = state.specoffers.list;
 
   return isDictLoaded([DEPARTMENTS], state.dictionaries)
     && !entity.isLoading;
@@ -60,11 +57,11 @@ export function decodeOneSpecoffer(item, dictionaries) {
 
 export function getSpecofferIdByIndex(index) {
   let state = store.getState();
-  return state[SPECOFFERS_REDUCER][SPECOFFERS_LIST_REDUCER].resources[index]['id'];
+  return state.specoffers.list.resources[index]['id'];
 }
 
 export function getEnrolmentIdByIndex(specofferId, index) {
   let state = store.getState();
-  let entity = state[SPECOFFERS_REDUCER][SPECOFFERS_VIEW_REDUCER][SPECOFFERS_ENROLMENTS_REDUCER];
+  let entity = state.specoffers.view.specofferEnrolments;
   return entity.data[specofferId].resources[index]['id'];
 }

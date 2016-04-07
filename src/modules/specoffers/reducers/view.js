@@ -1,15 +1,12 @@
 import * as types from '../constants';
-import {FIELD_NAMES} from '../../enrolments/constants';
+import {ENROLMENTS_FIELD_NAMES} from '../../enrolments/constants';
 import {combineReducers} from 'redux';
 import {LOCATION_CHANGE} from 'react-router-redux';
-
-let fieldWidth = {};
-FIELD_NAMES.map((item) => fieldWidth[item.field] = item.width);
 
 const enrolmentsDefaultState = {
   isLoading: false,
   data: {},
-  fieldWidth: fieldWidth,
+  enrolmentsFieldNames: ENROLMENTS_FIELD_NAMES,
   limit: 300,
   error: null
 };
@@ -25,7 +22,7 @@ export default function specofferEnrolments(state = enrolmentsDefaultState, acti
         {
           isLoading: false,
           data: Object.assign({}, state.data,
-            { [action.payload.specOfferId]:  action.response }),
+            { [action.payload.specofferId]:  action.response }),
           error: null
         }
       );
@@ -34,9 +31,13 @@ export default function specofferEnrolments(state = enrolmentsDefaultState, acti
       return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
 
     case types.ENROLMENTS_LIST_WIDTH_CHANGED:
+      let changedName = {
+        'name': state.enrolmentsFieldNames[action.payload.columnKey].name,
+        'width': action.payload.newColumnWidth
+      };
       return Object.assign({}, state,
         {
-          fieldWidth: {...state.fieldWidth, [action.payload.columnKey]: action.payload.newColumnWidth}
+          enrolmentsFieldNames: {...state.enrolmentsFieldNames, [action.payload.columnKey]: changedName}
         }
       );
 
@@ -62,7 +63,7 @@ export function mainInfo(state = mainInfoDefaultState, action = {}) {
         {
           isLoading: false,
           data: Object.assign({}, state.data,
-            { [action.payload.specOfferId]:  action.response }),
+            { [action.payload.specofferId]:  action.response }),
           error: null
         }
       );

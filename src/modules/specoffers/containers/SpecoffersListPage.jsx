@@ -6,11 +6,10 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
 
 import Loading from 'loading';
-import {loadSpecoffersList, setFieldWidth} from './../actions';
+import {loadSpecoffersList, setSpecofferFieldWidth} from './../actions';
 import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
-import {SPECOFFERS_LIST_REDUCER, FIELD_NAMES} from './../constants';
 
 class SpecoffersListPage extends Component {
   constructor(props) {
@@ -24,35 +23,35 @@ class SpecoffersListPage extends Component {
   }
 
   _onColumnResizeEndCallback = (newColumnWidth, columnKey) => {
-    this.props.setFieldWidth(newColumnWidth, columnKey);
+    this.props.setSpecofferFieldWidth(newColumnWidth, columnKey);
   }
 
-  _onClickRow = (e, index) => {
+  _goToDetailed = (e, index) => {
     let id = getSpecofferIdByIndex(index);
-    this.props.onClickRow(id);
+    this.props.goToDetailed(id);
   }
 
   render() {
-    let {decodedSpecoffers, fieldWidth} = this.props;
-    if (!isDataForSpecoffersLoaded(SPECOFFERS_LIST_REDUCER)) {
+    let {decodedSpecoffers, specoffersFieldNames} = this.props;
+    if (!isDataForSpecoffersLoaded()) {
       return <Loading/>;
     }
     if (!decodedSpecoffers.length) {
       return <div>Данних немає!</div>;
     }
 
-    let cells = FIELD_NAMES.map((item) => {
+    let cells = Object.keys(specoffersFieldNames).map((field) => {
       return <Column
-          columnKey={item.field}
-          header={<Cell>{item.name}</Cell>}
+          columnKey={field}
+          header={<Cell>{specoffersFieldNames[field].name}</Cell>}
           cell={props => (
               <Cell {...props}>
-                {decodedSpecoffers[props.rowIndex][item.field]}
+                {decodedSpecoffers[props.rowIndex][field]}
               </Cell>
             )
           }
           isResizable
-          width={fieldWidth[item.field]}
+          width={specoffersFieldNames[field].width}
         />
     });
 
@@ -64,7 +63,7 @@ class SpecoffersListPage extends Component {
           headerHeight={50}
           onColumnResizeEndCallback={this._onColumnResizeEndCallback}
           isColumnResizing={false}
-          onRowClick={this._onClickRow}
+          onRowClick={this._goToDetailed}
           width={950}
           height={420}
           {...this.props}
@@ -87,20 +86,20 @@ const mapStateToSpecoffers = createSelector(
   (state) => state.specoffers.list,
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.location.query,
-  (state) => state.specoffers.list.fieldWidth,
-  (list, listOfDict, query, fieldWidth) => ({
+  (state) => state.specoffers.list.specoffersFieldNames,
+  (list, listOfDict, query, specoffersFieldNames) => ({
     decodedSpecoffers: decodeSpecoffers(list, listOfDict),
     timePeriodId: query.timePeriodId,
     limit: query.limit,
-    fieldWidth: fieldWidth
+    specoffersFieldNames: specoffersFieldNames
   })
 );
 
 const mapDispatchToSpecoffers = (dispatch) => (
   { loadSpecoffersList: (params) => dispatch(loadSpecoffersList(params)),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
-    setFieldWidth: (newColumnWidth, columnKey) => dispatch(setFieldWidth(newColumnWidth, columnKey)),
-    onClickRow: (id) => dispatch(push(`/specoffers/${id}/enrolments`))
+    setSpecofferFieldWidth: (newColumnWidth, columnKey) => dispatch(setSpecofferFieldWidth(newColumnWidth, columnKey)),
+    goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`))
   }
 );
 

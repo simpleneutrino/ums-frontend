@@ -10,7 +10,7 @@ import {loadOneSpecoffer} from '../actions'
 export class SpecofferInfoMain extends Component {
   componentDidMount() {
     this.props.loadDictionaries([dictConst.DEPARTMENTS]);
-    this.props.loadOneSpecoffer(this.props.specOfferId);
+    this.props.loadOneSpecoffer(this.props.specofferId);
   }
 
   render() {
@@ -22,9 +22,9 @@ const mapStateToSpecofferInfoMain = createSelector(
   (state, ownProps) => state.specoffers.view.mainInfo.data[ownProps.params.id],
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.params.id,
-  (specoffer, listOfDict, specOfferId) => ({
+  (specoffer, listOfDict, specofferId) => ({
     decodedOneSpecoffer: decodeOneSpecoffer(specoffer, listOfDict),
-    specOfferId: specOfferId
+    specofferId: specofferId
   })
 );
 

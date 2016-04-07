@@ -4,13 +4,10 @@ import {LOCATION_CHANGE} from 'react-router-redux';
 import lcache from '../../../system/lcache';
 import { TIMEPERIODID_CHANGED } from '../../settings/duck';
 
-let fieldWidth = {};
-types.FIELD_NAMES.map((item) => fieldWidth[item.field] = item.width);
-
 const defaultState = {
   isLoading: false,
   resources: [],
-  fieldWidth: fieldWidth,
+  specoffersFieldNames: types.SPECOFFERS_FIELD_NAMES,
   timePeriodId: lcache.get('timePeriodId') || 8,
   limit: 300,
   error: null
@@ -50,9 +47,13 @@ export default function list(state = defaultState, action = {}) {
       return Object.assign({}, state, {timePeriodId, limit});
 
     case types.SPECOFFERS_LIST_WIDTH_CHANGED:
+      let changedName = {
+        'name': state.specoffersFieldNames[action.payload.columnKey].name,
+        'width': action.payload.newColumnWidth
+      };
       return Object.assign({}, state,
         {
-          fieldWidth: {...state.fieldWidth, [action.payload.columnKey]: action.payload.newColumnWidth}
+          specoffersFieldNames: {...state.specoffersFieldNames, [action.payload.columnKey]: changedName}
         }
       );
 

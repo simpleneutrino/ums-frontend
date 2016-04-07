@@ -4,7 +4,6 @@ import {isDataForOneEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import {ENROLMENT_MAININFO_REDUCER} from './../constants';
 import Loading from 'loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 import { createSelector } from 'reselect';
@@ -82,7 +81,7 @@ export const getOneDecodedEnrolment = createSelector(
    (state, ownProps) => ownProps.params.id],
   (mainInfo, listOfDict, enrolId) => ({
     decodedEnrolment: decodeOneEnrolment(mainInfo, listOfDict),
-    isDataLoaded: isDataForOneEnrolmentLoaded(ENROLMENT_MAININFO_REDUCER, {'enrolId': enrolId})
+    isDataLoaded: isDataForOneEnrolmentLoaded({'enrolId': enrolId})
   })
 )
 

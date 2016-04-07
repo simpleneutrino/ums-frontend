@@ -11,7 +11,7 @@ let {
 
 export function getEnrolmentIdByIndex(index) {
   let state = store.getState();
-  return state[constants.ENROLMENT_REDUCER][constants.ENROLMENT_LIST_REDUCER].resources[index]['id'];
+  return state.enrolments.list.resources[index]['id'];
 }
 
 /**
@@ -28,11 +28,10 @@ export function isEntityDataLoaded(entityData) {
  * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForEnrolmentLoaded(reducerName) {
+export function isDataForEnrolmentLoaded() {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataLoaded(
-      state[constants.ENROLMENT_REDUCER][reducerName]);
+    && isEntityDataLoaded(state.enrolments.list);
 }
 
 /**
@@ -51,12 +50,10 @@ export function isEntityDataForOneLoaded(entityData, params) {
  * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForOneEnrolmentLoaded(reducerName, params = {}) {
+export function isDataForOneEnrolmentLoaded(params = {}) {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataForOneLoaded(
-      state[constants.ENROLMENT_REDUCER][constants.ENROLMENT_VIEW_REDUCER][reducerName],
-      params);
+    && isEntityDataForOneLoaded(state.enrolments.view.mainInfo, params);
 }
 
 export function decodeOneEnrolment(item, dictionaries) {

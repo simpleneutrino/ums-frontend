@@ -10,23 +10,18 @@ export const LOAD_ENROLMENTS_BY_SPECOFFERS_START = 'LOAD_ENROLMENTS_BY_SPECOFFER
 export const LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS = 'LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS';
 export const LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL = 'LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL';
 
-export const SPECOFFERS_REDUCER = 'specoffers';
-export const SPECOFFERS_LIST_REDUCER = 'list';
-export const SPECOFFERS_VIEW_REDUCER = 'view';
-export const SPECOFFERS_ENROLMENTS_REDUCER = 'specofferEnrolments';
-
 export const SPECOFFERS_LIST_WIDTH_CHANGED = 'SPECOFFERS_LIST_WIDTH_CHANGED';
 export const ENROLMENTS_LIST_WIDTH_CHANGED = 'ENROLMENTS_LIST_WIDTH_CHANGED';
 
-export const FIELD_NAMES = [
-  {'name': '№',                     'field': 'id',                  'width': 80},
-  {'name': 'Спеціальність',         'field': 'specialtyId',         'width': 100},
-  {'name': 'Структурний підрозділ', 'field': 'departmentId',        'width': 100},
-  {'name': 'Тип пропозиції',        'field': 'specofferTypeId',     'width': 80},
-  {'name': 'docNum',                'field': 'docNum',              'width': 50},
-  {'name': 'weightCertificate',     'field': 'weightCertificate',   'width': 80},
-  {'name': 'weightAward',           'field': 'weightAward',         'width': 80},
-  {'name': 'Форма навчання',        'field': 'educationFormTypeId', 'width': 80},
-  {'name': 'Ліцензований обсяг',    'field': 'licCount',            'width': 80},
-  {'name': 'Державне замовлення',   'field': 'stateCount',          'width': 80},
-];
+export const SPECOFFERS_FIELD_NAMES = {
+  id:                   {'name': '№',                     'width': 80},
+  specialtyId:          {'name': 'Спеціальність',         'width': 100},
+  departmentId:         {'name': 'Структурний підрозділ', 'width': 100},
+  specofferTypeId:      {'name': 'Тип пропозиції',        'width': 80},
+  docNum:               {'name': 'docNum',                'width': 50},
+  weightCertificate:    {'name': 'weightCertificate',     'width': 80},
+  weightAward:          {'name': 'weightAward',           'width': 80},
+  educationFormTypeId:  {'name': 'Форма навчання',        'width': 80},
+  licCount:             {'name': 'Ліцензований обсяг',    'width': 80},
+  stateCount:           {'name': 'Державне замовлення',   'width': 80}
+};

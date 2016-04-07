@@ -14,28 +14,23 @@ export const LOAD_ONE_STATUS_START = 'LOAD_ONE_STATUS_START';
 export const LOAD_ONE_STATUS_SUCCESS = 'LOAD_ONE_STATUS_SUCCESS';
 export const LOAD_ONE_STATUS_FAIL = 'LOAD_ONE_STATUS_FAIL';
 
-export const ENROLMENT_REDUCER = 'enrolments';
-export const ENROLMENT_LIST_REDUCER = 'list';
-export const ENROLMENT_VIEW_REDUCER = 'view';
-export const ENROLMENT_MAININFO_REDUCER = 'mainInfo';
 export const ENROLMENTS_LIST_PAGE_WIDTH_CHANGED = 'ENROLMENTS_LIST_PAGE_WIDTH_CHANGED';
 
-export const FIELD_NAMES = [
-  {'name': '№',               'field': 'id', 'width': 40},
-  {'name': 'Персона (id)',    'field': 'personId', 'width': 70},
-  {'name': 'Пропозиція (id)', 'field': 'specOfferId', 'width': 90},
-  {'name': 'Бюджет',          'field': 'isState', 'width': 70},
-  {'name': 'Контракт',        'field': 'isContract', 'width': 80},
-  {'name': 'Підрозділ',       'field': 'departmentId', 'width': 80},
-  {'name': 'Загальний бал',   'field': 'mark', 'width': 90},
-  {'name': 'Наявність пільг', 'field': 'isPrivilege', 'width': 80},
-  {'name': 'Серія док.',      'field': 'docSeries', 'width': 80},
-  {'name': 'Номер док.',      'field': 'docNum', 'width': 80},
-  {'name': 'Потреб. гуртож',  'field': 'isHostel', 'width': 80},
-  {'name': 'Тип поступлення', 'field': 'enrolmentTypeId', 'width': 100},
-  {'name': 'Відмітка про співбесіду',     'field': 'isInterview', 'width': 100}
-
-];
+export const ENROLMENTS_FIELD_NAMES = {
+  id:               {'name': '№',                       'width': 40},
+  personId:         {'name': 'Персона (id)',            'width': 70},
+  specOfferId:      {'name': 'Пропозиція (id)',         'width': 90},
+  isState:          {'name': 'Бюджет',                  'width': 70},
+  isContract:       {'name': 'Контракт',                'width': 80},
+  departmentId:     {'name': 'Підрозділ',               'width': 80},
+  mark:             {'name': 'Загальний бал',           'width': 90},
+  isPrivilege:      {'name': 'Наявність пільг',         'width': 80},
+  docSeries:        {'name': 'Серія док.',              'width': 80},
+  docNum:           {'name': 'Номер док.',              'width': 80},
+  isHostel:         {'name': 'Потреб. гуртож',          'width': 80},
+  enrolmentTypeId:  {'name': 'Тип поступлення',         'width': 100},
+  isInterview:      {'name': 'Відмітка про співбесіду', 'width': 100}
+};
 
 export const isStateNames = ['\u2718', '\u2713'];
 export const isContractNames = ['\u2718', '\u2713'];

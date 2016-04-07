@@ -1,11 +1,11 @@
 /**
  * Created by nikolaykozhukharenko on 4/6/16.
  */
-import chai  from 'chai';
+import { expect }  from 'chai';
 import * as types from './../constants';
 import reducer from './ratingList';
-
-let expect = chai.expect;
+import { TIMEPERIODID_CHANGED, changeTimePeriodId } from './../../settings/duck';
+import { highlighEnrolment } from './../actions'
 
 describe('ratingList reducer', () => {
 
@@ -14,7 +14,7 @@ describe('ratingList reducer', () => {
     enrolments: [],
     error: null,
     highlightedEnrolment: null
-  }
+  };
 
   it('should return the initial state', () => {
     expect(
@@ -26,7 +26,7 @@ describe('ratingList reducer', () => {
     expect(
         reducer(undefined, {type: types.LOAD_RATING_LIST_START}).isLoading
     ).to.equal(true)
-  })
+  });
 
   it('should handle LOAD_RATING_LIST_SUCCESS action', () => {
     expect(
@@ -47,18 +47,15 @@ describe('ratingList reducer', () => {
 
   it('should handle TIMEPERIODID_CHANGED action', () => {
     expect(
-        reducer(undefined, {type: types.TIMEPERIODID_CHANGED}).enrolments
+        reducer({enrolments: [1,2,3]}, changeTimePeriodId(1)).enrolments
     ).to.have.length(0)
   });
 
   it('should handle HIGHLIGH_ENROLMENT action', () => {
     expect(
-        reducer(undefined, {
-          type: types.HIGHLIGH_ENROLMENT,
-          payload: {
-            enrolmentId: '22'
-          }
-        }).highlightedEnrolment
+        reducer({
+          highlightedEnrolment: 33
+        }, highlighEnrolment(22)).highlightedEnrolment
     ).to.equal(22)
   })
   

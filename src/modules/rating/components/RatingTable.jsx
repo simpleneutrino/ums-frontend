@@ -1,7 +1,6 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-// import 'fixed-data-table/dist/fixed-data-table.min.css'
 import FixedDataTable from 'fixed-data-table';
 const {Table, Column, Cell} = FixedDataTable;
 import findIndex from 'lodash/findIndex'
@@ -27,8 +26,6 @@ export default class RatingTable extends Component {
   render() {
     let { ratingData, size, highlightedEnrolment } =  this.props;
     const highlightedIndex = findIndex(ratingData, {'enrolmentId': highlightedEnrolment});
-    console.log('highlightedEnrolment', typeof highlightedEnrolment);
-    console.log('size', typeof size);
     return (
       <Table
         rowHeight={50}

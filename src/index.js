@@ -7,6 +7,7 @@ import routes from './system/routes';
 import '../assets/stylesheets/index.styl';
 import 'bootstrap/dist/css/bootstrap.css';
 import {syncHistoryWithStore} from 'react-router-redux';
+import 'fixed-data-table/dist/fixed-data-table.min.css'
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);

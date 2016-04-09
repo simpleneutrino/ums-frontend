@@ -19,7 +19,7 @@ export const ENROLMENTS_LIST_PAGE_WIDTH_CHANGED = 'ENROLMENTS_LIST_PAGE_WIDTH_CH
 export const ENROLMENTS_FIELD_NAMES = {
   id:               {'name': '№',                       'width': 40},
   personId:         {'name': 'Персона (id)',            'width': 70},
-  specOfferId:      {'name': 'Пропозиція (id)',         'width': 90},
+  specofferId:      {'name': 'Пропозиція (id)',         'width': 90},
   isState:          {'name': 'Бюджет',                  'width': 70},
   isContract:       {'name': 'Контракт',                'width': 80},
   departmentId:     {'name': 'Підрозділ',               'width': 80},

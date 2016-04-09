@@ -1,5 +1,6 @@
 import {REQUEST_API} from '../../system/constants';
 import * as types from './constants';
+import {getSpecofferEnrolmentsBySpecofferId, getSpecofferInfoMain} from './reducers/view.js'
 
 export function loadSpecoffersList(params) {
   return {
@@ -30,7 +31,7 @@ export function loadOneSpecoffer(specofferId) {
       },
       cache: true
     },
-    interrupt: (store) => !!store.getState().specoffers.view.mainInfo.data[specofferId],
+    interrupt: (store) => !!getSpecofferInfoMain(store.getState(), specofferId),
     payload: {
       specofferId: specofferId
     }
@@ -47,10 +48,10 @@ export function loadEnrolmentsListBySpecoffer(params) {
         success: {type: types.LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS},
         fail: {type: types.LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL}
       },
-      params,
+      params: {specOfferId: params.specofferId},
       cache: true
     },
-    interrupt: (store) => !!store.getState().specoffers.view.specofferEnrolments.data[params.specofferId],
+    interrupt: (store) => !!getSpecofferEnrolmentsBySpecofferId(store.getState(), params.specofferId),
     payload: {
       specofferId: params.specofferId
     }

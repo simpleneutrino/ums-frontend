@@ -6,6 +6,7 @@ import {isDataForSpecoffersLoaded, decodeOneSpecoffer} from './../helpers';
 import loadDictionaries from '../../dictionaries/actions';
 import * as dictConst from '../../dictionaries/constants';
 import {loadOneSpecoffer} from '../actions'
+import {getSpecofferInfoMain} from '../reducers/view.js'
 
 export class SpecofferInfoMain extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ export class SpecofferInfoMain extends Component {
 }
 
 const mapStateToSpecofferInfoMain = createSelector(
-  (state, ownProps) => state.specoffers.view.mainInfo.data[ownProps.params.id],
+  (state, ownProps) => getSpecofferInfoMain(state, ownProps.params.id),
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.params.id,
   (specoffer, listOfDict, specofferId) => ({

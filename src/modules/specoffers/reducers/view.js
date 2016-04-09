@@ -3,6 +3,12 @@ import {ENROLMENTS_FIELD_NAMES} from '../../enrolments/constants';
 import {combineReducers} from 'redux';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
+export let getSpecofferEnrolmentsBySpecofferId = (state, specofferId) => {
+  return state.specoffers.view.specofferEnrolments.data[specofferId]
+}
+
+export let getSpecofferEnrolments = (state) => state.specoffers.view.specofferEnrolments
+
 const enrolmentsDefaultState = {
   isLoading: false,
   data: {},
@@ -45,6 +51,8 @@ export default function specofferEnrolments(state = enrolmentsDefaultState, acti
       return state;
   }
 }
+
+export let getSpecofferInfoMain = (state, specofferId) => state.specoffers.view.mainInfo.data[specofferId]
 
 const mainInfoDefaultState = {
   isLoading: false,

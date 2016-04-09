@@ -1,4 +1,5 @@
 import * as types from '../constants';
+import {SPECOFFERS_FIELD_NAMES} from '../constants';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
 import lcache from '../../../system/lcache';
@@ -7,7 +8,7 @@ import { TIMEPERIODID_CHANGED } from '../../settings/duck';
 const defaultState = {
   isLoading: false,
   resources: [],
-  specoffersFieldNames: types.SPECOFFERS_FIELD_NAMES,
+  specoffersFieldNames: SPECOFFERS_FIELD_NAMES,
   timePeriodId: lcache.get('timePeriodId') || 8,
   limit: 300,
   error: null

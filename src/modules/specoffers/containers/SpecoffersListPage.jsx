@@ -26,7 +26,7 @@ class SpecoffersListPage extends Component {
     this.props.setSpecofferFieldWidth(newColumnWidth, columnKey);
   }
 
-  _goToDetailed = (e, index) => {
+  _onClickRow = (e, index) => {
     let id = getSpecofferIdByIndex(index);
     this.props.goToDetailed(id);
   }
@@ -63,7 +63,7 @@ class SpecoffersListPage extends Component {
           headerHeight={50}
           onColumnResizeEndCallback={this._onColumnResizeEndCallback}
           isColumnResizing={false}
-          onRowClick={this._goToDetailed}
+          onRowClick={this._onClickRow}
           width={950}
           height={420}
           {...this.props}

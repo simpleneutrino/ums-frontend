@@ -13,6 +13,7 @@ import {getEnrolmentIdByIndex} from '../helpers';
 
 import {loadEnrolmentsListBySpecoffer, setFieldWidthEnrolments} from './../actions';
 import {isDataForEnrolmentLoaded, decodeOneSpecoffer} from './../helpers';
+import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from '../reducers/view.js';
 
 class SpecofferEnrolments extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class SpecofferEnrolments extends Component {
     this.props.setFieldWidthEnrolments(newColumnWidth, columnKey);
   }
 
-  _goToDetailed = (e, index) => {
+  _onClickRow = (e, index) => {
     let id = getEnrolmentIdByIndex(this.props.specofferId, index);
     this.props.goToDetailed(id);
   }
@@ -44,7 +45,7 @@ class SpecofferEnrolments extends Component {
     }
 
     let cells = Object.keys(enrolmentsFieldNames).map((field) => {
-      if (field === 'specOfferId') return null;
+      if (field === 'specofferId') return null;
       return <Column
           columnKey={field}
           header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
@@ -66,7 +67,7 @@ class SpecofferEnrolments extends Component {
         headerHeight={70}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
-        onRowClick={this._goToDetailed}
+        onRowClick={this._onClickRow}
         width={950}
         height={380}>
         {cells}
@@ -76,10 +77,10 @@ class SpecofferEnrolments extends Component {
 }
 
 const mapStateToSpecofferEnrolments = createSelector(
-  (state, ownProps) => state.specoffers.view.specofferEnrolments.data[ownProps.params.id],
+  (state, ownProps) => getSpecofferEnrolmentsBySpecofferId(state, ownProps.params.id),
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.params.id,
-  (state) => state.specoffers.view.specofferEnrolments.enrolmentsFieldNames,
+  (state) => getSpecofferEnrolments(state).enrolmentsFieldNames,
   (enrolments, listOfDict, specofferId, enrolmentsFieldNames) => ({
     decodedEnrolments: decodeEnrolments(enrolments, listOfDict),
     specofferId: specofferId,

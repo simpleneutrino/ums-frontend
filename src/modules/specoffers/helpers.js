@@ -1,6 +1,7 @@
 import store from 'store';
 import * as dictConstants from '../dictionaries/constants';
 import {isDictLoaded} from '../dictionaries/helpers';
+import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from './reducers/view.js';
 
 let {
   DEPARTMENTS,
@@ -15,7 +16,7 @@ let {
  */
 export function isDataForEnrolmentLoaded(specofferId) {
   let state = store.getState();
-  let entity = state.specoffers.view.specofferEnrolments;
+  let entity = getSpecofferEnrolments(state);
 
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
     && !entity.isLoading
@@ -62,6 +63,6 @@ export function getSpecofferIdByIndex(index) {
 
 export function getEnrolmentIdByIndex(specofferId, index) {
   let state = store.getState();
-  let entity = state.specoffers.view.specofferEnrolments;
-  return entity.data[specofferId].resources[index]['id'];
+  let entity = getSpecofferEnrolmentsBySpecofferId(state, specofferId);
+  return entity.resources[index]['id'];
 }

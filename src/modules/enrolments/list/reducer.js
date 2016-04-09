@@ -1,4 +1,5 @@
 import * as types from '../constants';
+import {ENROLMENTS_FIELD_NAMES} from '../constants';
 
 const defaultState = {
   isLoading: true,
@@ -6,7 +7,7 @@ const defaultState = {
   limit: 50,
   offset: 0,
   resources: [],
-  enrolmentsFieldNames: types.ENROLMENTS_FIELD_NAMES,
+  enrolmentsFieldNames: ENROLMENTS_FIELD_NAMES,
   error: null
 };
 

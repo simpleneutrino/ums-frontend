@@ -11,7 +11,7 @@ export class SpecofferInfoPage extends Component {
       <div>
         <LinkContainer to={{ pathname: `/specoffers/list`, query: this.props.specoffersQueryParams }}>
           <div>
-            <Image src="/assets/images/icon-circle-arrow-left.png" circle />
+            <Image src={require('../../../../assets/images/icon-circle-arrow-left.png')} circle />
           </div>
         </LinkContainer>
         <h3>Пропозиція №{this.props.params.id}</h3>

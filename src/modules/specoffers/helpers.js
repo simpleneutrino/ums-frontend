@@ -49,10 +49,12 @@ export function decodeSpecoffers(rowSpecoffers, dictionaries) {
 export function decodeOneSpecoffer(item, dictionaries) {
   if (!item) return {};
 
-  let {DEPARTMENTS} = dictionaries;
+  let {DEPARTMENTS, SPECOFFERS_TYPES, EDUCATION_FORM_TYPES} = dictionaries;
 
   return Object.assign({}, item, {
-    departmentId: DEPARTMENTS.resourcesMap[item.departmentId]
+    departmentId: DEPARTMENTS.resourcesMap[item.departmentId],
+    specofferTypeId: SPECOFFERS_TYPES.resourcesMap[item.specofferTypeId],
+    educationFormTypeId: EDUCATION_FORM_TYPES.resourcesMap[item.educationFormTypeId]
   });
 }
 

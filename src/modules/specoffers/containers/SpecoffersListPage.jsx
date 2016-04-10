@@ -18,7 +18,7 @@ class SpecoffersListPage extends Component {
 
   componentDidMount() {
     const {timePeriodId, limit} = this.props;
-    this.props.loadDictionaries([dictConst.DEPARTMENTS]);
+    this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.SPECOFFERS_TYPES, dictConst.EDUCATION_FORM_TYPES]);
     this.props.loadSpecoffersList({timePeriodId, limit});
   }
 
@@ -64,8 +64,8 @@ class SpecoffersListPage extends Component {
           onColumnResizeEndCallback={this._onColumnResizeEndCallback}
           isColumnResizing={false}
           onRowClick={this._onClickRow}
-          width={950}
-          height={420}
+          width={window.innerWidth-20}
+          height={window.innerHeight-80}
           {...this.props}
         >
           {cells}

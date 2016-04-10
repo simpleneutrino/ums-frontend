@@ -12,9 +12,9 @@ export class SpecofferInfoPage extends Component {
         <LinkContainer to={{ pathname: `/specoffers/list`, query: this.props.specoffersQueryParams }}>
           <div>
             <Image src={require('../../../../assets/images/icon-circle-arrow-left.png')} circle />
+            <h3 className="back-to-specoffers">Пропозиція №{this.props.params.id}</h3>
           </div>
         </LinkContainer>
-        <h3>Пропозиція №{this.props.params.id}</h3>
         <br/>
         <Nav bsStyle="tabs" activeKey={1}>
           <LinkContainer to={{ pathname: `/specoffers/${this.props.params.id}/enrolments` }}>

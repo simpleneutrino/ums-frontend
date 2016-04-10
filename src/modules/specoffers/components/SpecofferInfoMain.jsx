@@ -10,7 +10,7 @@ import {getSpecofferInfoMain} from '../reducers/view.js'
 
 export class SpecofferInfoMain extends Component {
   componentDidMount() {
-    this.props.loadDictionaries([dictConst.DEPARTMENTS]);
+    this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.SPECOFFERS_TYPES, dictConst.EDUCATION_FORM_TYPES]);
     this.props.loadOneSpecoffer(this.props.specofferId);
   }
 

@@ -68,8 +68,8 @@ class SpecofferEnrolments extends Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         onRowClick={this._onClickRow}
-        width={950}
-        height={380}>
+        width={window.innerWidth-20}
+        height={window.innerHeight-180}>
         {cells}
       </Table>
     );

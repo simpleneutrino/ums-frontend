@@ -22,7 +22,7 @@ export const ENROLMENTS_FIELD_NAMES = {
   specofferId:      {'name': 'Пропозиція (id)',         'width': 90},
   isState:          {'name': 'Бюджет',                  'width': 70},
   isContract:       {'name': 'Контракт',                'width': 80},
-  departmentId:     {'name': 'Підрозділ',               'width': 80},
+  departmentId:     {'name': 'Підрозділ',               'width': 100},
   mark:             {'name': 'Загальний бал',           'width': 90},
   isPrivilege:      {'name': 'Наявність пільг',         'width': 80},
   docSeries:        {'name': 'Серія док.',              'width': 80},

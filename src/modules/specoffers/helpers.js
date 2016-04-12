@@ -35,13 +35,16 @@ export function isDataForSpecoffersLoaded() {
     && !entity.isLoading;
 }
 
+export function filteredByName(rowSpecoffers, filterByName) {
+  return rowSpecoffers.resources.filter((item) => item.name.indexOf(filterByName) !== -1);
+}
 /**
  *
  * @param rowSpecoffers - list of row specoffers
  * @returns {Array} - array of decoded specoffers
  */
-export function decodeSpecoffers(rowSpecoffers, dictionaries) {
-  return rowSpecoffers.resources.map((item)=> {
+export function decodeSpecoffers(specoffers, dictionaries) {
+  return specoffers.map((item)=> {
     return decodeOneSpecoffer(item, dictionaries);
   });
 }
@@ -60,7 +63,8 @@ export function decodeOneSpecoffer(item, dictionaries) {
 
 export function getSpecofferIdByIndex(index) {
   let state = store.getState();
-  return state.specoffers.list.resources[index]['id'];
+  let filteredList = filteredByName(state.specoffers.list, state.specoffers.list.filterByName);
+  return filteredList[index]['id'];
 }
 
 export function getEnrolmentIdByIndex(specofferId, index) {

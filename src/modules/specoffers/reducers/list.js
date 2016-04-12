@@ -10,6 +10,7 @@ const defaultState = {
   resources: [],
   specoffersFieldNames: SPECOFFERS_FIELD_NAMES,
   timePeriodId: lcache.get('timePeriodId') || 8,
+  filterByName: '',
   limit: 300,
   error: null
 };
@@ -55,6 +56,13 @@ export default function list(state = defaultState, action = {}) {
       return Object.assign({}, state,
         {
           specoffersFieldNames: {...state.specoffersFieldNames, [action.payload.columnKey]: changedName}
+        }
+      );
+
+    case types.FILTER_BY_NAME:
+      return Object.assign({}, state,
+        {
+          filterByName: action.payload.filterByName
         }
       );
 

@@ -77,3 +77,12 @@ export function setFieldWidthEnrolments(newColumnWidth, columnKey) {
     }
   };
 }
+
+export function setFilterByName(name) {
+  return {
+    type: types.FILTER_BY_NAME,
+    payload: {
+      filterByName: name
+    }
+  };
+}

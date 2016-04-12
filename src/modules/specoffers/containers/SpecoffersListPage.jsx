@@ -2,12 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import Input from 'react-bootstrap/lib/Input';
+import Col from 'react-bootstrap/lib/Col';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
 
 import Loading from 'loading';
-import {loadSpecoffersList, setSpecofferFieldWidth} from './../actions';
-import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex} from './../helpers';
+import {loadSpecoffersList, setSpecofferFieldWidth, setFilterByName} from './../actions';
+import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex, filteredByName} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
 
@@ -31,13 +33,14 @@ class SpecoffersListPage extends Component {
     this.props.goToDetailed(id);
   }
 
+  _onFilterChange = (e) => {
+    this.props.setFilterByName(e.target.value);
+  }
+
   render() {
-    let {decodedSpecoffers, specoffersFieldNames} = this.props;
+    let {decodedSpecoffers, specoffersFieldNames, filterByName} = this.props;
     if (!isDataForSpecoffersLoaded()) {
       return <Loading/>;
-    }
-    if (!decodedSpecoffers.length) {
-      return <div>Данних немає!</div>;
     }
 
     let cells = Object.keys(specoffersFieldNames).map((field) => {
@@ -57,6 +60,14 @@ class SpecoffersListPage extends Component {
 
     return (
       <div>
+        <Col xs={12} md={4}>
+          <Input
+            type="text"
+            onChange={this._onFilterChange}
+            placeholder="Знайти спеціальність"
+            value={filterByName}
+          />
+        </Col>
         <Table
           rowsCount={decodedSpecoffers.length}
           rowHeight={50}
@@ -65,7 +76,7 @@ class SpecoffersListPage extends Component {
           isColumnResizing={false}
           onRowClick={this._onClickRow}
           width={window.innerWidth-20}
-          height={window.innerHeight-80}
+          height={window.innerHeight-140}
           {...this.props}
         >
           {cells}
@@ -87,11 +98,13 @@ const mapStateToSpecoffers = createSelector(
   (state) => state.dictionaries,
   (state, ownProps) => ownProps.location.query,
   (state) => state.specoffers.list.specoffersFieldNames,
-  (list, listOfDict, query, specoffersFieldNames) => ({
-    decodedSpecoffers: decodeSpecoffers(list, listOfDict),
+  (state) => state.specoffers.list.filterByName,
+  (list, listOfDict, query, specoffersFieldNames, filterByName) => ({
+    decodedSpecoffers: decodeSpecoffers(filteredByName(list, filterByName), listOfDict),
     timePeriodId: query.timePeriodId,
     limit: query.limit,
-    specoffersFieldNames: specoffersFieldNames
+    specoffersFieldNames: specoffersFieldNames,
+    filterByName: filterByName
   })
 );
 
@@ -99,7 +112,8 @@ const mapDispatchToSpecoffers = (dispatch) => (
   { loadSpecoffersList: (params) => dispatch(loadSpecoffersList(params)),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
     setSpecofferFieldWidth: (newColumnWidth, columnKey) => dispatch(setSpecofferFieldWidth(newColumnWidth, columnKey)),
-    goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`))
+    goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`)),
+    setFilterByName: (name) => dispatch(setFilterByName(name))
   }
 );
 

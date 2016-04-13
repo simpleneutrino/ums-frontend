@@ -1,7 +1,6 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import 'fixed-data-table/dist/fixed-data-table.min.css'
 import FixedDataTable from 'fixed-data-table';
 const {Table, Column, Cell} = FixedDataTable;
 import findIndex from 'lodash/findIndex'

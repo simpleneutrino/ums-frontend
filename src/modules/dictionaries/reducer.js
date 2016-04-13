@@ -12,7 +12,9 @@ const disctionariesDefaultState = {
   [types.DEPARTMENTS]: dictInitialState,
   [types.ENROLMENTS_TYPES]: dictInitialState,
   [types.ENROLMENTS_STATUS_TYPES]: dictInitialState,
-  [types.TIMEPERIODS]: dictInitialState
+  [types.TIMEPERIODS]: dictInitialState,
+  [types.SPECOFFERS_TYPES]: dictInitialState,
+  [types.EDUCATION_FORM_TYPES]: dictInitialState
 };
 
 export default function dictionaries(state = disctionariesDefaultState, action = {}) {

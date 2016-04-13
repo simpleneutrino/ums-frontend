@@ -1,5 +1,5 @@
 {
-  "name": "ums-frontned",
+  "name": "ums-frontend",
   "version": "0.0.1",
   "description": "",
   "homepage": "https://github.com/mkozhukharenko/ums-frontend",
@@ -71,6 +71,7 @@
     "file-loader": "0.8.5",
     "ghooks": "^1.0.3",
     "html-webpack-plugin": "^1.7.0",
+    "image-webpack-loader": "^1.6.3",
     "mocha": "2.4.5",
     "postcss-loader": "^0.8.2",
     "react-transform-catch-errors": "^1.0.1",
@@ -82,6 +83,7 @@
     "style-loader": "^0.13.0",
     "stylus": "^0.54.2",
     "stylus-loader": "^2.0.0",
+    "url-loader": "^0.5.7",
     "watch": "0.17.1",
     "webpack": "^1.12.10",
     "webpack-dev-middleware": "^1.5.1",

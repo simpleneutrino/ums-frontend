@@ -1,18 +1,21 @@
 import React, {Component, PropTypes} from 'react';
+import find from 'lodash/find'
+import {createSelector} from 'reselect';
 import {connect} from 'react-redux';
-import { createSelector } from 'reselect';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
 
-import * as dictConst from '../../dictionaries/constants';
-import {loadEnrolments, setFieldWidthEnrolments} from './../actions';
-import loadDictionaries from '../../dictionaries/actions';
-import {isDataForEnrolmentLoaded, decodeEnrolments, getEnrolmentIdByIndex} from '../helpers';
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
-
 import Loading from 'loading';
+import * as dictConst from '../../dictionaries/constants';
+import loadDictionaries from '../../dictionaries/actions';
+import {decodeEnrolments} from '../../enrolments/helpers';
+import {getEnrolmentIdByIndex} from '../helpers';
 
-class EnrolmentsListPage extends Component {
+import {loadEnrolmentsListBySpecoffer, setFieldWidthEnrolments} from './../actions';
+import {isDataForEnrolmentLoaded, decodeOneSpecoffer} from './../helpers';
+import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from '../reducers/view.js';
+
+class SpecofferEnrolments extends Component {
   constructor(props) {
     super(props);
   }
@@ -22,24 +25,27 @@ class EnrolmentsListPage extends Component {
   }
 
   _onClickRow = (e, index) => {
-    let id = getEnrolmentIdByIndex(index);
+    let id = getEnrolmentIdByIndex(this.props.specofferId, index);
     this.props.goToDetailed(id);
   }
 
   componentDidMount() {
-    const {limit, offset} = this.props.enrolmentList;
     this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.ENROLMENTS_TYPES, dictConst.ENROLMENTS_STATUS_TYPES]);
-    this.props.loadEnrolments({limit, offset});
+    this.props.loadEnrolmentsListBySpecoffer({specofferId: this.props.specofferId});
   }
 
   render() {
-    if (!isDataForEnrolmentLoaded()) {
-      return <Loading/>;
-    }
-
     let {decodedEnrolments, enrolmentsFieldNames} = this.props;
 
+    if (!isDataForEnrolmentLoaded(this.props.specofferId)) {
+      return <Loading/>;
+    }
+    if (!decodedEnrolments.length) {
+      return <div>Данних по данній пропозиції немає!</div>;
+    }
+
     let cells = Object.keys(enrolmentsFieldNames).map((field) => {
+      if (field === 'specofferId') return null;
       return <Column
           columnKey={field}
           header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
@@ -63,34 +69,27 @@ class EnrolmentsListPage extends Component {
         isColumnResizing={false}
         onRowClick={this._onClickRow}
         width={window.innerWidth-20}
-        height={window.innerHeight-80}
-      >
+        height={window.innerHeight-180}>
         {cells}
       </Table>
     );
   }
 }
 
-// const select = (state)=> {
-//   return {
-//     enrolmentList: state.enrolments.list,
-//     dictionaries: state.dictionaries
-//   };
-// };
-
-export const getDecodedEnrolments = createSelector(
-  [ (state) => state.enrolments.list,
-   (state) => state.dictionaries,
-   (state) => state.enrolments.list.enrolmentsFieldNames],
-  (enrolmentList, listOfDict, enrolmentsFieldNames) => ({
-    decodedEnrolments: decodeEnrolments(enrolmentList, listOfDict),
-    enrolmentList: enrolmentList,
+const mapStateToSpecofferEnrolments = createSelector(
+  (state, ownProps) => getSpecofferEnrolmentsBySpecofferId(state, ownProps.params.id),
+  (state) => state.dictionaries,
+  (state, ownProps) => ownProps.params.id,
+  (state) => getSpecofferEnrolments(state).enrolmentsFieldNames,
+  (enrolments, listOfDict, specofferId, enrolmentsFieldNames) => ({
+    decodedEnrolments: decodeEnrolments(enrolments, listOfDict),
+    specofferId: specofferId,
     enrolmentsFieldNames: enrolmentsFieldNames
   })
-)
+);
 
 const mapDispatchToEnrolments = (dispatch) => (
-  { loadEnrolments: (params) => dispatch(loadEnrolments(params)),
+  { loadEnrolmentsListBySpecoffer: (params) => dispatch(loadEnrolmentsListBySpecoffer(params)),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
     setFieldWidthEnrolments: (newWidth, columnKey) => dispatch(setFieldWidthEnrolments(newWidth, columnKey)),
     goToDetailed: (id) => dispatch(push(`/enrolments/${id}/info`))
@@ -98,6 +97,6 @@ const mapDispatchToEnrolments = (dispatch) => (
 );
 
 export default connect(
-  getDecodedEnrolments,
+  mapStateToSpecofferEnrolments,
   mapDispatchToEnrolments
-)(EnrolmentsListPage);
+)(SpecofferEnrolments);

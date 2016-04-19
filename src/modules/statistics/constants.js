@@ -3,9 +3,6 @@ export const STATISTICS_LOAD_START = 'STATISTICS_LOAD_START';
 export const STATISTICS_LOAD_SUCCESS = 'STATISTICS_LOAD_SUCCESS';
 export const STATISTICS_LOAD_FAIL = 'STATISTICS_LOAD_FAIL';
 
-// CONSTANTS
-export const STATISTICS_REDUCER = 'statistics';
-
 // statistics entities names
 export const PRIORITIES = 'PRIORITIES';
 export const ALLOCATIONS_ADMINUNITS = 'ALLOCATIONS_ADMINUNITS';
@@ -31,6 +28,10 @@ export const STATISTICS_MAP = {
     },
     route: `/statistics/chart/${PRIORITIES}`,
     title: 'Статистика по пріоритетам',
+    headers: [
+      {key: 'priority', title: 'Пріоритет'},
+      {key: 'count', title: 'Кількість заяв'}
+    ],
     amChartConfig: {
       'type': 'serial',
       'theme': 'light',
@@ -76,6 +77,10 @@ export const STATISTICS_MAP = {
     },
     route: `/statistics/chart/${ALLOCATIONS_ADMINUNITS}`,
     title: 'Статистика по областям',
+    headers: [
+      {key: 'adminUnit', title: 'Область'},
+      {key: 'entrantCount', title: 'Кількість заяв'}
+    ],
     amChartConfig: {
       'type': 'pie',
       'theme': 'light',
@@ -99,6 +104,10 @@ export const STATISTICS_MAP = {
       cache: true,
       cacheTime: 300
     },
+    headers: [
+      {key: 'adminUnit', title: 'Область'},
+      {key: 'entrantCount', title: 'Кількість заяв'}
+    ],
     route: `/statistics/chart/${ALLOCATIONS_ADMINUNITS_MAP}`,
     title: 'Статистика по областям (карта)',
     amChartConfig: {
@@ -138,6 +147,12 @@ export const STATISTICS_MAP = {
     },
     route: `/statistics/chart/${ALLOCATIONS_DEPARTMENTS}`,
     title: 'Статистика по факультетам',
+    headers: [
+      {key: 'name', title: 'Кількість заявок (entrantPlace)'},
+      {key: 'awardsCount', title: 'Нагороди'},
+      {key: 'benefitCount', title: 'Пільги'},
+      {key: 'generalCount', title: 'Загальна кількість'}
+    ],
     amChartConfig: {
       'type': 'serial',
       'theme': 'light',
@@ -206,6 +221,10 @@ export const STATISTICS_MAP = {
       cache: true,
       cacheTime: 300
     },
+    headers: [
+      {key: 'departmentName', title: 'Факультет/Департамент'},
+      {key: 'entrantPlace', title: 'Кількість заявок (entrantPlace)'}
+    ],
     route: `/statistics/chart/${PLACES}`,
     title: 'Статистика по місцям',
     amChartConfig: {

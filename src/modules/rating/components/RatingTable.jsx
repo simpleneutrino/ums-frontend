@@ -29,10 +29,6 @@ export default class RatingTable extends Component {
 
   render() {
     let { enrolments, highlightedEnrolment, stateCount } =  this.props;
-    console.log('enrolments', enrolments);
-    console.log('stateCount', stateCount);
-    console.log('stateCount', typeof stateCount);
-    // let classes = [];
     const highlightedIndex = findIndex(enrolments, {'enrolmentId': highlightedEnrolment});
     return (
       <Table

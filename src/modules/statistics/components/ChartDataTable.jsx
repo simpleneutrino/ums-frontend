@@ -9,9 +9,6 @@ export default class ChartDataTable extends Component {
 
   render() {
     let {chartData, headers} = this.props;
-    console.log('chartData', chartData);
-    console.log('headers', headers);
-    console.log('this.talbeRows(chartData, headers)', this.talbeRows(chartData, headers));
     return (
         <Table striped bordered condensed hover>
           <thead>

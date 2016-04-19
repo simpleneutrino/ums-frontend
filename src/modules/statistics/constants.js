@@ -148,7 +148,7 @@ export const STATISTICS_MAP = {
     route: `/statistics/chart/${ALLOCATIONS_DEPARTMENTS}`,
     title: 'Статистика по факультетам',
     headers: [
-      {key: 'name', title: 'Кількість заявок (entrantPlace)'},
+      {key: 'name', title: 'Департамент/фаультет'},
       {key: 'awardsCount', title: 'Нагороди'},
       {key: 'benefitCount', title: 'Пільги'},
       {key: 'generalCount', title: 'Загальна кількість'}
@@ -157,7 +157,7 @@ export const STATISTICS_MAP = {
       'type': 'serial',
       'theme': 'light',
       'categoryField': 'name',
-      'rotate': false,
+      'rotate': true,
       'startDuration': 1,
       'categoryAxis': {
         'gridPosition': 'start',

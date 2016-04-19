@@ -65,12 +65,11 @@ class Chart extends Component {
 
   render() {
     let { dataProvider, chartId, config: { headers } } = this.props;
-    console.log('dataProvider', dataProvider);
-    // if data for chart is available - so render a table with it
     return (
       <div className="statistics__content">
         <div id={chartId} className="statistics__amchart"></div>
         {this.addSpinner(dataProvider)}
+        {/* if data for chart is available - so render a table with it*/}
         { dataProvider.data.length ? 
             <ChartDataTable chartData={dataProvider.data} headers={headers}/> : null }
       </div>

@@ -4,16 +4,10 @@ import { expect }  from 'chai';
 import RatingTable from './RatingTable'
 import ratingData from './../fixtures/ratingList'
 
-// TODO: try chai-enzyme for better experience;
-
 describe('<RatingTable /> components', () => {
-
-
+  
   let setup = () => {
-    const shallowTable = shallow(<RatingTable
-        ratingData={ratingData.enrolments}
-        size={ratingData.enrolments.length}
-        highlightedEnrolment={3}/>);
+    const shallowTable = shallow(<RatingTable {...ratingData}/>);
     
     return {
       shallowTable,
@@ -21,10 +15,7 @@ describe('<RatingTable /> components', () => {
     }
   };
 
-  const renderedTable = render(<RatingTable
-      ratingData={ratingData.enrolments}
-      size={ratingData.enrolments.length}
-      highlightedEnrolment={1}/>);
+  const renderedTable = render(<RatingTable {...ratingData}/>);
   
   it('should have 3 rows', () => {
     let { tableProps } = setup();

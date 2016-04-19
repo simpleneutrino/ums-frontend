@@ -25,6 +25,7 @@
     "amcharts3": "github:amcharts/amcharts3",
     "ammap3": "github:amcharts/ammap3",
     "bootstrap": "^3.3.6",
+    "classnames": "^2.2.3",
     "fixed-data-table": "^0.6.0",
     "history": "2.0.0",
     "lodash": "^4.7.0",

@@ -1,6 +1,9 @@
 export default {
   licCount: 100,
   stateCount: 20,
+  highlightedEnrolment: 3,
+  isLoading: false,
+  error: null,
   enrolments: [
     {
       enrolmentId: 1,

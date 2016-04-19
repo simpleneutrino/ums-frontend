@@ -4,6 +4,7 @@ import React, {Component, PropTypes} from 'react';
 import FixedDataTable from 'fixed-data-table';
 const {Table, Column, Cell} = FixedDataTable;
 import findIndex from 'lodash/findIndex'
+import classNames from 'classnames';
 
 const CostomCell = ({rowIndex, data, field, ...props}) => (
   <Cell {...props}>
@@ -11,55 +12,62 @@ const CostomCell = ({rowIndex, data, field, ...props}) => (
   </Cell>
 );
 
-const rowClassNameGetter = (highlightedIndex) => (index, b) => {
-  if (highlightedIndex === index)
-    return 'row--higlighted';
+const rowClassNameGetter = (highlightedIndex, stateCount) => (index) => {
+  console.log('index', index);
+  
+  return classNames(
+      {'row--higlighted': highlightedIndex === index},
+      {'row--red-state-line': index + 1 === stateCount});
 };
 
 export default class RatingTable extends Component {
   static propTypes = {
-    ratingData: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    enrolments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     size: PropTypes.number.isRequired,
     highlightedEnrolment: PropTypes.number
   };
 
   render() {
-    let { ratingData, size, highlightedEnrolment } =  this.props;
-    const highlightedIndex = findIndex(ratingData, {'enrolmentId': highlightedEnrolment});
+    let { enrolments, highlightedEnrolment, stateCount } =  this.props;
+    console.log('enrolments', enrolments);
+    console.log('stateCount', stateCount);
+    console.log('stateCount', typeof stateCount);
+    // let classes = [];
+    const highlightedIndex = findIndex(enrolments, {'enrolmentId': highlightedEnrolment});
     return (
       <Table
         rowHeight={50}
         scrollToRow={highlightedIndex}
         headerHeight={50}
-        rowsCount={size}
+        rowsCount={enrolments.length}
         width={650}
         maxHeight={900}
-        rowClassNameGetter={rowClassNameGetter(highlightedIndex)}
+        rowClassNameGetter={rowClassNameGetter(highlightedIndex, stateCount)}
         {...this.props}>
         <Column
           header={<Cell>Призвіще</Cell>}
-          cell={<CostomCell data={ratingData} field="surname"/>}
+          cell={<CostomCell data={enrolments} field="surname"/>}
           flexGrow={2}
           width={200}
         />
         <Column
           header={<Cell>Імя</Cell>}
-          cell={<CostomCell data={ratingData} field="firstname"/>}
+          cell={<CostomCell data={enrolments} field="firstname"/>}
           width={100}
         />
         <Column
           header={<Cell>По-батькові</Cell>}
-          cell={<CostomCell data={ratingData} field="fathername"/>}
+          cell={<CostomCell data={enrolments} field="fathername"/>}
           width={150}
         />
         <Column
           header={<Cell>Бал</Cell>}
-          cell={<CostomCell data={ratingData} field="kb"/>}
+          cell={<CostomCell data={enrolments} field="kb"/>}
           width={100}
         />
         <Column
           header={<Cell>Пріоритет</Cell>}
-          cell={<CostomCell data={ratingData} field="ratingPriority"/>}
+          cell={<CostomCell data={enrolments} field="ratingPriority"/>}
           width={100}
         />
       </Table>

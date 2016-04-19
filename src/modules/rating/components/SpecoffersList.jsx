@@ -7,7 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class SpecoffersList extends Component {
   static propTypes = {
-    specoffers: PropTypes.object.isRequired,
+    specoffers: PropTypes.array.isRequired,
     departmentId: PropTypes.string.isRequired
   };
 
@@ -20,14 +20,11 @@ export default class SpecoffersList extends Component {
   }
   specoffersList() {
     let {specoffers, departmentId} = this.props;
-    if (!specoffers) {
-      return <div>Choose a department at first!</div>
-    }
-    return specoffers.specoffers.map((specoffer) => {
+    return specoffers.map((specoffer) => {
       return <LinkContainer key={specoffer.specofferId}
         to={{ pathname: '/rating',
               query: {departmentId: departmentId, specofferId: specoffer.specofferId} }}>
-        <NavItem eventKey={specoffer.specofferId}> {specoffer.name} {specoffer.specofferId}</NavItem>
+        <NavItem eventKey={specoffer.specofferId}>{specoffer.name}</NavItem>
       </LinkContainer>;
     });
   };

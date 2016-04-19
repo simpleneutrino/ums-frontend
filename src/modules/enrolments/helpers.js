@@ -9,10 +9,14 @@ let {
   ENROLMENTS_STATUS_TYPES
 } = dictConstants;
 
+export function getEnrolmentIdByIndex(index) {
+  let state = store.getState();
+  return state.enrolments.list.resources[index]['id'];
+}
+
 /**
  * check if data is loaded
- * @param storeState
- * @param reducerName
+ * @param entityData
  * @returns {boolean}
  */
 export function isEntityDataLoaded(entityData) {
@@ -24,11 +28,10 @@ export function isEntityDataLoaded(entityData) {
  * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForEnrolmentLoaded(reducerName) {
+export function isDataForEnrolmentLoaded() {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataLoaded(
-      state[constants.ENROLMENT_REDUCER][reducerName]);
+    && isEntityDataLoaded(state.enrolments.list);
 }
 
 /**
@@ -47,12 +50,10 @@ export function isEntityDataForOneLoaded(entityData, params) {
  * @param reducerName
  * @returns {*|boolean}
  */
-export function isDataForOneEnrolmentLoaded(reducerName, params = {}) {
+export function isDataForOneEnrolmentLoaded(params = {}) {
   let state = store.getState();
   return isDictLoaded([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES], state.dictionaries)
-    && isEntityDataForOneLoaded(
-      state[constants.ENROLMENT_REDUCER][constants.ENROLMENT_VIEW_REDUCER][reducerName],
-      params);
+    && isEntityDataForOneLoaded(state.enrolments.view.mainInfo, params);
 }
 
 export function decodeOneEnrolment(item, dictionaries) {
@@ -90,6 +91,8 @@ export function decodeOneEnrolment(item, dictionaries) {
  * @returns {Array} - array of decoded enrolments
  */
 export function decodeEnrolments(rowEnrolments, dictionaries) {
+  if (!rowEnrolments) return [];
+
   return rowEnrolments.resources.map((item)=> {
     return decodeOneEnrolment(item, dictionaries);
   });

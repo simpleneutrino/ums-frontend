@@ -38,6 +38,16 @@ export function loadEnrolmentById(id) {
   };
 }
 
+export function setFieldWidthEnrolments(newColumnWidth, columnKey) {
+  return {
+    type: types.ENROLMENTS_LIST_PAGE_WIDTH_CHANGED,
+    payload: {
+      newColumnWidth: newColumnWidth,
+      columnKey: columnKey
+    }
+  };
+}
+
 export function loadBenefitsById(id) {
   return {
     type: REQUEST_API,

@@ -14,11 +14,23 @@ export const LOAD_ONE_STATUS_START = 'LOAD_ONE_STATUS_START';
 export const LOAD_ONE_STATUS_SUCCESS = 'LOAD_ONE_STATUS_SUCCESS';
 export const LOAD_ONE_STATUS_FAIL = 'LOAD_ONE_STATUS_FAIL';
 
-export const ENROLMENT_REDUCER = 'enrolments';
-export const ENROLMENT_LIST_REDUCER = 'list';
-export const ENROLMENT_VIEW_REDUCER = 'view';
-export const ENROLMENT_MAININFO_REDUCER = 'mainInfo';
+export const ENROLMENTS_LIST_PAGE_WIDTH_CHANGED = 'ENROLMENTS_LIST_PAGE_WIDTH_CHANGED';
 
+export const ENROLMENTS_FIELD_NAMES = {
+  id:               {'name': '№',                       'width': 40},
+  personId:         {'name': 'Персона (id)',            'width': 70},
+  specofferId:      {'name': 'Пропозиція (id)',         'width': 90},
+  isState:          {'name': 'Бюджет',                  'width': 70},
+  isContract:       {'name': 'Контракт',                'width': 80},
+  departmentId:     {'name': 'Підрозділ',               'width': 100},
+  mark:             {'name': 'Загальний бал',           'width': 90},
+  isPrivilege:      {'name': 'Наявність пільг',         'width': 80},
+  docSeries:        {'name': 'Серія док.',              'width': 80},
+  docNum:           {'name': 'Номер док.',              'width': 80},
+  isHostel:         {'name': 'Потреб. гуртож',          'width': 80},
+  enrolmentTypeId:  {'name': 'Тип поступлення',         'width': 100},
+  isInterview:      {'name': 'Відмітка про співбесіду', 'width': 100}
+};
 
 export const isStateNames = ['\u2718', '\u2713'];
 export const isContractNames = ['\u2718', '\u2713'];

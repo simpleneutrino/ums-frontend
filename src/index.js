@@ -6,6 +6,7 @@ import store from 'store';
 import routes from './system/routes';
 import '../assets/stylesheets/index.styl';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'fixed-data-table/dist/fixed-data-table.min.css';
 import {syncHistoryWithStore} from 'react-router-redux';
 import 'fixed-data-table/dist/fixed-data-table.min.css'
 

@@ -4,12 +4,11 @@ import {isDataForOneEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import {ENROLMENT_MAININFO_REDUCER} from './../constants';
 import Loading from 'loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 import { createSelector } from 'reselect';
 
-export default class MainInfo extends Component {
+class MainInfo extends Component {
   static propTypes = {
     decodedEnrolment: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     id: PropTypes.string.isRequired
@@ -77,12 +76,12 @@ MainInfo.propTypes = {
 // };
 
 export const getOneDecodedEnrolment = createSelector(
-  [ (state) => state.enrolments.view.mainInfo,
+  [ (state, ownProps) => state.enrolments.view.mainInfo.data[ownProps.params.id],
    (state) => state.dictionaries,
    (state, ownProps) => ownProps.params.id],
   (mainInfo, listOfDict, enrolId) => ({
-    decodedEnrolment: decodeOneEnrolment(mainInfo.data[enrolId], listOfDict),
-    isDataLoaded: isDataForOneEnrolmentLoaded(ENROLMENT_MAININFO_REDUCER, {'enrolId': enrolId})
+    decodedEnrolment: decodeOneEnrolment(mainInfo, listOfDict),
+    isDataLoaded: isDataForOneEnrolmentLoaded({'enrolId': enrolId})
   })
 )
 

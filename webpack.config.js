@@ -67,7 +67,9 @@ const getEntry = function (env) {
 const getLoaders = function (env) {
   const loaders = [
     {test: /\.(js|jsx)$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
-    {test: /\.(jpe?g|png|gif|svg|eot|woff2|woff|ttf)$/i, loaders: ['file']}
+    // The url-loadereturn a Data Url if the file is smaller than a limit. Else - file loader is used.
+    {test: /\.(jpe?g|png|gif|svg|eot|woff2|woff|ttf)$/i, loaders: ['url-loader?limit=5000&name=img-[hash:6].[ext]']}
+    // TODO: add image loader to compress large images;
   ];
 
   if (env === productionEnvironment) {

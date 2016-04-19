@@ -1,4 +1,5 @@
 import * as types from '../constants';
+import {ENROLMENTS_FIELD_NAMES} from '../constants';
 
 const defaultState = {
   isLoading: true,
@@ -6,6 +7,7 @@ const defaultState = {
   limit: 50,
   offset: 0,
   resources: [],
+  enrolmentsFieldNames: ENROLMENTS_FIELD_NAMES,
   error: null
 };
 
@@ -25,6 +27,17 @@ export default function enrolments(state = defaultState, action = {}) {
 
     case types.LOAD_ALL_ENROLMENTS_FAIL:
       return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
+
+    case types.ENROLMENTS_LIST_PAGE_WIDTH_CHANGED:
+      let changedName = {
+        'name': state.enrolmentsFieldNames[action.payload.columnKey].name,
+        'width': action.payload.newColumnWidth
+      };
+      return Object.assign({}, state,
+        {
+          enrolmentsFieldNames: {...state.enrolmentsFieldNames, [action.payload.columnKey]: changedName}
+        }
+      );
 
     default:
       return state;

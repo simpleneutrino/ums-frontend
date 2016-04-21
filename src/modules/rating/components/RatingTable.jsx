@@ -2,9 +2,9 @@
 
 import React, {Component, PropTypes} from 'react';
 import FixedDataTable from 'fixed-data-table';
-const {Table, Column, Cell} = FixedDataTable;
 import findIndex from 'lodash/findIndex'
 import classNames from 'classnames';
+const {Table, Column, Cell} = FixedDataTable;
 
 const CostomCell = ({rowIndex, data, field, ...props}) => (
   <Cell {...props}>
@@ -13,8 +13,7 @@ const CostomCell = ({rowIndex, data, field, ...props}) => (
 );
 
 const rowClassNameGetter = (highlightedIndex, stateCount) => (index) => {
-  console.log('index', index);
-  
+
   return classNames(
       {'row--higlighted': highlightedIndex === index},
       {'row--red-state-line': index + 1 === stateCount});
@@ -23,8 +22,9 @@ const rowClassNameGetter = (highlightedIndex, stateCount) => (index) => {
 export default class RatingTable extends Component {
   static propTypes = {
     enrolments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    size: PropTypes.number.isRequired,
-    highlightedEnrolment: PropTypes.number
+    highlightedEnrolment: PropTypes.number,
+    stateCount: PropTypes.number.isRequired,
+    licCount: PropTypes.number.isRequired
   };
 
   render() {

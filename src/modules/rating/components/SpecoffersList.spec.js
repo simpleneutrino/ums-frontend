@@ -8,7 +8,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 describe('<SpecoffersList /> components', () => {
 
   let props = {
-    departmentId: 221,
+    departmentId: '221',
     specoffers: [ {
       'name' : 'Теst child',
       'specofferId' : 69

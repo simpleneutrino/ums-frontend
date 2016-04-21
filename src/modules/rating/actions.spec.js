@@ -27,8 +27,8 @@ describe('Rating actions', () => {
       expect(interrupt(store)).to.equal(true)
     });
 
-    it('not interrupt loadSpecoffersChooser ' +
-        'when data for specoffer choose is not available (empty)', () => {
+    it('dont interrupts a loading of SpecoffersChooser ' +
+        'when data for specofferChooser is not available (empty)', () => {
       initialData.rating.specofferChooser.resources = [];
       let store = mockStore(initialData);
       expect(interrupt(store)).to.equal(false)

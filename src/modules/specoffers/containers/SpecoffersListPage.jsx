@@ -1,17 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
-import Input from 'react-bootstrap/lib/Input';
+import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
-
-import Loading from 'loading';
 import {loadSpecoffersList, setSpecofferFieldWidth, setFilterByName} from './../actions';
 import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex, filteredByName} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
+import Loader from 'loader'
 
 class SpecoffersListPage extends Component {
   constructor(props) {
@@ -39,29 +37,15 @@ class SpecoffersListPage extends Component {
 
   render() {
     let {decodedSpecoffers, specoffersFieldNames, filterByName} = this.props;
-    if (!isDataForSpecoffersLoaded()) {
-      return <Loading/>;
-    }
 
-    let cells = Object.keys(specoffersFieldNames).map((field) => {
-      return <Column
-          columnKey={field}
-          header={<Cell>{specoffersFieldNames[field].name}</Cell>}
-          cell={props => (
-              <Cell {...props}>
-                {decodedSpecoffers[props.rowIndex][field]}
-              </Cell>
-            )
-          }
-          isResizable
-          width={specoffersFieldNames[field].width}
-        />
-    });
+    if (!isDataForSpecoffersLoaded()) {
+      return <Loader isLoading/>;
+    }
 
     return (
       <div>
         <Col xs={12} md={4}>
-          <Input
+          <FormControl
             type="text"
             onChange={this._onFilterChange}
             placeholder="Знайти спеціальність"
@@ -79,10 +63,28 @@ class SpecoffersListPage extends Component {
           height={window.innerHeight-140}
           {...this.props}
         >
-          {cells}
+          {this._buildCells(decodedSpecoffers, specoffersFieldNames)}
         </Table>
       </div>
     );
+  }
+
+  _buildCells = (decodedSpecoffers, specoffersFieldNames) => {
+    return Object.keys(specoffersFieldNames).map((field) => {
+      return <Column
+        key={field}
+        columnKey={field}
+        header={<Cell>{specoffersFieldNames[field].name}</Cell>}
+        cell={props => (
+              <Cell {...props}>
+                {decodedSpecoffers[props.rowIndex][field]}
+              </Cell>
+            )
+          }
+        isResizable
+        width={specoffersFieldNames[field].width}
+      />
+    });
   }
 }
 

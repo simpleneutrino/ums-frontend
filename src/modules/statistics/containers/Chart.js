@@ -11,6 +11,7 @@ import { STATISTICS_MAP as map } from './../constants';
 import { loadStatistics } from '../actions';
 import { fillMapWithData } from '../helpers';
 import ChartDataTable from '../components/ChartDataTable'
+import Loader from 'loader'
 
 class Chart extends Component {
   static propTypes = {
@@ -34,7 +35,7 @@ class Chart extends Component {
   componentDidUpdate(prevProps, prevState) {
     let { dataProvider } = this.props;
     if (dataProvider && dataProvider.data && !dataProvider.isLoading) {
-      this.renderChart();
+      this._renderChart();
     }
   }
   /**
@@ -50,7 +51,7 @@ class Chart extends Component {
    * merge amChart configs with data from a server (dataProvider)
    * amChartConfig - predefined configs (from constants) for amChart
    */
-  renderChart() {
+  _renderChart() {
     let { dataProvider, chartId } = this.props;
     let { amChartConfig }  = this.props.config;
     if (amChartConfig.type === 'map') {
@@ -67,19 +68,13 @@ class Chart extends Component {
     let { dataProvider, chartId, config: { headers } } = this.props;
     return (
       <div className="statistics__content">
+        <Loader isLoading={!dataProvider || dataProvider.isLoading}/>
         <div id={chartId} className="statistics__amchart"></div>
-        {this.addSpinner(dataProvider)}
         {/* if data for chart is available - so render a table with it*/}
         { dataProvider.data.length ? 
             <ChartDataTable chartData={dataProvider.data} headers={headers}/> : null }
       </div>
     );
-  }
-
-  addSpinner(dataProvider) {
-    if (!dataProvider || dataProvider.isLoading) {
-      return <div>Loading ...</div>;
-    } 
   }
 }
 

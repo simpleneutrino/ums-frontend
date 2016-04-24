@@ -6,7 +6,6 @@ import Autosuggest from 'react-autosuggest';
 import { getSuggestions } from '../helpers'
 import { highlighEnrolment } from '../actions'
 
-
 function renderSuggestion(suggestion) {
   return (
     <span>{suggestion.surname} {suggestion.firstname} - {suggestion.kb}</span>

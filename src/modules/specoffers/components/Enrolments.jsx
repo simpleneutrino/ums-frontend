@@ -1,19 +1,17 @@
 import React, {Component, PropTypes} from 'react';
-import find from 'lodash/find'
 import {createSelector} from 'reselect';
 import {connect} from 'react-redux';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
 
-import Loading from 'loading';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
 import {decodeEnrolments} from '../../enrolments/helpers';
 import {getEnrolmentIdByIndex} from '../helpers';
-
 import {loadEnrolmentsListBySpecoffer, setFieldWidthEnrolments} from './../actions';
-import {isDataForEnrolmentLoaded, decodeOneSpecoffer} from './../helpers';
+import {isDataForEnrolmentLoaded} from './../helpers';
 import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from '../reducers/view.js';
+import Loader from 'loader'
 
 class SpecofferEnrolments extends Component {
   constructor(props) {
@@ -37,8 +35,9 @@ class SpecofferEnrolments extends Component {
   render() {
     let {decodedEnrolments, enrolmentsFieldNames} = this.props;
 
+
     if (!isDataForEnrolmentLoaded(this.props.specofferId)) {
-      return <Loading/>;
+      return <Loader isLoading isPageLoader/>;
     }
     if (!decodedEnrolments.length) {
       return <div>Данних по данній пропозиції немає!</div>;

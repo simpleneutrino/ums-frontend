@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { loadRatingList } from './../actions';
 import { createSelector } from 'reselect';
 import RatingTable from './../components/RatingTable';
+import Loader from 'loader'
 
 class RatingListContainer extends Component {
   static propTypes = {
@@ -24,10 +25,7 @@ class RatingListContainer extends Component {
   render() {
     let {ratingList, specofferId} = this.props;
     let {isLoading, enrolments} =ratingList;
-    
-    if (isLoading) {
-      return <div>loading...</div>;
-    }
+
     if (!specofferId) {
       return <div>Для того щоб отримати перелік заяв потрібно обрати пропозицію!</div>;
     }
@@ -36,7 +34,9 @@ class RatingListContainer extends Component {
     }
 
     return (
-        <RatingTable {...ratingList} />
+        <Loader isLoading={isLoading}>
+          <RatingTable {...ratingList} />
+        </Loader>
     );
   }
 }

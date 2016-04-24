@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-
 export default PageNotFound  =>
   <div className='center-align'>
     <h1 className='center-align'>

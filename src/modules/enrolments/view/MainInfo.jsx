@@ -4,16 +4,11 @@ import {isDataForOneEnrolmentLoaded, decodeOneEnrolment} from './../helpers';
 import Table from 'react-bootstrap/lib/Table';
 import {loadEnrolmentById} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
-import Loading from 'loading';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 import { createSelector } from 'reselect';
+import Loader from 'loader'
 
 class MainInfo extends Component {
-  static propTypes = {
-    decodedEnrolment: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    id: PropTypes.string.isRequired
-  };
-
   componentDidMount() {
     this.props.dispatch(loadDictionaries([DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES]));
     this.props.dispatch(loadEnrolmentById(this.props.params.id));
@@ -21,10 +16,9 @@ class MainInfo extends Component {
 
   render() {
     let { isDataLoaded, decodedEnrolment } = this.props;
-    if (!isDataLoaded) {
-      return <Loading/>;
-    } else {
-      return (
+    
+    return (
+      <Loader isLoading={!isDataLoaded}>
         <Table striped bordered condensed hover>
           <thead>
           <tr>
@@ -59,21 +53,16 @@ class MainInfo extends Component {
           </tr>
           </tbody>
         </Table>
-      );
-    }
+      </Loader>
+    );
   }
 }
 
 MainInfo.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  decodedEnrolment: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  id: PropTypes.string.isRequired
 };
-
-// const select = (state)=> {
-//   return {
-//     mainInfo: state.enrolments.view.mainInfo,
-//     dictionaries: state.dictionaries
-//   };
-// };
 
 export const getOneDecodedEnrolment = createSelector(
   [ (state, ownProps) => state.enrolments.view.mainInfo.data[ownProps.params.id],

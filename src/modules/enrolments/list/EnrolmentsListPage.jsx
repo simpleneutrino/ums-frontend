@@ -8,9 +8,7 @@ import * as dictConst from '../../dictionaries/constants';
 import {loadEnrolments, setFieldWidthEnrolments} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
 import {isDataForEnrolmentLoaded, decodeEnrolments, getEnrolmentIdByIndex} from '../helpers';
-import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
-
-import Loading from 'loading';
+import Loader from 'loader'
 
 class EnrolmentsListPage extends Component {
   constructor(props) {
@@ -34,7 +32,7 @@ class EnrolmentsListPage extends Component {
 
   render() {
     if (!isDataForEnrolmentLoaded()) {
-      return <Loading/>;
+      return <Loader isLoading isPageLoader/>;
     }
 
     let {decodedEnrolments, enrolmentsFieldNames} = this.props;
@@ -70,13 +68,6 @@ class EnrolmentsListPage extends Component {
     );
   }
 }
-
-// const select = (state)=> {
-//   return {
-//     enrolmentList: state.enrolments.list,
-//     dictionaries: state.dictionaries
-//   };
-// };
 
 export const getDecodedEnrolments = createSelector(
   [ (state) => state.enrolments.list,

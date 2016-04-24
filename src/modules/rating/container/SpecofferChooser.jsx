@@ -7,6 +7,9 @@ import find from 'lodash/find'
 import DepartmentsList from './../components/DepartmentsList'
 import SpecoffersList from './../components/SpecoffersList'
 import { createSelector } from 'reselect';
+import Loader from 'loader'
+
+console.log('Loader', Loader);
 
 class SpecofferChooser extends Component {
   static propTypes = {
@@ -26,14 +29,11 @@ class SpecofferChooser extends Component {
 
   render() {
     let {departments, departmentId, specoffers} = this.props;
-    if (!departments.length) {
-      return <div>loading...</div>;
-    }
     return (
-      <div>
-        <DepartmentsList departments={departments}  departmentId={departmentId}/>
-        {specoffers ? <SpecoffersList specoffers={specoffers.specoffers} departmentId={departmentId}/> : null}
-      </div>
+        <Loader isLoading={!departments.length}>
+          <DepartmentsList departments={departments}  departmentId={departmentId}/>
+          {specoffers ? <SpecoffersList specoffers={specoffers.specoffers} departmentId={departmentId}/> : null}
+        </Loader>
     );
   }
 }

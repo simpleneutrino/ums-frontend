@@ -97,6 +97,11 @@ function getConfig(env) {
       publicPath: env === productionEnvironment ? '' : '/assets/',
       filename: env === productionEnvironment ? '[name].min.js' : 'app.js'
     },
+    externals: {
+      'cheerio': 'window',
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': true
+    },
     plugins: getPlugins(env),
     module: {
       loaders: getLoaders(env)

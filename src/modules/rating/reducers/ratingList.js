@@ -17,7 +17,6 @@ export default function ratingList(state = initialRatingListState, action = {}) 
       return Object.assign({}, state, {isLoading: true, enrolments: [], error: null});
 
     case types.LOAD_RATING_LIST_SUCCESS:
-      console.log('LOAD_RATING_LIST_SUCCESS', action);
       return Object.assign({}, state,
         {
           isLoading: false,

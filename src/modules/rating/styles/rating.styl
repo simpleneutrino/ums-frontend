@@ -27,7 +27,15 @@
   100%
     background none
 
-/* HIGHLIGHT ROW ON SEARCH */
-.row--higlighted
-  .public_fixedDataTableCell_main
-    animation highlight 5s
+.row
+  /* HIGHLIGHT ROW ON SEARCH */
+  &--higlighted
+    .public_fixedDataTableCell_main
+      animation highlight 5s
+
+  /* red-line */
+  &--red-state-line
+    border-bottom 2px solid red
+  /* blue-line */
+  &--blue-lic-line
+    border-bottom 2px solid blue

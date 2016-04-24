@@ -6,7 +6,7 @@ import { loadRatingList } from './../actions';
 import { createSelector } from 'reselect';
 import RatingTable from './../components/RatingTable';
 
-class SpecofferChooser extends Component {
+class RatingListContainer extends Component {
   static propTypes = {
     specofferId: PropTypes.string
   };
@@ -23,8 +23,8 @@ class SpecofferChooser extends Component {
   }
   render() {
     let {ratingList, specofferId} = this.props;
-    let {isLoading, enrolments, highlightedEnrolment} = ratingList;
-
+    let {isLoading, enrolments} =ratingList;
+    
     if (isLoading) {
       return <div>loading...</div>;
     }
@@ -36,8 +36,7 @@ class SpecofferChooser extends Component {
     }
 
     return (
-        <RatingTable ratingData={enrolments} size={enrolments.length}
-                     highlightedEnrolment={highlightedEnrolment}/>
+        <RatingTable {...ratingList} />
     );
   }
 }
@@ -46,7 +45,7 @@ class SpecofferChooser extends Component {
  * ratingList: list of enrolments sorted by rating
  * specoffer id - query param
  */
-const mapStateToSpecofferChooser = createSelector(
+const mapStateToRatingList = createSelector(
   (state) => state.rating.ratingList,
   (state, ownProps) => ownProps.location.query.specofferId,
   (ratingList, specofferId) => ({
@@ -55,13 +54,13 @@ const mapStateToSpecofferChooser = createSelector(
   })
 );
 
-const mapDispatchToChartFactory = (dispatch) => {
+const mapDispatchToRatingList = (dispatch) => {
   return {
     loadRatingList: (specofferId) => dispatch(loadRatingList(specofferId))
   };
 };
 
 export default connect(
-  mapStateToSpecofferChooser,
-  mapDispatchToChartFactory
-)(SpecofferChooser);
+  mapStateToRatingList,
+  mapDispatchToRatingList
+)(RatingListContainer);

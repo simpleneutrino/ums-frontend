@@ -11,7 +11,7 @@ import { createSelector } from 'reselect';
 class SpecofferChooser extends Component {
   static propTypes = {
     departments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    specoffers: PropTypes.object.isRequired,
+    specoffers: PropTypes.object,
     departmentId: PropTypes.string,
     specofferId: PropTypes.string
   };
@@ -32,7 +32,7 @@ class SpecofferChooser extends Component {
     return (
       <div>
         <DepartmentsList departments={departments}  departmentId={departmentId}/>
-        <SpecoffersList specoffers={specoffers} departmentId={departmentId}/>
+        {specoffers ? <SpecoffersList specoffers={specoffers.specoffers} departmentId={departmentId}/> : null}
       </div>
     );
   }

@@ -26,9 +26,8 @@ class Statistics extends Component {
 
   render() {
     return (
-      <div>
-        <div>Statistics</div>
-        <Nav bsStyle="pills" stacked activeKey={1} onSelect={this.handleSelect}>
+      <div className="statistics">
+        <Nav className="statistics__list-nav" bsStyle="pills" stacked activeKey={1} onSelect={this.handleSelect}>
           <LinkContainer to={{ pathname: map[ALLOCATIONS_ADMINUNITS].route}}>
             <NavItem eventKey={1} > { map[ALLOCATIONS_ADMINUNITS].title } </NavItem>
           </LinkContainer>

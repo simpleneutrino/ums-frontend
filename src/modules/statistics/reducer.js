@@ -19,7 +19,7 @@ export default function (state = statisticsInitialState, action = {}) {
 
     case types.STATISTICS_LOAD_START:
       return Object.assign({}, state, {
-        [action.payload.collectionName]: {isLoading: true}
+        [action.payload.collectionName]: {data: [], isLoading: true}
       });
 
     case types.STATISTICS_LOAD_SUCCESS:
@@ -34,6 +34,7 @@ export default function (state = statisticsInitialState, action = {}) {
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,
+          data: [],
           error: action.error.message
         }
       });

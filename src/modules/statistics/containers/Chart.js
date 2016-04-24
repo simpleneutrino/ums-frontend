@@ -10,6 +10,7 @@ import ukraineLow from './../components/UkraineMap';
 import { STATISTICS_MAP as map } from './../constants';
 import { loadStatistics } from '../actions';
 import { fillMapWithData } from '../helpers';
+import ChartDataTable from '../components/ChartDataTable'
 
 class Chart extends Component {
   static propTypes = {
@@ -63,11 +64,14 @@ class Chart extends Component {
   }
 
   render() {
-    let { dataProvider, chartId } = this.props;
+    let { dataProvider, chartId, config: { headers } } = this.props;
     return (
-      <div>
-        <div> {this.addSpinner(dataProvider)}</div>
-        <div id={chartId} className="amchart_div"></div>
+      <div className="statistics__content">
+        <div id={chartId} className="statistics__amchart"></div>
+        {this.addSpinner(dataProvider)}
+        {/* if data for chart is available - so render a table with it*/}
+        { dataProvider.data.length ? 
+            <ChartDataTable chartData={dataProvider.data} headers={headers}/> : null }
       </div>
     );
   }
@@ -75,7 +79,7 @@ class Chart extends Component {
   addSpinner(dataProvider) {
     if (!dataProvider || dataProvider.isLoading) {
       return <div>Loading ...</div>;
-    }
+    } 
   }
 }
 
@@ -88,7 +92,6 @@ class Chart extends Component {
 const mapStateToChartFactory = (state, ownProps) => {
   let { chartId } =  ownProps.params;
   let collectionName = map[chartId].callApi.collectionName || chartId;
-  console.log('chartId', chartId);
   return {
     dataProvider: state.statistics[collectionName],
     config: map[chartId],

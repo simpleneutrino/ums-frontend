@@ -9,8 +9,6 @@ import SpecoffersList from './../components/SpecoffersList'
 import { createSelector } from 'reselect';
 import Loader from 'loader'
 
-console.log('Loader', Loader);
-
 class SpecofferChooser extends Component {
   static propTypes = {
     departments: PropTypes.arrayOf(React.PropTypes.object).isRequired,

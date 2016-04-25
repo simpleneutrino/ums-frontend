@@ -11,11 +11,26 @@ import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
 import Loader from 'loader'
 
-class SpecoffersListPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+let buildCells = (decodedSpecoffers, specoffersFieldNames) => {
+  return Object.keys(specoffersFieldNames).map((field) => {
+    return <Column
+      key={field}
+      columnKey={field}
+      header={<Cell>{specoffersFieldNames[field].name}</Cell>}
+      cell={props => (
+              <Cell {...props}>
+                {decodedSpecoffers[props.rowIndex][field]}
+              </Cell>
+            )
+          }
+      isResizable
+      width={specoffersFieldNames[field].width}
+    />
+  });
+};
 
+class SpecoffersListPage extends Component {
+  
   componentDidMount() {
     const {timePeriodId, limit} = this.props;
     this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.SPECOFFERS_TYPES, dictConst.EDUCATION_FORM_TYPES]);
@@ -38,12 +53,8 @@ class SpecoffersListPage extends Component {
   render() {
     let {decodedSpecoffers, specoffersFieldNames, filterByName} = this.props;
 
-    if (!isDataForSpecoffersLoaded()) {
-      return <Loader isLoading/>;
-    }
-
     return (
-      <div>
+      <Loader isLoading={!isDataForSpecoffersLoaded()}>
         <Col xs={12} md={4}>
           <FormControl
             type="text"
@@ -63,28 +74,10 @@ class SpecoffersListPage extends Component {
           height={window.innerHeight-140}
           {...this.props}
         >
-          {this._buildCells(decodedSpecoffers, specoffersFieldNames)}
+          {buildCells(decodedSpecoffers, specoffersFieldNames)}
         </Table>
-      </div>
+      </Loader>
     );
-  }
-
-  _buildCells = (decodedSpecoffers, specoffersFieldNames) => {
-    return Object.keys(specoffersFieldNames).map((field) => {
-      return <Column
-        key={field}
-        columnKey={field}
-        header={<Cell>{specoffersFieldNames[field].name}</Cell>}
-        cell={props => (
-              <Cell {...props}>
-                {decodedSpecoffers[props.rowIndex][field]}
-              </Cell>
-            )
-          }
-        isResizable
-        width={specoffersFieldNames[field].width}
-      />
-    });
   }
 }
 

@@ -30,7 +30,7 @@ let buildCells = (decodedSpecoffers, specoffersFieldNames) => {
 };
 
 class SpecoffersListPage extends Component {
-  
+
   componentDidMount() {
     const {timePeriodId, limit} = this.props;
     this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.SPECOFFERS_TYPES, dictConst.EDUCATION_FORM_TYPES]);
@@ -84,22 +84,22 @@ class SpecoffersListPage extends Component {
 SpecoffersListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   decodedSpecoffers: PropTypes.array.isRequired,
-  timePeriodId: PropTypes.string.isRequired,
-  limit: PropTypes.string.isRequired
+  timePeriodId: PropTypes.string.isRequired
 };
 
 const mapStateToSpecoffers = createSelector(
   (state) => state.specoffers.list,
   (state) => state.dictionaries,
-  (state, ownProps) => ownProps.location.query,
   (state) => state.specoffers.list.specoffersFieldNames,
   (state) => state.specoffers.list.filterByName,
-  (list, listOfDict, query, specoffersFieldNames, filterByName) => ({
+  (state) => state.settings.timePeriodId,
+  (state) => state.specoffers.list.limit,
+  (list, listOfDict, specoffersFieldNames, filterByName, timePeriodId, limit) => ({
     decodedSpecoffers: decodeSpecoffers(filteredByName(list, filterByName), listOfDict),
-    timePeriodId: query.timePeriodId,
-    limit: query.limit,
     specoffersFieldNames: specoffersFieldNames,
-    filterByName: filterByName
+    filterByName: filterByName,
+    timePeriodId: timePeriodId,
+    limit: limit
   })
 );
 

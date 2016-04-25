@@ -3,6 +3,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { createSelector } from 'reselect';
 import {TIMEPERIODS} from './../../dictionaries/constants';
 import {isDictLoaded} from './../../dictionaries/helpers';
@@ -33,12 +35,15 @@ class TimePeriodId extends Component {
     });
 
     return (
-        <Loader className="body" isLoading={!isDictLoadedProp}>
+      <Loader className="body" isLoading={!isDictLoadedProp}>
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Оберіть вступну кампанію</ControlLabel>
           <FormControl componentClass="select" placeholder="Оберіть вступну кампанію"
-                 value={timePeriodId} onChange={this.handleOptionChange}>
+              value={timePeriodId} onChange={this.handleOptionChange}>
             { optionList }
           </FormControl>
-        </Loader>
+        </FormGroup>
+      </Loader>
     );
   }
 }

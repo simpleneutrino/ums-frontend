@@ -59,5 +59,12 @@ rules:
   react/self-closing-comp: 2
 
 globals:
-  AmCharts: true
+  AmCharts     : true
   __BASIC_URL__: true
+  /* MOCHA */
+  describe     : true
+  it           : true
+  before       : true
+  beforeEach   : true
+  after        : true
+  afterEach    : true

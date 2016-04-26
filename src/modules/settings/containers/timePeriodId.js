@@ -30,20 +30,22 @@ class TimePeriodId extends Component {
 
     let { isDictLoadedProp, timeperiods, timePeriodId } = this.props;
 
+    if (!isDictLoadedProp) {
+      return <Loader className="body" isLoading />
+    }
+
     const optionList = timeperiods.map((item, i) => {
       return <option value={i} key={i}>{item}</option>;
     });
 
     return (
-      <Loader className="body" isLoading={!isDictLoadedProp}>
-        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Оберіть вступну кампанію</ControlLabel>
-          <FormControl componentClass="select" placeholder="Оберіть вступну кампанію"
-              value={timePeriodId} onChange={this.handleOptionChange}>
-            { optionList }
-          </FormControl>
-        </FormGroup>
-      </Loader>
+      <FormGroup controlId="formControlsSelect">
+        <ControlLabel>Оберіть вступну кампанію</ControlLabel>
+        <FormControl componentClass="select" placeholder="Оберіть вступну кампанію"
+            value={timePeriodId} onChange={this.handleOptionChange}>
+          { optionList }
+        </FormControl>
+      </FormGroup>
     );
   }
 }

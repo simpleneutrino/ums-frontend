@@ -11,7 +11,7 @@ import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 chai.should();
 
-describe('ratingList reducer', () => {
+describe('dictionary reducer', () => {
   
   let helpersMock;
   let reducer;

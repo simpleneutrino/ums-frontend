@@ -2,13 +2,13 @@
 
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Input from 'react-bootstrap/lib/Input';
+import FormControl from 'react-bootstrap/lib/FormControl';
 import { createSelector } from 'reselect';
-
 import {TIMEPERIODS} from './../../dictionaries/constants';
 import {isDictLoaded} from './../../dictionaries/helpers';
 import loadDictionaries from './../../dictionaries/actions';
 import {changeTimePeriodId} from './../duck';
+import Loader from 'loader'
 
 class TimePeriodId extends Component {
 
@@ -28,21 +28,17 @@ class TimePeriodId extends Component {
 
     let { isDictLoadedProp, timeperiods, timePeriodId } = this.props;
 
-    if (!isDictLoadedProp) {
-      return <div>loading...</div>;
-    }
-
     const optionList = timeperiods.map((item, i) => {
       return <option value={i} key={i}>{item}</option>;
     });
 
     return (
-      <div className="body">
-        <Input type="select" label="Оберіть вступну кампанію"
-               value={timePeriodId} onChange={this.handleOptionChange}>
-          { optionList }
-        </Input>
-      </div>
+        <Loader className="body" isLoading={!isDictLoadedProp}>
+          <FormControl componentClass="select" placeholder="Оберіть вступну кампанію"
+                 value={timePeriodId} onChange={this.handleOptionChange}>
+            { optionList }
+          </FormControl>
+        </Loader>
     );
   }
 }
@@ -52,13 +48,6 @@ TimePeriodId.propTypes = {
   children: PropTypes.any
 };
 
-// const mapStateToSettings = (state) => {
-//   return {
-//     dictionaries: state.dictionaries,
-//     timePeriodId: state.settings.timePeriodId
-//   };
-// };
-
 export const mapStateToSettings = createSelector(
   [ (state) => state.dictionaries,
    (state) => state.settings.timePeriodId],
@@ -67,7 +56,7 @@ export const mapStateToSettings = createSelector(
     timeperiods: dictionaries[TIMEPERIODS].resourcesMap,
     timePeriodId: timePeriodId
   })
-)
+);
 
 const mapDispatchToSettings = (dispatch) => {
   return {

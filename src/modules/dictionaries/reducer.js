@@ -1,7 +1,7 @@
-import {createDataMap} from './helpers';
+import helpers, {createDataMap} from './helpers';
 import * as types  from './constants';
 
-const dictInitialState = {
+export const dictInitialState = {
   isLoading: false,
   resources: [],
   resourcesMap: [],
@@ -35,6 +35,7 @@ export default function dictionaries(state = disctionariesDefaultState, action =
       });
 
     case types.DICTIONARY_LOAD_FAIL:
+      console.log('action', action);
       return Object.assign({}, state, {
         [action.payload.collectionName]: {
           isLoading: false,

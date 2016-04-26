@@ -17,21 +17,10 @@ describe('<RatingTable /> components', () => {
 
   const renderedTable = render(<RatingTable {...ratingData}/>);
   
-  it('should have 3 rows', () => {
+  it('should have 2 children (help btn + table itself)', () => {
     let { tableProps } = setup();
-    expect(tableProps.rowsCount).to.equal(3);
+    expect(tableProps.children).to.have.length(2);
   });
-
-  it('should have 5 columns', () => {
-    let { tableProps } = setup();
-    expect(tableProps.children).to.have.length(5);
-  });
-
-  it('should pass 2nd row to scrollToRow propery', () => {
-    let { tableProps } = setup();
-    expect(tableProps.scrollToRow).to.equal(2);
-  });
-
 
   it('2nd row should be higlighet', () => {
     expect(renderedTable.find('.row--higlighted')).to.have.length(1);

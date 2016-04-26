@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles/spinner.styl'
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 export default ({className}) =>
   <div className={classNames('sk-fading-circle', className)}>

@@ -1,9 +1,8 @@
-import forEach from 'lodash/forEach';
 import find from 'lodash/find';
 
 /**
  * func for putting data to MAP
- * @param data
+ * @param mapData
  * @returns {Array}
  */
 export function fillMapWithData(mapData) {
@@ -19,6 +18,6 @@ export function fillMapWithData(mapData) {
       return area;
     });
     map.validateNow();
-    return map.dataProvider.areas; // for testing purpuses;
+    return map.dataProvider.areas; // for testing purposes;
   };
 }

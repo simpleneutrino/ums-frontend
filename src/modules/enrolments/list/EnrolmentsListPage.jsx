@@ -8,6 +8,8 @@ import * as dictConst from '../../dictionaries/constants';
 import {loadEnrolments, setFieldWidthEnrolments} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
 import {isDataForEnrolmentLoaded, decodeEnrolments, getEnrolmentIdByIndex} from '../helpers';
+import {setTableDimensions} from '../../commons/tableHelpers';
+
 import Loader from 'loader'
 
 let buildCells = (decodedEnrolments, enrolmentsFieldNames) => {
@@ -59,8 +61,7 @@ class EnrolmentsListPage extends Component {
           onColumnResizeEndCallback={this._onColumnResizeEndCallback}
           isColumnResizing={false}
           onRowClick={this._onClickRow}
-          width={window.innerWidth-20}
-          height={window.innerHeight-80}
+          {...setTableDimensions({width: 1050})}
         >
           {buildCells(decodedEnrolments, enrolmentsFieldNames)}
         </Table>

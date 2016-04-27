@@ -32,9 +32,8 @@ let buildCells = (decodedSpecoffers, specoffersFieldNames) => {
 class SpecoffersListPage extends Component {
 
   componentDidMount() {
-    const {timePeriodId, limit} = this.props;
     this.props.loadDictionaries([dictConst.DEPARTMENTS, dictConst.SPECOFFERS_TYPES, dictConst.EDUCATION_FORM_TYPES]);
-    this.props.loadSpecoffersList({timePeriodId, limit});
+    this.props.loadSpecoffersList();
   }
 
   _onColumnResizeEndCallback = (newColumnWidth, columnKey) => {
@@ -83,8 +82,7 @@ class SpecoffersListPage extends Component {
 
 SpecoffersListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  decodedSpecoffers: PropTypes.array.isRequired,
-  timePeriodId: PropTypes.string.isRequired
+  decodedSpecoffers: PropTypes.array.isRequired
 };
 
 const mapStateToSpecoffers = createSelector(
@@ -92,19 +90,15 @@ const mapStateToSpecoffers = createSelector(
   (state) => state.dictionaries,
   (state) => state.specoffers.list.specoffersFieldNames,
   (state) => state.specoffers.list.filterByName,
-  (state) => state.settings.timePeriodId,
-  (state) => state.specoffers.list.limit,
-  (list, listOfDict, specoffersFieldNames, filterByName, timePeriodId, limit) => ({
+  (list, listOfDict, specoffersFieldNames, filterByName) => ({
     decodedSpecoffers: decodeSpecoffers(filteredByName(list, filterByName), listOfDict),
     specoffersFieldNames: specoffersFieldNames,
-    filterByName: filterByName,
-    timePeriodId: timePeriodId,
-    limit: limit
+    filterByName: filterByName
   })
 );
 
 const mapDispatchToSpecoffers = (dispatch) => (
-  { loadSpecoffersList: (params) => dispatch(loadSpecoffersList(params)),
+  { loadSpecoffersList: () => dispatch(loadSpecoffersList()),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
     setSpecofferFieldWidth: (newColumnWidth, columnKey) => dispatch(setSpecofferFieldWidth(newColumnWidth, columnKey)),
     goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`)),

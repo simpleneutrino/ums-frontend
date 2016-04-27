@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, IndexRoute} from 'react-router';
-import AuthContainer from '../auth/auth/AuthContainer';
 import Statistics from './components/Statistics';
 import StatisticsIndex from './components/StatisticsIndex';
 import Chart from './containers/Chart';

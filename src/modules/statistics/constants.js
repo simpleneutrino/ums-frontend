@@ -228,16 +228,34 @@ export const STATISTICS_MAP = {
     route: `/statistics/chart/${PLACES}`,
     title: 'Статистика по місцям',
     amChartConfig: {
-      'type': 'pie',
-      'theme': 'light',
-      'dataProvider': null,
-      'valueField': 'entrantPlace',
-      'titleField': 'departmentName',
-      'balloon':{
-        'fixedPosition':true
+      theme: 'light',
+      type: 'serial',
+      dataProvider: null,
+      categoryField: 'departmentName',
+      depth3D: 20,
+      angle: 30,
+      categoryAxis: {
+        labelRotation: 90,
+        gridPosition: 'start'
       },
-      'export': {
-        'enabled': true
+      valueAxes: [ {
+        title: 'Visitors'
+      } ],
+      graphs: [ {
+        balloonText: '<b>[[value]] заяв</b>',
+        valueField: 'entrantPlace',
+        colorField: 'color',
+        type: 'column',
+        lineAlpha: 0.1,
+        fillAlphas: 1
+      } ],
+      chartCursor: {
+        cursorAlpha: 0,
+        zoomable: false,
+        categoryBalloonEnabled: true
+      },
+      export: {
+        enabled: true
       }
     }
   }

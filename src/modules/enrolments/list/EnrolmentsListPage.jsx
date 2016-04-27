@@ -8,7 +8,26 @@ import * as dictConst from '../../dictionaries/constants';
 import {loadEnrolments, setFieldWidthEnrolments} from './../actions';
 import loadDictionaries from '../../dictionaries/actions';
 import {isDataForEnrolmentLoaded, decodeEnrolments, getEnrolmentIdByIndex} from '../helpers';
+import {setTableDimensions} from '../../commons/tableHelpers';
+
 import Loader from 'loader'
+
+let buildCells = (decodedEnrolments, enrolmentsFieldNames) => {
+  return Object.keys(enrolmentsFieldNames).map((field) => {
+    return <Column
+      columnKey={field}
+      header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
+      cell={props => (
+            <Cell {...props}>
+              {decodedEnrolments[props.rowIndex][field]}
+            </Cell>
+            )
+          }
+      isResizable
+      width={enrolmentsFieldNames[field].width}
+    />
+  });
+};
 
 class EnrolmentsListPage extends Component {
   constructor(props) {
@@ -31,40 +50,22 @@ class EnrolmentsListPage extends Component {
   }
 
   render() {
-    if (!isDataForEnrolmentLoaded()) {
-      return <Loader isLoading isPageLoader/>;
-    }
-
     let {decodedEnrolments, enrolmentsFieldNames} = this.props;
 
-    let cells = Object.keys(enrolmentsFieldNames).map((field) => {
-      return <Column
-          columnKey={field}
-          header={<Cell>{enrolmentsFieldNames[field].name}</Cell>}
-          cell={props => (
-            <Cell {...props}>
-              {decodedEnrolments[props.rowIndex][field]}
-            </Cell>
-            )
-          }
-          isResizable
-          width={enrolmentsFieldNames[field].width}
-        />
-    });
-
     return (
-      <Table
-        rowsCount={decodedEnrolments.length}
-        rowHeight={50}
-        headerHeight={70}
-        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-        isColumnResizing={false}
-        onRowClick={this._onClickRow}
-        width={window.innerWidth-20}
-        height={window.innerHeight-80}
-      >
-        {cells}
-      </Table>
+      <Loader isLoading={!isDataForEnrolmentLoaded()} isPageLoader>
+        <Table
+          rowsCount={decodedEnrolments.length}
+          rowHeight={50}
+          headerHeight={70}
+          onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+          isColumnResizing={false}
+          onRowClick={this._onClickRow}
+          {...setTableDimensions({width: 1050})}
+        >
+          {buildCells(decodedEnrolments, enrolmentsFieldNames)}
+        </Table>
+      </Loader>
     );
   }
 }
@@ -78,7 +79,7 @@ export const getDecodedEnrolments = createSelector(
     enrolmentList: enrolmentList,
     enrolmentsFieldNames: enrolmentsFieldNames
   })
-)
+);
 
 const mapDispatchToEnrolments = (dispatch) => (
   { loadEnrolments: (params) => dispatch(loadEnrolments(params)),

@@ -4,7 +4,7 @@
 import { expect }  from 'chai';
 import * as types from './../constants';
 import reducer from './ratingList';
-import { TIMEPERIODID_CHANGED, changeTimePeriodId } from './../../settings/duck';
+import { changeTimePeriodId } from './../../settings/duck';
 import { highlighEnrolment } from './../actions'
 
 describe('ratingList reducer', () => {

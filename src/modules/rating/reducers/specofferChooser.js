@@ -40,7 +40,6 @@ export default function specofferChooser(state = specofferChooserInitialState, a
       );
 
     case LOCATION_CHANGE: // listen to query parameters changes
-      //if (action.payload.pathname !== '/rating') return state;
       let {
         departmentId = state.departmentId,
         specofferId = state.specofferId } = action.payload.query;

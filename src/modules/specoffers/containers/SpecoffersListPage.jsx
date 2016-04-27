@@ -5,10 +5,12 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Col from 'react-bootstrap/lib/Col';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
+
 import {loadSpecoffersList, setSpecofferFieldWidth, setFilterByName} from './../actions';
 import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex, filteredByName} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
+import {setTableDimensions} from '../../commons/tableHelpers';
 import Loader from 'loader'
 
 let buildCells = (decodedSpecoffers, specoffersFieldNames) => {
@@ -70,8 +72,7 @@ class SpecoffersListPage extends Component {
           onColumnResizeEndCallback={this._onColumnResizeEndCallback}
           isColumnResizing={false}
           onRowClick={this._onClickRow}
-          width={window.innerWidth-20}
-          height={window.innerHeight-140}
+          {...setTableDimensions({width: 950, heightGutter: 140})}
           {...this.props}
         >
           {buildCells(decodedSpecoffers, specoffersFieldNames)}

@@ -11,6 +11,7 @@ import {getEnrolmentIdByIndex} from '../helpers';
 import {loadEnrolmentsListBySpecoffer, setFieldWidthEnrolments} from './../actions';
 import {isDataForEnrolmentLoaded} from './../helpers';
 import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from '../reducers/view.js';
+import {setTableDimensions} from '../../commons/tableHelpers';
 import Loader from 'loader'
 
 class SpecofferEnrolments extends Component {
@@ -67,8 +68,8 @@ class SpecofferEnrolments extends Component {
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         isColumnResizing={false}
         onRowClick={this._onClickRow}
-        width={window.innerWidth-20}
-        height={window.innerHeight-180}>
+        {...setTableDimensions({width: 950, heightGutter: 180})}
+      >
         {cells}
       </Table>
     );

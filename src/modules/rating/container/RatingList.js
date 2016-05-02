@@ -24,7 +24,7 @@ class RatingListContainer extends Component {
   }
   render() {
     let {ratingList, specofferId} = this.props;
-    let {isLoading, enrolments} =ratingList;
+    let {isLoading, enrolments} = ratingList;
 
     if (!specofferId) {
       return <div>Для того щоб отримати перелік заяв потрібно обрати пропозицію!</div>;

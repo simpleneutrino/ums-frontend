@@ -7,7 +7,7 @@ class LogoutPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({type: AUTH_LOG_OUT});
-    this.props.dispatch(push('/'));
+    this.props.dispatch(push('/statistics'));
   }
 
   render() {

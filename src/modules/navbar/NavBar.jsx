@@ -7,8 +7,9 @@ import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import SettingsModal from './../settings/components/SettingsModal';
-import checkAuth from '../auth/helpers';
+import {checkPermission} from '../auth/helpers';
 import {IndexLink} from 'react-router'
+import {REQUIRED_AUTH} from '../../system/routes';
 
 export default class NavBar extends Component {
   render() {
@@ -21,20 +22,11 @@ export default class NavBar extends Component {
         </Navbar.Header>
 
         <Nav>
-          <LinkContainer to={{ pathname: '/enrolments'}}>
-            <NavItem>Заяви</NavItem>
-          </LinkContainer>
-
-          <LinkContainer to={{ pathname: '/statistics'}}>
-            <NavItem>Статистика</NavItem>
-          </LinkContainer>
-
-          <LinkContainer to={{ pathname: '/specoffers/list'}}>
-            <NavItem>Пропозиції</NavItem>
-          </LinkContainer>
-
-          {this.authItem('rating', 'Рейтинг', {query: this.props.ratingQueryParams})}
-          {this.authItem('persons', 'Персони')}
+          {this.authItem('/enrolments', 'Заяви')}
+          {this.authItem('/statistics', 'Статистика')}
+          {this.authItem('/specoffers/list', 'Пропозиції')}
+          {this.authItem('/rating', 'Рейтинг', {query: this.props.ratingQueryParams})}
+          {this.authItem('/persons', 'Персони')}
         </Nav>
 
         <Nav className='pull-right'>
@@ -51,7 +43,7 @@ export default class NavBar extends Component {
   };
 
   authItem(pathname, name, rest) {
-    if (checkAuth(this.props.auth, pathname)) {
+    if (checkPermission(this.props.auth, pathname, REQUIRED_AUTH)) {
       return (
         <LinkContainer to={{ pathname: pathname, ...rest}}>
           <NavItem>{name}</NavItem>

@@ -1,42 +1,40 @@
-import {routes} from '../../system/routes';
+import {AUTH_NEEDED, AUTH_SUCCESS} from './constants'
+/**
+ * @param auth {Object} state from the store
+ * @param path - e.g. '/enrolments'
+ * @param requiredAuth {Array} of strings
+ * @returns {boolean}
+ */
+export function checkPermission(auth, path, requiredAuth = []) {
+  let isRequreAuth = requiredAuth.some((route) => {
+    return !route.indexOf(path)
+  });
+  if (!isRequreAuth) return true;
 
-export default function checkAuth(auth, path) {
-  let config = routes[path];
+  if (auth.user.authenticated) return true;
 
-  if (config) {
-    const {groups=[], login, roles=[]} = config;
-
-    if (auth.user.authenticated) {
-      if (login && auth.user.login === login) {
-        return true;
-      }
-
-      if (contains(groups, auth.user.groups) || contains(roles, auth.user.roles)) {
-        return true;
-      }
-    } else {
-      return false;
-    }
-  } else {
-    return true;
-  }
+  return false;
 }
 
-function contains(firstArr = [], secondArr = []) {
-  let result = false;
-
-  for (let i = firstArr.length - 1; i >= 0; i--) {
-    for (let j = secondArr.length - 1; j >= 0; j--) {
-      if (firstArr[i] === secondArr[j]) {
-        result = true;
-        break;
-      }
-
-      if (result) {
-        break;
-      }
-    }
+/**
+ * 
+ * @param auth {Object} state from the store
+ * @param location {Object}
+ * @returns null | error string
+ */
+export function getError ({auth, location}) {
+  if (auth.error) return auth.error;
+  if (location.query.next) {
+    return AUTH_NEEDED
   }
+  return false
+}
 
-  return result;
+
+export function initLogin(dispatch) {
+  let login = window.sessionStorage.getItem('login');
+  let token = window.sessionStorage.getItem('token');
+  if (login && token) {
+    dispatch({type: AUTH_SUCCESS, response: {login}, payload: {token}})
+  }
 }

@@ -2,6 +2,7 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import rootReducer from './reducers/reducers';
 import thunk from 'redux-thunk';
 import {default as request} from './middleware/request';
+import {default as auth} from './middleware/auth';
 import {default as requestLocalStorage} from './middleware/request.localstorage.proxy';
 import {default as requestTimePeriod} from './middleware/request.time.period';
 import {default as requestCachePopulate} from './middleware/request.cache.populate';
@@ -14,6 +15,7 @@ import {routerMiddleware} from 'react-router-redux';
 
 const middleware = [thunk,
   routerMiddleware(browserHistory),
+  auth,
   requestCachePopulate(configToCache(DICTIONARY_MAP)),
   requestTimePeriod, requestLocalStorage, request,
   timePeriodChange

@@ -90,3 +90,5 @@ export default combineReducers({
   benefits,
   statuses
 });
+
+export const getMainInfo = (state, ownProps) => state.enrolments.view.mainInfo.data[ownProps.params.id];

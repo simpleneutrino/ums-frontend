@@ -14,6 +14,7 @@ import PageNotFound from '../modules/commons/PageNotFound';
 import RatingRoute from '../modules/rating/routes';
 import StatisticsRoute from '../modules/statistics/route';
 import SpecoffersRoute from '../modules/specoffers/routes';
+import EnrolmentHeader from '../modules/enrolments/view/Header';
 
 //configure permissions
 export const REQUIRED_AUTH = ['/enrolments', '/persons', '/specoffers', '/specoffers/list'];
@@ -22,7 +23,7 @@ export default (
   <Route path="/" component={Application}>
     <IndexRedirect to="enrolments"/>
     <Route path='enrolments' component={EnrolmentsPage}/>
-    <Route path="enrolments/:id" component={InfoPage}>
+    <Route path="enrolments/:id" components={{main: InfoPage, header: EnrolmentHeader}}>
       <Route path='info' component={MainInfo}/>
       <Route path='benefits' component={Benefits}/>
       <Route path='subjects' component={Subjects}/>

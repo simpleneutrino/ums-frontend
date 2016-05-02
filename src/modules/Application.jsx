@@ -3,11 +3,15 @@ import NavBar from './navbar/NavBar';
 
 export default class Application extends Component {
   render() {
+    const { main, header } = this.props;
+    let navBar = header ? header : <NavBar/>;
+    let mainContent = main ? main : this.props.children;
+
     return (
       <div id="layout">
-        <NavBar />
+        {navBar}
         <div id="main" className="container-fluid main-container">
-          {this.props.children}
+          {mainContent}
         </div>
       </div>
     );

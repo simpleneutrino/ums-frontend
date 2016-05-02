@@ -7,11 +7,12 @@ import SpecofferInfoMain from './components/SpecofferInfoMain';
 import SpecofferBenefits from './components/SpecofferBenefits';
 import SpecofferSubjects from './components/SpecofferSubjects';
 import SpecofferWaves from './components/SpecofferWaves';
+import Header from './components/Header.jsx';
 
 export default (
   <Route>
     <Route path="specoffers/list" component={SpecoffersListPage}/>
-    <Route path="specoffers/:id" component={SpecofferInfoPage}>
+    <Route path="specoffers/:id" components={{main: SpecofferInfoPage, header: Header}}>
       <Route path="enrolments" component={SpecofferEnrolments}/>
       <Route path='info' component={SpecofferInfoMain}/>
       <Route path='benefits' component={SpecofferBenefits}/>
@@ -20,4 +21,3 @@ export default (
     </Route>
   </Route>
 );
-

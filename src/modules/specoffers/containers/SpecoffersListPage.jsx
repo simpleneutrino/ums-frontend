@@ -5,7 +5,7 @@ import {push} from 'react-router-redux';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import {loadSpecoffersList} from './../actions';
-import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex, filteredByName} from './../helpers';
+import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
 import Loader from 'loader'
@@ -60,7 +60,7 @@ const mapStateToSpecoffers = createSelector(
   (state) => state.specoffers.list,
   (state) => state.dictionaries,
   (list, listOfDict) => ({
-    decodedSpecoffers: decodeSpecoffers(list.resources, listOfDict),
+    decodedSpecoffers: decodeSpecoffers(list, listOfDict),
   })
 );
 

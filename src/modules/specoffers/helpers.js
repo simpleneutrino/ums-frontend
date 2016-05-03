@@ -41,7 +41,7 @@ export function isDataForSpecoffersLoaded() {
  * @returns {Array} - array of decoded specoffers
  */
 export function decodeSpecoffers(specoffers, dictionaries) {
-  return specoffers.map((item)=> {
+  return specoffers.resources.map((item)=> {
     return decodeOneSpecoffer(item, dictionaries);
   });
 }

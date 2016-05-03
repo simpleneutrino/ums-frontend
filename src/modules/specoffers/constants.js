@@ -10,11 +10,6 @@ export const LOAD_ENROLMENTS_BY_SPECOFFERS_START = 'LOAD_ENROLMENTS_BY_SPECOFFER
 export const LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS = 'LOAD_ENROLMENTS_BY_SPECOFFERS_SUCCESS';
 export const LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL = 'LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL';
 
-export const SPECOFFERS_LIST_WIDTH_CHANGED = 'SPECOFFERS_LIST_WIDTH_CHANGED';
-export const ENROLMENTS_LIST_WIDTH_CHANGED = 'ENROLMENTS_LIST_WIDTH_CHANGED';
-
-export const FILTER_BY_NAME = 'FILTER_BY_NAME';
-
 export const SPECOFFERS_FIELD_NAMES = {
   id:                   {'name': '№',                     'width': 70},
   name:                 {'name': 'Спеціальність',         'width': 130},

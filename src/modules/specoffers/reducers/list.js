@@ -1,13 +1,9 @@
 import * as types from '../constants';
-import {SPECOFFERS_FIELD_NAMES} from '../constants';
-
-import lcache from '../../../system/lcache';
 import { TIMEPERIODID_CHANGED } from '../../settings/duck';
 
 const defaultState = {
   isLoading: false,
   resources: [],
-  specoffersFieldNames: SPECOFFERS_FIELD_NAMES,
   filterByName: '',
   limit: 300,
   error: null
@@ -36,24 +32,6 @@ export default function list(state = defaultState, action = {}) {
         {
           isLoading: false,
           resources: []
-        }
-      );
-
-    case types.SPECOFFERS_LIST_WIDTH_CHANGED:
-      let changedName = {
-        'name': state.specoffersFieldNames[action.payload.columnKey].name,
-        'width': action.payload.newColumnWidth
-      };
-      return Object.assign({}, state,
-        {
-          specoffersFieldNames: {...state.specoffersFieldNames, [action.payload.columnKey]: changedName}
-        }
-      );
-
-    case types.FILTER_BY_NAME:
-      return Object.assign({}, state,
-        {
-          filterByName: action.payload.filterByName
         }
       );
 

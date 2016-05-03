@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import SpecoffersListPage from './containers/SpecoffersListPage';
-import SpecofferEnrolments from './components/Enrolments';
+import SpecofferEnrolments from './components/SpecofferEnrolments';
 import SpecofferInfoPage from './components/SpecofferInfoPage';
 import SpecofferInfoMain from './components/SpecofferInfoMain';
 import SpecofferBenefits from './components/SpecofferBenefits';

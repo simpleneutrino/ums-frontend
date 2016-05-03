@@ -61,32 +61,3 @@ export function loadEnrolmentsListBySpecoffer(params) {
     }
   };
 }
-
-export function setSpecofferFieldWidth(newColumnWidth, columnKey) {
-  return {
-    type: types.SPECOFFERS_LIST_WIDTH_CHANGED,
-    payload: {
-      newColumnWidth: newColumnWidth,
-      columnKey: columnKey
-    }
-  };
-}
-
-export function setFieldWidthEnrolments(newColumnWidth, columnKey) {
-  return {
-    type: types.ENROLMENTS_LIST_WIDTH_CHANGED,
-    payload: {
-      newColumnWidth: newColumnWidth,
-      columnKey: columnKey
-    }
-  };
-}
-
-export function setFilterByName(name) {
-  return {
-    type: types.FILTER_BY_NAME,
-    payload: {
-      filterByName: name
-    }
-  };
-}

@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import { Link } from 'react-router'

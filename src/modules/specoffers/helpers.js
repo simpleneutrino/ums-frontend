@@ -1,7 +1,7 @@
 import store from 'store';
 import * as dictConstants from '../dictionaries/constants';
 import {isDictLoaded} from '../dictionaries/helpers';
-import {getSpecofferEnrolments, getSpecofferEnrolmentsBySpecofferId} from './reducers/view.js';
+import {getSpecofferEnrolments} from './reducers/view.js';
 
 let {
   DEPARTMENTS,
@@ -35,9 +35,6 @@ export function isDataForSpecoffersLoaded() {
     && !entity.isLoading;
 }
 
-export function filteredByName(rowSpecoffers, filterByName) {
-  return rowSpecoffers.resources.filter((item) => item.name.indexOf(filterByName) !== -1);
-}
 /**
  *
  * @param rowSpecoffers - list of row specoffers
@@ -59,16 +56,4 @@ export function decodeOneSpecoffer(item, dictionaries) {
     specofferTypeId: SPECOFFERS_TYPES.resourcesMap[item.specofferTypeId],
     educationFormTypeId: EDUCATION_FORM_TYPES.resourcesMap[item.educationFormTypeId]
   });
-}
-
-export function getSpecofferIdByIndex(index) {
-  let state = store.getState();
-  let filteredList = filteredByName(state.specoffers.list, state.specoffers.list.filterByName);
-  return filteredList[index]['id'];
-}
-
-export function getEnrolmentIdByIndex(specofferId, index) {
-  let state = store.getState();
-  let entity = getSpecofferEnrolmentsBySpecofferId(state, specofferId);
-  return entity.resources[index]['id'];
 }

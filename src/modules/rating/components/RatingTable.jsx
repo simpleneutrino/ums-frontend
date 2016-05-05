@@ -24,8 +24,8 @@ export default class RatingTable extends Component {
   static propTypes = {
     enrolments: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     highlightedEnrolment: PropTypes.number,
-    stateCount: PropTypes.number.isRequired,
-    licCount: PropTypes.number.isRequired
+    stateCount: PropTypes.number,
+    licCount: PropTypes.number
   };
 
   render() {

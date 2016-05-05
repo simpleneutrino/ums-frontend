@@ -2,7 +2,7 @@ import * as types from './constants';
 import {push} from 'react-router-redux';
 import {REQUEST_API} from '../../system/constants';
 
-export function auth(params) {
+export function authorize(params, redirectTo) {
   let {login, password} = params;
   let token = 'Basic ' + btoa(login + ':' + password);
 
@@ -18,20 +18,23 @@ export function auth(params) {
       }
     },
     payload: {
-      token: token
+      token,
+      redirectTo 
     }
   };
 }
 
 function successAuth(response, ...rest) {
-  return dispatch=> {
+  return dispatch => {
     let action = Object.assign(response, ...rest);
+   
+    // save login and token to local storage
+    window.sessionStorage.setItem('login', response.response.login);
+    window.sessionStorage.setItem('token', rest[0].payload.token);
+    
     dispatch({type: types.AUTH_SUCCESS, ...action});
-    dispatch(push('/'));
+    
+    // redirect to page from which user was redirected to '/login'
+    dispatch(push(rest[0].payload.redirectTo || '/'));
   };
-}
-
-
-export function changeField(field, value) {
-  return {type: types.AUTH_CHANGE_FIELD, field, value};
 }

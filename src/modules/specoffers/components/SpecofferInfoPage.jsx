@@ -2,19 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import Image from 'react-bootstrap/lib/Image';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 
 export class SpecofferInfoPage extends Component {
   render() {
     return (
       <div>
-        <LinkContainer to={{ pathname: `/specoffers/list`, query: this.props.specoffersQueryParams }}>
-          <div>
-            <Image src={require('../../../../assets/images/icon-circle-arrow-left.png')} circle />
-            <h3 className="back-to-specoffers">Пропозиція №{this.props.params.id}</h3>
-          </div>
-        </LinkContainer>
         <br/>
         <Nav bsStyle="tabs" activeKey={1}>
           <LinkContainer to={{ pathname: `/specoffers/${this.props.params.id}/enrolments` }}>

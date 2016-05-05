@@ -7,6 +7,7 @@ import loadDictionaries from '../../dictionaries/actions';
 import {DEPARTMENTS, ENROLMENTS_TYPES, ENROLMENTS_STATUS_TYPES} from  '../../dictionaries/constants';
 import { createSelector } from 'reselect';
 import Loader from 'loader'
+import {getMainInfo} from './reducer';
 
 class MainInfo extends Component {
   componentDidMount() {
@@ -65,7 +66,7 @@ MainInfo.propTypes = {
 };
 
 export const getOneDecodedEnrolment = createSelector(
-  [ (state, ownProps) => state.enrolments.view.mainInfo.data[ownProps.params.id],
+  [ (state, ownProps) => getMainInfo(state, ownProps),
    (state) => state.dictionaries,
    (state, ownProps) => ownProps.params.id],
   (mainInfo, listOfDict, enrolId) => ({

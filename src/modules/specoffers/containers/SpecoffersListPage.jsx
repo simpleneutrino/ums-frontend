@@ -1,35 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
-import {Table, Column, Cell} from 'fixed-data-table';
 import {push} from 'react-router-redux';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import {loadSpecoffersList, setSpecofferFieldWidth, setFilterByName} from './../actions';
-import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex, filteredByName} from './../helpers';
+import {loadSpecoffersList} from './../actions';
+import {isDataForSpecoffersLoaded, decodeSpecoffers, getSpecofferIdByIndex} from './../helpers';
 import * as dictConst from '../../dictionaries/constants';
 import loadDictionaries from '../../dictionaries/actions';
-import {setTableDimensions} from '../../commons/tableHelpers';
 import Loader from 'loader'
-
-let buildCells = (decodedSpecoffers, specoffersFieldNames) => {
-  return Object.keys(specoffersFieldNames).map((field) => {
-    return <Column
-      key={field}
-      columnKey={field}
-      header={<Cell>{specoffersFieldNames[field].name}</Cell>}
-      cell={props => (
-              <Cell {...props}>
-                {decodedSpecoffers[props.rowIndex][field]}
-              </Cell>
-            )
-          }
-      isResizable
-      width={specoffersFieldNames[field].width}
-    />
-  });
-};
 
 class SpecoffersListPage extends Component {
 
@@ -38,44 +17,33 @@ class SpecoffersListPage extends Component {
     this.props.loadSpecoffersList();
   }
 
-  _onColumnResizeEndCallback = (newColumnWidth, columnKey) => {
-    this.props.setSpecofferFieldWidth(newColumnWidth, columnKey);
-  }
-
-  _onClickRow = (e, index) => {
-    let id = getSpecofferIdByIndex(index);
-    this.props.goToDetailed(id);
-  }
-
-  _onFilterChange = (e) => {
-    this.props.setFilterByName(e.target.value);
-  }
-
   render() {
-    let {decodedSpecoffers, specoffersFieldNames, filterByName} = this.props;
+    let {decodedSpecoffers} = this.props;
+
+    let options = {
+      onRowClick: (row) => this.props.goToDetailed(row.id),
+      sizePerPage: 15,
+    };
 
     return (
       <Loader isLoading={!isDataForSpecoffersLoaded()}>
-        <Col xs={12} md={4}>
-          <FormControl
-            type="text"
-            onChange={this._onFilterChange}
-            placeholder="Знайти спеціальність"
-            value={filterByName}
-          />
-        </Col>
-        <Table
-          rowsCount={decodedSpecoffers.length}
-          rowHeight={50}
-          headerHeight={50}
-          onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-          isColumnResizing={false}
-          onRowClick={this._onClickRow}
-          {...setTableDimensions({width: 950, heightGutter: 140})}
-          {...this.props}
-        >
-          {buildCells(decodedSpecoffers, specoffersFieldNames)}
-        </Table>
+        <BootstrapTable
+          data={decodedSpecoffers}
+          options={options}
+          striped hover condensed
+          pagination
+          search>
+          <TableHeaderColumn width="50" dataField="id" isKey dataSort >№</TableHeaderColumn>
+          <TableHeaderColumn width="80" dataField="name" dataSort >Спеціальність</TableHeaderColumn>
+          <TableHeaderColumn width="50" dataField="departmentId" dataSort >Підрозділ</TableHeaderColumn>
+          <TableHeaderColumn width="120" dataField="specofferTypeId" dataSort >Тип пропозиції</TableHeaderColumn>
+          <TableHeaderColumn width="40" dataField="docNum" dataSort >Номер ліцензії</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="weightCertificate" dataSort >weightCertificate</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="weightAward" dataSort >weightAward</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="educationFormTypeId" dataSort >Форма навч.</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="licCount" dataSort >Ліценз. обсяг</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="stateCount" dataSort >Держ. замовлення</TableHeaderColumn>
+        </BootstrapTable>
       </Loader>
     );
   }
@@ -83,27 +51,23 @@ class SpecoffersListPage extends Component {
 
 SpecoffersListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  decodedSpecoffers: PropTypes.array.isRequired
+  decodedSpecoffers: PropTypes.array.isRequired,
+  loadDictionaries: PropTypes.func.isRequired,
+  goToDetailed: PropTypes.func.isRequired
 };
 
 const mapStateToSpecoffers = createSelector(
   (state) => state.specoffers.list,
   (state) => state.dictionaries,
-  (state) => state.specoffers.list.specoffersFieldNames,
-  (state) => state.specoffers.list.filterByName,
-  (list, listOfDict, specoffersFieldNames, filterByName) => ({
-    decodedSpecoffers: decodeSpecoffers(filteredByName(list, filterByName), listOfDict),
-    specoffersFieldNames: specoffersFieldNames,
-    filterByName: filterByName
+  (list, listOfDict) => ({
+    decodedSpecoffers: decodeSpecoffers(list, listOfDict),
   })
 );
 
 const mapDispatchToSpecoffers = (dispatch) => (
   { loadSpecoffersList: () => dispatch(loadSpecoffersList()),
     loadDictionaries: (dicArray) => dispatch(loadDictionaries(dicArray)),
-    setSpecofferFieldWidth: (newColumnWidth, columnKey) => dispatch(setSpecofferFieldWidth(newColumnWidth, columnKey)),
-    goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`)),
-    setFilterByName: (name) => dispatch(setFilterByName(name))
+    goToDetailed: (id) => dispatch(push(`/specoffers/${id}/enrolments`))
   }
 );
 

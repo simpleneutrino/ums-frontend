@@ -1,5 +1,4 @@
 import * as types from '../constants';
-import {ENROLMENTS_FIELD_NAMES} from '../../enrolments/constants';
 import {combineReducers} from 'redux';
 
 export let getSpecofferEnrolmentsBySpecofferId = (state, specofferId) => {
@@ -11,7 +10,6 @@ export let getSpecofferEnrolments = (state) => state.specoffers.view.specofferEn
 const enrolmentsDefaultState = {
   isLoading: false,
   data: {},
-  enrolmentsFieldNames: ENROLMENTS_FIELD_NAMES,
   limit: 300,
   error: null
 };
@@ -34,17 +32,6 @@ export default function specofferEnrolments(state = enrolmentsDefaultState, acti
 
     case types.LOAD_ENROLMENTS_BY_SPECOFFERS_FAIL:
       return Object.assign({}, state, {isLoading: false}, {error: action.error.message});
-
-    case types.ENROLMENTS_LIST_WIDTH_CHANGED:
-      let changedName = {
-        'name': state.enrolmentsFieldNames[action.payload.columnKey].name,
-        'width': action.payload.newColumnWidth
-      };
-      return Object.assign({}, state,
-        {
-          enrolmentsFieldNames: {...state.enrolmentsFieldNames, [action.payload.columnKey]: changedName}
-        }
-      );
 
     default:
       return state;

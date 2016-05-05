@@ -1,5 +1,11 @@
 import _ from 'lodash';
 
+/**
+ * 
+ * @param url - e.g. '/enrolments/{{timePeriodId}}
+ * @param timePeriodId {number}
+ * @returns {*} '/enrolments/5
+ */
 export function replaceTimePeriodId(url, timePeriodId) {
   if (url.indexOf('{{timePeriodId}}') > -1) {
     let newUrl = url.replace('{{timePeriodId}}', timePeriodId);

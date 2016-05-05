@@ -59,8 +59,8 @@ SpecoffersListPage.propTypes = {
 const mapStateToSpecoffers = createSelector(
   (state) => state.specoffers.list,
   (state) => state.dictionaries,
-  (list, listOfDict, specoffersFieldNames, filterByName) => ({
-    decodedSpecoffers: decodeSpecoffers(filteredByName(list, filterByName), listOfDict),
+  (list, listOfDict) => ({
+    decodedSpecoffers: decodeSpecoffers(list.resources, listOfDict),
   })
 );
 

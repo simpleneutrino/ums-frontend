@@ -36,11 +36,12 @@ const Login = (props) => {
           </Col>
         </FormGroup>
 
+        /* TODO: implement this functionality
         <FormGroup>
           <Col smOffset={2} sm={10}>
             <Checkbox>Remember me</Checkbox>
           </Col>
-        </FormGroup>
+        </FormGroup>*/
 
         <FormGroup>
           <Col smOffset={2} sm={10}>

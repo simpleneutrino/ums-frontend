@@ -18,6 +18,7 @@ export const EDUCATION_FORM_TYPES = 'EDUCATION_FORM_TYPES';
 export const DICTIONARY_MAP = {
   [DEPARTMENTS]: {
     url: '/departments',
+    title: 'Відділення',
     params: {
       departmentTypeId: 1,
       limit: 300
@@ -26,6 +27,7 @@ export const DICTIONARY_MAP = {
   },
   [ENROLMENTS_TYPES]: {
     url: '/enrolments/types',
+    title : 'Типи прийнятих',
     params: {
       limit: 300
     },
@@ -33,6 +35,7 @@ export const DICTIONARY_MAP = {
   },
   [ENROLMENTS_STATUS_TYPES]: {
     url: '/enrolments/statustypes',
+    title : 'Статус',
     params: {
       limit: 300
     },
@@ -40,6 +43,7 @@ export const DICTIONARY_MAP = {
   },
   [TIMEPERIODS]: {
     url: '/timeperiods',
+    title : 'Відрізки часу',
     params: {
       limit: 300
     },

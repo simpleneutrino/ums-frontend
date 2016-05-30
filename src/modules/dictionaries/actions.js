@@ -4,14 +4,14 @@ import isString from 'lodash/isString';
 
 export default function loadDictionaries(listOfDict) {
   if (!listOfDict) throw new Error('loadDictionaries:', consts.errors.wrongListOfDic);
-  
+
   if (isString(listOfDict)) listOfDict = [listOfDict];
 
   return dispatch => {
+
     listOfDict.forEach((dicName) => {
       let {url, params} = consts.DICTIONARY_MAP[dicName];
       //todo check state + cache
-
       dispatch({
         type: REQUEST_API,
         request: {

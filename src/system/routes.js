@@ -13,6 +13,7 @@ import InfoPage from '../modules/enrolments/view/InfoPage';
 import PageNotFound from '../modules/commons/PageNotFound';
 import RatingRoute from '../modules/rating/routes';
 import StatisticsRoute from '../modules/statistics/route';
+import Dictionaries from '../modules/dictionaries/route';
 import SpecoffersRoute from '../modules/specoffers/routes';
 import EnrolmentHeader from '../modules/enrolments/view/Header';
 
@@ -30,6 +31,7 @@ export default (
       <Route path='statuses' component={Statuses}/>
     </Route>
     {StatisticsRoute}
+    {Dictionaries}
     {SpecoffersRoute}
     <Route path="persons" component={PersonsPage}/>
     {RatingRoute}

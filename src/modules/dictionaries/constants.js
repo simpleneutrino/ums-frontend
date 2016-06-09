@@ -64,3 +64,10 @@ export const DICTIONARY_MAP = {
     cache: true
   }
 };
+
+export const TABLE_STRUCTURE = {
+  [DEPARTMENTS]: ['departmentTypeId', 'id', 'identifir', 'name'],
+  [ENROLMENTS_TYPES]: ['abbrName', 'id', 'name'],
+  [ENROLMENTS_STATUS_TYPES]: ['id', 'name'],
+  [TIMEPERIODS]: ['id', 'name', 'numValue', 'timePeriodTypeId']
+}

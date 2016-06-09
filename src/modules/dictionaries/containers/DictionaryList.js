@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import loadDictionaries  from '../actions';
+import DictionaryTable  from '../components/DictionaryTable';
 import {
   DEPARTMENTS,
   ENROLMENTS_TYPES,
@@ -8,21 +9,24 @@ import {
   TIMEPERIODS,
   DICTIONARY_MAP as map
 } from './../constants';
-export default class DictionaryTable extends React.Component {
+export default class DictionaryList extends React.Component {
   componentDidMount() {
     if (this.props.params.dicName) {
-
+      this.props.getDictionaryData(this.props.params.dicName);
     }
   }
   componentWillReceiveProps(nextProps) {
-    //console.log(this.props);
-    this.props.getDictionaryData([this.props.params.dicName]);
+
+    if (nextProps.params.dicName && nextProps.params.dicName !== this.props.params.dicName) {
+      this.props.getDictionaryData(this.props.params.dicName);
+    }
   }
   render () {
-
+    let dicName = this.props.params.dicName,
+      dicData = this.props.dictionaries[dicName];
     return (
       <div>
-
+        <DictionaryTable dicData={dicData} dicName={dicName}/>
       </div>
     )
   }
@@ -45,5 +49,5 @@ const mapDispatchToLoadDictionary = (dispatch) => {
 export default connect(
   mapStateToDictionary,
   mapDispatchToLoadDictionary
-)(DictionaryTable);
+)(DictionaryList);
 
